@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Validador Interactivo de Precios</title>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 400px; margin: 40px auto; }
+  label { display: block; margin-top: 12px; }
+  input, select, button { width: 100%; padding: 8px; margin-top: 4px; box-sizing: border-box; }
+  button { margin-top: 16px; cursor: pointer; }
+  #resultado { margin-top: 20px; padding: 12px; border: 1px solid #ccc; }
+  .error { color: red; }
+</style>
+</head>
+<body>
+
+<h1>Validador Interactivo de Precios</h1>
+
+<form id="formPrecio">
+  <label for="precioBase">Precio base (€)</label>
+  <input type="number" id="precioBase" step="0.01">
+
+  <label for="tipoIva">Tipo de IVA</label>
+  <select id="tipoIva">
+    <option value="0.21">General (21%)</option>
+    <option value="0.10">Reducido (10%)</option>
+    <option value="0.04">Superreducido (4%)</option>
+  </select>
+
+  <button type="button" id="btnCalcular">Calcular</button>
+</form>
+
+<div id="resultado"></div>
+
+<script>
+document.getElementById('btnCalcular').addEventListener('click', function () {
+  const precioInput = document.getElementById('precioBase').value;
+  const ivaSeleccionado = document.getElementById('tipoIva').value;
+  const resultadoDiv = document.getElementById('resultado');
+
+  const precioBase = parseFloat(precioInput);
+
+  // Validación
+  if (isNaN(precioBase) || precioBase <= 0) {
+    resultadoDiv.innerHTML = '<p class="error">Introduce un precio numérico válido, mayor que cero.</p>';
+    return;
+  }
+
+  const tipoIva = parseFloat(ivaSeleccionado);
+
+  // Punto de depuración: comprueba aquí precioBase y tipoIva en el debugger
+  debugger;
+
+  const importeIva = precioBase * tipoIva;
+  const precioFinal = precioBase + importeIva;
+
+  console.log('Precio base:', precioBase);
+  console.log('Tipo de IVA:', tipoIva);
+  console.log('Importe IVA:', importeIva);
+  console.log('Precio final:', precioFinal);
+
+  resultadoDiv.innerHTML = `
+    <p>Precio base: ${precioBase.toFixed(2)} €</p>
+    <p>IVA (${(tipoIva * 100).toFixed(0)}%): ${importeIva.toFixed(2)} €</p>
+    <p><strong>Precio final: ${precioFinal.toFixed(2)} €</strong></p>
+  `;
+});
+</script>
+
+<p>Nota: Este validador calcula el precio final de un producto incluyendo el IVA según el tipo seleccionado.</p>
+
+</body>
+</html>
