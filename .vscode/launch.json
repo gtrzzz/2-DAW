@@ -1,22 +1,20 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Attach to Chrome",
-            "port": 9222,
-            "request": "attach",
-            "type": "chrome",
-            "webRoot": "${workspaceFolder}"
-        },
-
-        {
-            "type": "editor-browser",
-            "request": "launch",
-            "name": "Open index.html",
-            "url": "file:///Users/zzz/DAW/ENTORNO%20CLIENTE/PruebaEvaluacionInicial/index.html"
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "holamundo",
+      "request": "launch",
+      "mainClass": "holamundo",
+      "projectName": "2º DAW_daa2bd4d"
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Depurar con Live Server (Brave)",
+      "url": "http://127.0.0.1:5500/ENTORNO CLIENTE/PruebaEvaluacionInicial/index.html",
+      "webRoot": "${workspaceFolder}",
+      "runtimeExecutable": "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
+    }
+  ]
 }
