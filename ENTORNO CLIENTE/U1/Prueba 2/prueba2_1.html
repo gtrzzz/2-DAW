@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <body>
+    <h1 id="h1cambio">Modificando el código HTML</h1>
+    <!--le pongo un id al encabezado para poder localizarlo con
+    document.getElementById() y cambiar su contenido -->
+    <p id="prueba">Modificando el contenido.</p>
+    <!-- Al hacer clic, document.getElementById localiza el nodo y cambia su texto interno -->
+    <button
+      type="button"
+      onclick="
+        document.getElementById('prueba').innerHTML = 'CAMBIANDO el contenido!'
+      "
+    >
+      ¡Dale!
+    </button>
+
+    <!-- Añadir un segundo botón al ejemplo de los apuntes, al pulsarlo, no solo altere el párrafo 
+    sino que cambie también el texto del encabezado <h1> mediante document.getElementById() y innerHTML.
+
+      Como ya hemos cambiado el contenido del párrafo, ahora vamos a cambiar también el contenido del encabezado <h1> con otro botón
+    -->
+    <button
+      type="button"
+      onclick="
+        document.getElementById('prueba').innerHTML = 'CAMBIANDO el contenido!';
+        document.getElementById('h1cambio').innerHTML =
+          'CAMBIANDO el encabezado!';
+      "
+    >
+      ¡Dale al segundo botón!
+    </button>
+  </body>
+</html>

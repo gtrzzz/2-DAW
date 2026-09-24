@@ -1,0 +1,65 @@
+<html>
+  <body>
+    <!-- Ejercicio 4: Construir una web con tres botones ("Ruso", "Español", "Inglés") 
+     que alteren un párrafo (<p>) mostrando un saludo en el idioma elegido y aplicando a 
+      dicho párrafo un color de fuente CSS diferente para cada uno mediante .style.color -->
+
+    <h1>Ejercicio 4</h1>
+    <p id="saludo">Selecciona un idioma</p>
+    <button
+      type="button"
+      onclick="
+        document.getElementById('saludo').innerHTML = 'HOLA';
+        document.getElementById('saludo').style.color = 'red';
+      "
+    >
+      Español
+    </button>
+    <button
+      type="button"
+      onclick="
+        document.getElementById('saludo').innerHTML = 'HELLO';
+        document.getElementById('saludo').style.color = 'blue';
+      "
+    >
+      Inglés
+    </button>
+    <button
+      type="button"
+      onclick="
+        document.getElementById('saludo').innerHTML = 'PRIVET/ПРИВЕТ';
+        document.getElementById('saludo').style.color = 'green';
+      "
+    >
+      Ruso
+    </button>
+
+    <!--Ejercicio 5: Adaptar el mismo ejercicio para que las salidas en los
+    tres idiomas se impriman únicamente a través de la consola de desarrollador.-->
+    <button type="button" onclick="console.log('HOLA')">Español consola</button>
+    <button type="button" onclick="console.log('HELLO')">Inglés consola</button>
+    <button type="button" onclick="console.log('PRIVET/ПРИВЕТ')">
+      Ruso consola
+    </button>
+
+    <!--Ejercicio 6: Transformar el código para generar 
+    los textos directamente en el flujo de la página mediante 
+    el método document.write().-->
+
+    <h1>Ejercicio 6</h1>
+    <button type="button" onclick="document.write('HOLA')">
+      Español write
+    </button>
+    <button type="button" onclick="document.write('HELLO')">
+      Inglés write
+    </button>
+    <button type="button" onclick="document.write('PRIVET/ПРИВЕТ')">
+      Ruso write
+    </button>
+
+    <!-- Ahora vamos a hacer que aunque pulsemos el document.write salga el mensaje del idioma que sea y toda la página, 
+    para ello vamos a poner todo el html dentro del document.write-->
+
+    <button type="button" onclick."document.write('HOLA')">Español document write</button>
+  </body>
+</html>
