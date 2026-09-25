@@ -1,0 +1,33 @@
+<html>
+  <body>
+    <!--Ejercicio 7. Diseña una interfaz compuesta por un titular <h1>, un párrafo <p id="estado">Sistema en espera</p> y tres botones:
+    Botón 1 (Consola): Emite una traza mediante console.log() indicando la hora del sistema.
+    Botón 2 (Estilo): Modifica el color de fondo del párrafo a verde y su texto a "Sistema Activo" mediante innerHTML y .style.backgroundColor.
+    Botón 3 (Alerta): Lanza un cuadro modal mediante window.alert() avisando de que el proceso ha concluido.
+  -->
+
+    <h1 id="titular">Interfaz de Usuario</h1>
+    <p id="estado">Sistema en espera</p>
+
+    <button
+      type="button"
+      onclick="
+        console.log('Hora del sistema: ' + new Date().toLocaleTimeString())
+      "
+    >
+      Consola
+    </button>
+    <button
+      type="button"
+      onclick="
+        document.getElementById('estado').innerHTML = 'Sistema Activo';
+        document.getElementById('estado').style.backgroundColor = 'green';
+      "
+    >
+      Estilo
+    </button>
+    <button type="button" onclick="window.alert('El proceso ha concluido.')">
+      Alerta
+    </button>
+  </body>
+</html>
