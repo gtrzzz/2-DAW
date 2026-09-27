@@ -1,0 +1,304 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --primary: #1173d4;
+    --primary-dark: #0a3d66;
+    --primary-hover: #0d5ba8;
+    --primary-light: #09f;
+    --background: #101922;
+    --text-primary: #ffffff;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --border: rgba(255, 255, 255, 0.1);
+    --card-bg: #1e293b;
+    --shadow: rgba(0,0,0,0.3);
+    --input-bg: #1e293b;
+    --hsla-example: hsla(210, 100%, 56%, 1);
+
+}
+
+@font-face {
+    font-family: 'Coolvetica';
+    src: url('./fonts/Coolvetica Rg.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Coolvetica';
+    src: url('./fonts/Coolvetica Rg It.otf') format('opentype');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Coolvetica Condensed';
+    src: url('./fonts/Coolvetica Rg Cond.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Coolvetica Compressed';
+    src: url('./fonts/Coolvetica Hv Comp.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Coolvetica Cram';
+    src: url('./fonts/Coolvetica Rg Cram.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+body {
+    font-family: 'Coolvetica', sans-serif;
+    font-weight: 400;
+    background-color: var(--background);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.6;
+}
+
+/* Títulos principales */
+h1 {
+   font-size: 2.25rem;
+   font-weight: 900;
+   margin-bottom: 1rem;
+   line-height: 1.2;
+   text-wrap: balance;
+}
+
+h1 + p {
+    text-wrap: balance;
+    margin-bottom: 2rem;
+}
+
+header {
+    border-bottom: 1px solid var(--border);
+    background-color: var(--background);
+    padding: .5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+
+    h2 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-primary);
+    }
+}
+
+nav {
+    align-items: center;
+    gap: 1rem;
+    display: flex;
+
+    a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-size: .95rem;
+        transition: color .2s ease;
+
+        &:hover {
+            color: var(--text-primary);
+        }
+    }
+}
+
+/* Contenedor de acciones del header (Publicar empleo / Iniciar sesión) */
+header > div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    a {
+        text-decoration: none;
+        font-size: .95rem;
+        padding: .5rem 1rem;
+        border-radius: .375rem;
+        transition: background-color .2s ease, color .2s ease;
+    }
+
+    a:first-child {
+        color: var(--text-secondary);
+    }
+
+    a:last-child {
+        background-color: var(--primary);
+        color: var(--text-primary);
+
+        &:hover {
+            background-color: var(--primary-hover);
+        }
+    }
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 2rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Sección hero */
+main > section:first-child {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 3rem 1rem;
+    border-radius: .5rem;
+    overflow: hidden;
+
+    img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+        opacity: .3;
+    }
+
+    p {
+        max-width: 40rem;
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+    }
+}
+
+form[role="search"] {
+    display: flex;
+    align-items: center;
+    background-color: var(--input-bg);
+    border: 1px solid var(--border);
+    border-radius: .5rem;
+    padding: .5rem;
+    width: 100%;
+    max-width: 32rem;
+    gap: .5rem;
+
+    svg {
+        flex-shrink: 0;
+        color: var(--text-muted);
+    }
+
+    input {
+        flex: 1;
+        background: transparent;
+        border: none;
+        outline: none;
+        color: var(--text-primary);
+        font-size: .95rem;
+
+        &::placeholder {
+            color: var(--text-muted);
+        }
+    }
+
+    button {
+        background-color: var(--primary);
+        color: var(--text-primary);
+        border: none;
+        border-radius: .375rem;
+        padding: .5rem 1.25rem;
+        font-size: .95rem;
+        cursor: pointer;
+        transition: background-color .2s ease;
+
+        &:hover {
+            background-color: var(--primary-hover);
+        }
+    }
+}
+
+/* Sección "¿Por qué ZJobs?" */
+main > section:last-child {
+    header {
+        border: none;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0;
+        margin-bottom: 2rem;
+
+        h2 {
+            font-size: 1.75rem;
+            margin-bottom: .75rem;
+        }
+
+        p {
+            color: var(--text-secondary);
+            max-width: 60rem;
+        }
+    }
+
+    footer {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+        gap: 1.5rem;
+        background: none;
+        border: none;
+        padding: 0;
+
+        article {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: .5rem;
+            padding: 1.5rem;
+
+            svg {
+                color: var(--primary);
+                margin-bottom: .75rem;
+            }
+
+            h3 {
+                font-size: 1.1rem;
+                margin-bottom: .5rem;
+            }
+
+            p {
+                color: var(--text-secondary);
+                font-size: .9rem;
+            }
+        }
+    }
+}
+
+/* Footer general de la página */
+body > footer {
+    border-top: 1px solid var(--border);
+    padding: 1.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    small {
+        color: var(--text-muted);
+        font-size: .85rem;
+    }
+
+    nav a {
+        font-size: .85rem;
+    }
+}
