@@ -1,12 +1,33 @@
-<html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+  </head>
   <body>
     <!--Crear una secuencia cíclica de al menos 4 imágenes fotograma a fotograma. 
     Al hacer clic sobre la imagen, el script comprueba cuál se está visualizando (
     mediante una condición o extrayendo un contador de un array) y reasigna el atributo .src para mostrar 
     la siguiente.-->
-
     <h1>Secuencia de imágenes</h1>
-    <img
-      id="imagenSecuencia"
+    <img id="imagenSecuencia" src="img/frame1.jpg" width="400" height="600" style="object-fit: cover;">
+
+    <script>
+      var fotogramas = [
+        "img/frame1.jpg",
+        "img/frame2.jpg",
+        "img/frame3.jpg",
+        "img/frame4.jpg"
+      ];
+      var contador = 0;
+      var imagen = document.getElementById("imagenSecuencia");
+
+      imagen.onclick = function () {
+        contador++;
+        if (contador == fotogramas.length) {
+          contador = 0;
+        }
+        imagen.src = fotogramas[contador];
+      };
+    </script>
   </body>
 </html>
+
