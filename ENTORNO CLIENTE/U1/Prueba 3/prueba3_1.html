@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+
+    <ul>
+      <h1>Predicción de resultados de cada uno:</h1>
+
+      <li>
+        <b>fechaA = new Date(2026, 0, 10);
+        <dd>Resultado: </b>10 de enero de 2026</dd>
+      </li>
+      <li>
+        <b>fechaB = new Date(2026, 12, 1);
+        <dd>Resultado: </b>El mes está mal porque como los meses empiezan desde 0 al 11, el 12 supera el rango y sería un error</dd>
+      </li>
+      <li>
+        <b>fechaC = new Date(2026);
+        <dd>Resultado: </b>Saldría en ms 2026ms más al jueves 1 de enero de 1970 01:00:00 GMT+0100</dd>
+      </li>
+      <li>
+        <b>fechaD = new Date("2026-02-28");
+        <dd>Resultado: </b>28 de febrero de 2026</dd>
+      </li>
+      <li>
+        <b>fechaE = new Date("2026/02/28");
+        <dd>Resultado: </b>No cumple con las normas ISO, no estoy seguro de si pillaría el 28 de febero de 2026</dd>
+      </li>
+    </ul>
+  </body>
+</html>
