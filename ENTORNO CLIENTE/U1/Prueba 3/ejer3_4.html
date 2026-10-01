@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ejercicios 4 y 5 (con funciones)</title>
+  </head>
+  <body>
+    <h1>Ejercicio 4</h1>
+    <!-- Ejercicio 4: saludo en el párrafo con color distinto por idioma -->
+    <p id="saludo">Selecciona un idioma</p>
+    <button type="button" onclick="saludar('es')">Español</button>
+    <button type="button" onclick="saludar('en')">Inglés</button>
+    <button type="button" onclick="saludar('ru')">Ruso</button>
+
+    <h1>Ejercicio 5</h1>
+    <!-- Ejercicio 5: la misma salida, solo por consola (F12) -->
+    <button type="button" onclick="saludarConsola('es')">
+      Español consola
+    </button>
+    <button type="button" onclick="saludarConsola('en')">Inglés consola</button>
+    <button type="button" onclick="saludarConsola('ru')">Ruso consola</button>
+
+    <script>
+      // Datos en un solo sitio: texto y color de cada idioma
+      const saludos = {
+        es: { texto: "HOLA", color: "red" },
+        en: { texto: "HELLO", color: "blue" },
+        ru: { texto: "PRIVET/ПРИВЕТ", color: "green" },
+      };
+
+      // Ejercicio 4: cambia el texto y el color del párrafo
+      function saludar(idioma) {
+        const p = document.getElementById("saludo");
+        p.innerHTML = saludos[idioma].texto;
+        p.style.color = saludos[idioma].color;
+      }
+
+      // Ejercicio 5: solo escribe en la consola
+      function saludarConsola(idioma) {
+        console.log(saludos[idioma].texto);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ejercicio 6 (con funciones)</title>
+  </head>
+  <body>
+    <h1>Ejercicio 6</h1>
+    <p>Pulsa un botón: document.write() reescribe toda la página.</p>
+    <button type="button" onclick="escribirPagina('es')">Español write</button>
+    <button type="button" onclick="escribirPagina('en')">Inglés write</button>
+    <button type="button" onclick="escribirPagina('ru')">Ruso write</button>
+
+    <script>
+      const saludos = {
+        es: "HOLA",
+        en: "HELLO",
+        ru: "PRIVET/ПРИВЕТ",
+      };
+
+      // Los botones se repiten dentro del write para que la página
+      // siga siendo usable tras borrar el documento original.
+      const botones =
+        '<button type="button" onclick="escribirPagina(\'es\')">Español write</button> ' +
+        '<button type="button" onclick="escribirPagina(\'en\')">Inglés write</button> ' +
+        '<button type="button" onclick="escribirPagina(\'ru\')">Ruso write</button>';
+
+      // Tras la carga, document.write() borra el documento.
+      // Por eso escribimos el HTML completo en cada llamada.
+      function escribirPagina(idioma) {
+        document.open();
+        document.write(
+          '<!doctype html><html><head><meta charset="UTF-8">' +
+            "<title>Ejercicio 6</title></head><body>" +
+            "<h1>Ejercicio 6</h1>" +
+            "<p>" +
+            saludos[idioma] +
+            "</p>" +
+            botones +
+            "</body></html>",
+        );
+        document.close();
+      }
+    </script>
+  </body>
+</html>
