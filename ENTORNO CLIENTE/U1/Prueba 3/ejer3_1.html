@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 1 (con funciones)</title>
+  </head>
+  <body>
+    <h1 id="h1cambio">Modificando el código HTML</h1>
+    <!-- id en el encabezado para localizarlo con document.getElementById() -->
+    <p id="prueba">Modificando el contenido.</p>
+
+    <!-- Cada botón llama a una función en lugar de llevar el código dentro del onclick -->
+    <button type="button" onclick="cambiarParrafo()">¡Dale!</button>
+    <button type="button" onclick="cambiarParrafoYEncabezado()">
+      ¡Dale al segundo botón!
+    </button>
+
+    <script>
+      // Cambia solo el texto del párrafo
+      function cambiarParrafo() {
+        document.getElementById("prueba").innerHTML = "CAMBIANDO el contenido!";
+      }
+
+      // Cambia el párrafo (reutilizando la función anterior) y el encabezado <h1>
+      function cambiarParrafoYEncabezado() {
+        cambiarParrafo();
+        document.getElementById("h1cambio").innerHTML =
+          "CAMBIANDO el encabezado!";
+      }
+    </script>
+  </body>
+</html>

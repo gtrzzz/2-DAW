@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ejercicios 2 y 3 (con funciones)</title>
+  </head>
+  <body>
+    <h1>Ejercicios 2 y 3</h1>
+    <p>Capturando el evento clic de un botón</p>
+
+    <!-- Ejercicio 2: traza informativa en la consola con console.log() -->
+    <button type="button" onclick="trazaConsola()">¡Dale!</button>
+
+    <!-- Ejercicio 3: ventana modal con window.alert() / alert() -->
+    <button type="button" onclick="avisoModal()">
+      ¡Dale al segundo botón!
+    </button>
+
+    <script>
+      // Ejercicio 2: escribe en la consola (F12), no altera la página
+      function trazaConsola() {
+        console.log("Se ha pulsado el botón");
+      }
+
+      // Ejercicio 3: abre un diálogo modal y bloquea la página hasta pulsar "Aceptar"
+      function avisoModal() {
+        window.alert("Se ha pulsado el botón");
+      }
+    </script>
+  </body>
+</html>
