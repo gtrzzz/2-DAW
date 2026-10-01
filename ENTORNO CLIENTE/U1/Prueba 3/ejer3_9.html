@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ejercicio 9 (con funciones)</title>
+  </head>
+  <body>
+    <h1>Secuencia de imágenes</h1>
+    <!-- Al hacer clic se llama a la función siguienteFoto() -->
+    <img
+      id="imagenSecuencia"
+      src="..//Prueba 2/img/frame1.jpg"
+      width="400"
+      height="600"
+      style="object-fit: cover"
+      onclick="siguienteFoto()"
+    />
+
+    <script>
+      const fotogramas = [
+        "..//Prueba 2/img/frame1.jpg",
+        "..//Prueba 2/img/frame2.jpg",
+        "..//Prueba 2/img/frame3.jpg",
+        "..//Prueba 2/img/frame4.jpg",
+      ];
+      let contador = 0;
+
+      // Avanza al siguiente fotograma; el resto (%) vuelve a 0 tras el último
+      function siguienteFoto() {
+        contador = (contador + 1) % fotogramas.length;
+        document.getElementById("imagenSecuencia").src = fotogramas[contador];
+      }
+    </script>
+  </body>
+</html>

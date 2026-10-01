@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ejercicio 7 (con funciones)</title>
+  </head>
+  <body>
+    <h1 id="titular">Interfaz de Usuario</h1>
+    <p id="estado">Sistema en espera</p>
+
+    <button type="button" onclick="mostrarHora()">Consola</button>
+    <button type="button" onclick="activarSistema()">Estilo</button>
+    <button type="button" onclick="avisarFin()">Alerta</button>
+
+    <script>
+      // Botón 1: traza con la hora del sistema en la consola
+      function mostrarHora() {
+        console.log("Hora del sistema: " + new Date().toLocaleTimeString());
+      }
+
+      // Botón 2: cambia texto y color de fondo del párrafo
+      function activarSistema() {
+        const estado = document.getElementById("estado");
+        estado.innerHTML = "Sistema Activo";
+        estado.style.backgroundColor = "green";
+      }
+
+      // Botón 3: aviso modal
+      function avisarFin() {
+        window.alert("El proceso ha concluido.");
+      }
+    </script>
+  </body>
+</html>
