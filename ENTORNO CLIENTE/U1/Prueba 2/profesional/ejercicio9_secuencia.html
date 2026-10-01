@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 9 - Secuencia de imágenes</title>
+    <link rel="stylesheet" href="./css/estilos.css" />
+    <script defer src="./js/ej9_secuencia.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>Ejercicio 9: secuencia de imágenes</h1>
+
+      <p class="criterio">
+        <strong>RA1</strong> – CE 1.a · Manipulación de atributos de los elementos del DOM
+        (<code>src</code>) y persistencia de estado con una variable de ámbito superior.
+      </p>
+
+      <h2>Enunciado</h2>
+      <p>
+        Crear una secuencia cíclica de al menos 4 imágenes fotograma a fotograma. Al hacer clic
+        sobre la imagen, el script comprueba cuál se está visualizando (mediante una condición o
+        extrayendo un contador de un array) y reasigna el atributo <code>.src</code> para
+        mostrar la siguiente.
+      </p>
+
+      <h2>Secuencia</h2>
+      <p>
+        <img
+          id="imagenSecuencia"
+          class="secuencia"
+          src="img/frame1.jpg"
+          width="400"
+          height="600"
+          style="object-fit: cover;"
+          alt="Fotograma de la secuencia"
+        />
+      </p>
+      <p>
+        <button type="button" id="btnListar">Listar fotogramas</button>
+        <button type="button" id="btnReiniciar">Volver al primero</button>
+      </p>
+      <p id="salida" class="salida">Fotograma 1 de 4
+imagen.src = "img/frame1.jpg"</p>
+
+      <h2>Código del fichero externo <code>./js/ej9_secuencia.js</code></h2>
+      <pre><code>const FOTOGRAMAS = [
+  "img/frame1.jpg",
+  "img/frame2.jpg",
+  "img/frame3.jpg",
+  "img/frame4.jpg"
+];
+
+// FUERA de la funcion: debe conservar el valor entre pulsaciones
+let indiceActual = 0;
+
+function avanzarFotograma() {
+  const imagen = document.getElementById("imagenSecuencia");
+
+  indiceActual++;
+  if (indiceActual === FOTOGRAMAS.length) {
+    indiceActual = 0;              // vuelta al principio: la secuencia es ciclica
+  }
+
+  imagen.src = FOTOGRAMAS[indiceActual];
+}</code></pre>
+
+      <h2>Los dos detalles que hacen que funcione</h2>
+      <div class="tarjeta">
+        <h3>1. El contador va fuera de la función</h3>
+        <p>
+          Si <code>indiceActual</code> se declarase dentro de
+          <code>avanzarFotograma()</code>, se crearía una variable nueva en cada llamada que
+          valdría siempre 1, la condición nunca se cumpliría y la imagen se quedaría
+          congelada. Al declararlo en el <strong>ámbito superior</strong> del script, conserva
+          su valor entre invocaciones: eso es lo que se llama <em>estado</em> del programa.
+        </p>
+      </div>
+      <div class="tarjeta">
+        <h3>2. La condición de reinicio</h3>
+        <p>
+          Al incrementar el índice hay que comprobar si ha superado la última posición del
+          <code>Array</code>. Como los índices van de 0 a <code>length - 1</code>, cuando
+          <code>indiceActual</code> llega a <code>FOTOGRAMAS.length</code> se reinicia a 0 y
+          la secuencia vuelve a empezar por la primera imagen.
+        </p>
+        <p>
+          Un <code>Array</code> en JavaScript empieza siempre en la posición <strong>0</strong>,
+          igual que los meses del objeto <code>Date</code>, así que el fotograma
+          "1 de 4" se corresponde con el índice 0.
+        </p>
+      </div>
+
+      <h2>Diferencia con los apuntes originales</h2>
+      <p>
+        La versión de los apuntes usaba el atributo <code>onclick</code> asignado como
+        propiedad del elemento (<code>imagen.onclick = function () {...}</code>) y declaraba
+        las variables con <code>var</code>. Aquí se ha modernizado a
+        <code>addEventListener()</code> y a <code>const</code>/<code>let</code>, que son las
+        formas recomendadas actualmente.
+      </p>
+      <pre><code>&lt;!-- Apuntes: propiedad del elemento, var --&gt;
+var contador = 0;
+imagen.onclick = function () {
+  contador++;
+  if (contador == fotogramas.length) { contador = 0; }
+  imagen.src = fotogramas[contador];
+};
+
+&lt;!-- Versión actual: addEventListener, const y let --&gt;
+let indiceActual = 0;
+imagen.addEventListener("click", avanzarFotograma);</code></pre>
+      <p>
+        Con <code>==</code> la comparación no distingue entre tipos; lo correcto en JavaScript
+        moderno es usar siempre <code>===</code> (igualdad estricta) y
+        <code>!==</code> para la desigualdad.
+      </p>
+
+      <nav class="menu">
+        <a href="./index.html">Índice de la prueba</a>
+        <a href="./ejercicio1_modificar_html.html">Ejercicio 1: modificar el contenido del HTML</a>
+        <a href="./ejercicio2_3_eventos.html">Ejercicios 2 y 3: eventos, console.log y alert</a>
+        <a href="./ejercicio4_5_6_idiomas.html">Ejercicios 4, 5 y 6: idiomas y colores</a>
+        <a href="./ejercicio7_interfaz.html">Ejercicio 7: interfaz de usuario</a>
+        <a href="./ejercicio8_test_interactivo.html">Ejercicio 8: test interactivo</a>
+      </nav>
+    </main>
+  </body>
+</html>

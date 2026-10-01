@@ -3,33 +3,176 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Prueba 4 - Ejercicio 1 | Apartado 1.4</title>
+    <link rel="stylesheet" href="./css/estilos.css" />
+    <!-- Script externo: el .js vive en ./js y el HTML solo enlaza la ruta (integración por fichero separado) -->
+    <script defer src="./js/ej1_verificacion.js"></script>
   </head>
   <body>
+    <main>
+      <h1>Ejercicio 1: interpretación de constructores y desbordamientos</h1>
 
-    <ul>
-      <h1>Predicción de resultados de cada uno:</h1>
+      <p class="criterio">
+        <strong>RA1</strong> – CE 1.d · Particulares de la programación de guiones.
+        Predict <b>sin ejecutar en la consola</b> qué fecha representa cada variable y
+        comprobar después el resultado real.
+      </p>
 
-      <li>
-        <b>fechaA = new Date(2026, 0, 10);
-        <dd>Resultado: </b>10 de enero de 2026</dd>
-      </li>
-      <li>
-        <b>fechaB = new Date(2026, 12, 1);
-        <dd>Resultado: </b>El mes está mal porque como los meses empiezan desde 0 al 11, el 12 supera el rango y sería un error</dd>
-      </li>
-      <li>
-        <b>fechaC = new Date(2026);
-        <dd>Resultado: </b>Saldría en ms 2026ms más al jueves 1 de enero de 1970 01:00:00 GMT+0100</dd>
-      </li>
-      <li>
-        <b>fechaD = new Date("2026-02-28");
-        <dd>Resultado: </b>28 de febrero de 2026</dd>
-      </li>
-      <li>
-        <b>fechaE = new Date("2026/02/28");
-        <dd>Resultado: </b>No cumple con las normas ISO, no estoy seguro de si pillaría el 28 de febrero de 2026</dd>
-      </li>
-    </ul>
+      <h2>Código que hay que analizar</h2>
+      <pre><code>const fechaA = new Date(2026, 0, 10);
+const fechaB = new Date(2026, 12, 1);
+const fechaC = new Date(2026);
+const fechaD = new Date("2026-02-28");
+const fechaE = new Date("2026/02/28");</code></pre>
+
+      <h2>Predicción y resultado verificado</h2>
+      <p>
+        La columna <em>Predicción</em> es la respuesta redactada antes de ejecutar nada.
+        La columna <em>Resultado real</em> la rellena <code>./js/ej1_verificacion.js</code>
+        al cargar la página (y también la envía a la consola del navegador).
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Variable</th>
+            <th>Predicción (sin ejecutar)</th>
+            <th>Resultado real verificado</th>
+            <th>¿Acierto?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>new Date(2026, 0, 10)</code></td>
+            <td>10 de enero de 2026</td>
+            <td class="resultado" data-caso="A"></td>
+            <td class="veredicto" data-caso="A"></td>
+          </tr>
+          <tr>
+            <td><code>new Date(2026, 12, 1)</code></td>
+            <td>
+              El mes está mal porque como los meses empiezan desde 0 al 11, el 12 supera
+              el rango y sería un error
+            </td>
+            <td class="resultado" data-caso="B"></td>
+            <td class="veredicto" data-caso="B"></td>
+          </tr>
+          <tr>
+            <td><code>new Date(2026)</code></td>
+            <td>Saldría en ms 2026 ms más al jueves 1 de enero de 1970 01:00:00 GMT+0100</td>
+            <td class="resultado" data-caso="C"></td>
+            <td class="veredicto" data-caso="C"></td>
+          </tr>
+          <tr>
+            <td><code>new Date("2026-02-28")</code></td>
+            <td>28 de febrero de 2026</td>
+            <td class="resultado" data-caso="D"></td>
+            <td class="veredicto" data-caso="D"></td>
+          </tr>
+          <tr>
+            <td><code>new Date("2026/02/28")</code></td>
+            <td>
+              No cumple con las normas ISO, no estoy seguro de si pillaría el 28 de febrero
+              de 2026
+            </td>
+            <td class="resultado" data-caso="E"></td>
+            <td class="veredicto" data-caso="E"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Justificación de cada caso</h2>
+
+      <div class="tarjeta">
+        <h3>A · <code>new Date(2026, 0, 10)</code> – componentes numéricos</h3>
+        <p>
+          Se usan componentes numéricos, así que el motor interpreta los argumentos como
+          <strong>hora local</strong>. El mes es <strong>base cero</strong>: el 0 es enero y el
+          11 es diciembre. El día, en cambio, <strong>empieza en 1</strong>. Por eso
+          <code>(2026, 0, 10)</code> es el 10 de enero y no el 10 de diciembre.
+        </p>
+      </div>
+
+      <div class="tarjeta">
+        <h3>B · <code>new Date(2026, 12, 1)</code> – desbordamiento de mes</h3>
+        <p>
+          <strong>Predicción incorrecta.</strong> El mes 12 no genera un error: JavaScript
+          aplica el <em>comportamiento de desbordamiento automático</em>. El motor calcula el
+          exceso y lo lleva a la siguiente unidad superior, exactamente igual que hace
+          <code>new Date(2026, 15, 20)</code> -&gt; abril de 2027 (12 meses = 1 año, sobran 3).
+          Aquí 12 meses = 1 año entero, así que la fecha se va a <strong>enero de 2027</strong>.
+        </p>
+        <p>
+          Este es el error conceptual más habitual: <strong>el desbordamiento nunca es un
+          error</strong>, es una forma de sumar. Si lo que se quiere es december, hay que pasar
+          el índice 11.
+        </p>
+      </div>
+
+      <div class="tarjeta">
+        <h3>C · <code>new Date(2026)</code> – un único argumento numérico</h3>
+        <p>
+          Al recibir <strong>un solo número</strong>, el constructor no lo interpreta como año
+          sino como <strong>milisegundos desde la época Unix</strong> (1 de enero de 1970
+          00:00:00 UTC). Por eso el resultado es el 1 de enero de 1970 con 2,026 segundos
+          añadidos, que en horario peninsular (GMT+0100) se ve a las 01:00:02.
+        </p>
+        <p>
+          <strong>Regla:</strong> pasar un único número <em>nunca</em> indica el año. Para
+          escribir el año 2026 hay que usar componentes (<code>new Date(2026, 0, 1)</code>) o
+          una cadena de texto.
+        </p>
+      </div>
+
+      <div class="tarjeta">
+        <h3>D · <code>new Date("2026-02-28")</code> – cadena con formato ISO 8601</h3>
+        <p>
+          Formato <strong>ISO 8601 recomendado</strong>, así que el analizador lo reconoce sin
+          ambigüedad. Matiz importante: una cadena ISO <em>solo con fecha</em>
+          (<code>YYYY-MM-DD</code>) se interpreta como <strong>medianoche UTC</strong>, no como
+          medianoche local. En España eso se traduce a la <strong>01:00</strong> del mismo día.
+        </p>
+        <p>
+          En cambio <code>"2026-02-28T12:30:00"</code> (fecha <em>y</em> hora, sin
+          <code>Z</code>) sí se interpreta como hora local. Esa diferencia es la causa del
+          clásico "se me ha displaced un día el fecha".
+        </p>
+      </div>
+
+      <div class="tarjeta">
+        <h3>E · <code>new Date("2026/02/28")</code> – formato no estándar</h3>
+        <p>
+          La predicción era dubitativa y la duda es correcta: <code>YYYY/MM/DD</code>
+          <strong>no pertenece a ningún estándar</strong> (ni ISO 8601 ni RFC 2822), por lo que
+          el estándar no obliga a ningún motor a aceptarlo. En la práctica los navegadores
+          basados en V8 (Chrome, Edge, Opera) sí lo aceptan como <strong>hora local</strong> y
+          devuelven el 28 de febrero de 2026 a las 00:00, pero es un comportamiento
+          <strong>no garantizado</strong>: en otros navegadores podría devolver
+          <code>Invalid Date</code>.
+        </p>
+        <p>
+          Conclusión práctica: en código real hay que usar siempre
+          <code>YYYY-MM-DD</code>, nunca separadores de barra.
+        </p>
+      </div>
+
+      <h2>Otros desbordamientos comprobados</h2>
+      <pre><code>new Date(2026, 15, 20);  // mes 15 -> 2027 + 3 meses = 20 de abril de 2027
+new Date(2026, 5, 35);   // junio tiene 30 días -> 5 de julio de 2026
+new Date(2026, 8, 32);   // septiembre tiene 30 días -> 2 de octubre de 2026
+new Date(95, 5, 15);     // años 0-99 -> siglo XX: 15 de junio de 1995
+new Date(0);             // 1 de enero de 1970 00:00:00 UTC
+new Date(86400000);      // 1 día = 86.400.000 ms -> 2 de enero de 1970</code></pre>
+
+      <nav>
+        <a href="./prueba4_2.html">Siguiente: Ejercicio 2</a>
+        <a href="./prueba4_3.html">Ejercicio 3</a>
+        <a href="./prueba4_4.html">Ejercicio 4</a>
+        <a href="./prueba4_5.html">Ejercicio 5</a>
+        <a href="./prueba4_6.html">Ejercicio 6</a>
+        <a href="./prueba4_7.html">Ejercicio 7</a>
+        <a href="./prueba4_metodos.html">Complemento: métodos de Date</a>
+      </nav>
+    </main>
   </body>
 </html>

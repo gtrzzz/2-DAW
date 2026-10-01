@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prueba 5 - Ubicación de los scripts, defer y async</title>
+    <link rel="stylesheet" href="./css/estilos.css" />
+
+    <!--
+      1) Script en el <head> SIN defer: el navegador detiene aqui el analisis
+         del HTML. Este script falla a proposito porque el elemento del <body>
+         todavia no existe en el DOM.
+    -->
+    <script src="./js/en_head_sin_defer.js"></script>
+
+    <!--
+      2) Script en el <head> CON defer: se descarga en segundo plano y se
+         ejecuta cuando el documento entero ya esta parseado. Este funciona.
+    -->
+    <script defer src="./js/en_head_con_defer.js"></script>
+
+    <!--
+      3) Script con async: se ejecuta en cuanto termina su descarga, sin
+         esperar al HTML. Se reserva para scripts independientes.
+    -->
+    <script async src="./js/cargador_async.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>Ubicación de los scripts, <code>defer</code> y <code>async</code></h1>
+
+      <p class="criterio">
+        <strong>RA1</strong> – CE 1.e · Los mecanismos de integración no solo deciden
+        <em>dónde</em> se escribe el código, sino también <em>cuándo</em> se ejecuta respecto
+        al análisis del documento HTML.
+      </p>
+
+      <h2>Demostración en vivo</h2>
+      <p>
+        El bloque de abajo está en el <code>&lt;body&gt;</code>. Hay dos scripts intentando
+        escribir en él desde el <code>&lt;head&gt;</code>:
+      </p>
+
+      <div id="puntoDeControl">Este texto lo escribe el script que se ejecute correctamente.</div>
+
+      <p class="aviso">
+        Al abrir la consola (<code>F12</code>) se ve un <strong>TypeError</strong> procedente
+        de <code>js/en_head_sin_defer.js</code>. Es intencionado: demuestra el problema común
+        descrito en el tema.
+      </p>
+
+      <h2>1. Script en el <code>&lt;head&gt;</code> sin atributos</h2>
+      <p>
+        El navegador lee el documento de arriba abajo. Al encontrar una etiqueta
+        <code>&lt;script&gt;</code> en el <code>&lt;head&gt;</code>, <strong>detiene el análisis
+        del HTML</strong> hasta que el script se ha descargado y ejecutado por completo.
+      </p>
+      <p class="error">
+        <strong>Problema común:</strong> si ese script intenta acceder a un elemento del
+        <code>&lt;body&gt;</code> con <code>document.getElementById('...')</code>, falla con un
+        error, porque ese elemento todavía no ha sido leído ni construido en el DOM. Eso es
+        exactamente lo que hace <code>js/en_head_sin_defer.js</code>.
+      </p>
+      <pre><code>&lt;script src="./js/en_head_sin_defer.js"&gt;&lt;/script&gt;   &lt;!-- BLOQUEA y FALLA --&gt;</code></pre>
+
+      <h2>2. Script al final del <code>&lt;body&gt;</code></h2>
+      <p>
+        Se considera la <strong>recomendación tradicional más eficaz</strong>: garantiza que
+        todo el marcado, los textos y las imágenes ya se han analizado e insertado en el DOM
+        antes de que empiece la lógica de interacción. Por eso la Actividad 2 coloca su bloque
+        <code>&lt;script&gt;</code> justo antes de <code>&lt;/body&gt;</code>.
+      </p>
+      <pre><code>&lt;body&gt;
+  &lt;h1 id="titulo"&gt;...&lt;/h1&gt;
+  &lt;button id="btn"&gt;...&lt;/button&gt;
+
+  &lt;script&gt;
+    // Aqui el DOM ya esta completo: getElementById encuentra todo
+    document.getElementById("btn").addEventListener("click", manejar);
+  &lt;/script&gt;
+&lt;/body&gt;</code></pre>
+
+      <h2>3. <code>defer</code>: la solución moderna para scripts del <code>&lt;head&gt;</code></h2>
+      <p>
+        Para scripts <strong>externos</strong> colocados en el <code>&lt;head&gt;</code>, HTML5
+        define <code>defer</code>: el navegador <strong>descarga el archivo en segundo plano
+        mientras sigue construyendo el HTML</strong>, pero <strong>retrasa su ejecución
+        hasta que el documento se ha parseado por completo</strong>.
+      </p>
+      <ul>
+        <li>El HTML se muestra antes: mejora la percepción de velocidad.</li>
+        <li>El script se ejecuta con el DOM completo: <code>getElementById</code> funciona.</li>
+        <li>Además, varios scripts con <code>defer</code> se ejecutan <strong>en el orden en que aparecen</strong>.</li>
+      </ul>
+      <pre><code>&lt;script defer src="./js/en_head_con_defer.js"&gt;&lt;/script&gt;   &lt;!-- NO bloquea y SI funciona --&gt;</code></pre>
+
+      <h2>4. <code>async</code>: para scripts independientes</h2>
+      <p>
+        <code>async</code>, el archivo también se descarga en segundo plano, pero
+        <strong>se ejecuta en cuanto termina la descarga</strong>, sin importar si el HTML ha
+        terminado de leerse. Es la opción para herramientas externas de analítica o
+        contadores, que no dependen de la página.
+      </p>
+      <pre><code>&lt;script async src="./js/cargador_async.js"&gt;&lt;/script&gt;</code></pre>
+      <p class="error">
+        <strong>Advertencia:</strong> con <code>async</code> el <em>orden de ejecución no está
+        garantizado</em>, porque depende de qué archivo termine de descargarse antes. Si dos
+        scripts <code>async</code> dependen entre sí, la página se romperá de forma
+        impredecible.
+      </p>
+      <p id="salidaOrden" class="salida">(aquí se registra el orden de ejecución de los eventos)</p>
+
+      <h2>Tabla resumen de las cuatro ubicaciones</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Ubicación</th>
+            <th>Bloquea el HTML</th>
+            <th>DOM listo al ejecutar</th>
+            <th>Orden garantizado</th>
+            <th>Cuándo usarla</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>&lt;head&gt;</code> sin atributos</td>
+            <td class="error">Sí</td>
+            <td class="error">No</td>
+            <td>Sí</td>
+            <td>Nunca, si necesita el DOM</td>
+          </tr>
+          <tr>
+            <td><code>&lt;head&gt;</code> con <code>defer</code></td>
+            <td class="ok">No</td>
+            <td class="ok">Sí</td>
+            <td class="ok">Sí</td>
+            <td class="ok">Recomendado para scripts del proyecto</td>
+          </tr>
+          <tr>
+            <td><code>&lt;head&gt;</code> con <code>async</code></td>
+            <td class="ok">No</td>
+            <td class="ok">No garantizado</td>
+            <td class="error">No</td>
+            <td>Analítica, contadores, scripts de terceros</td>
+          </tr>
+          <tr>
+            <td>Final del <code>&lt;body&gt;</code></td>
+            <td class="error">Sí (pero ya se ve el contenido)</td>
+            <td class="ok">Sí</td>
+            <td>Sí</td>
+            <td>Scripts propios embebidos o enlazados</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Sintaxis de la etiqueta <code>&lt;script&gt;</code></h2>
+      <p>
+        En HTML5 basta con abrir y cerrar la etiqueta: los navegadores asumen por defecto que el
+        lenguaje es JavaScript. En versiones antiguas era obligatorio indicar el tipo MIME con
+        <code>type="text/javascript"</code>; hoy los navegadores lo reconocen por compatibilidad
+        hacia atrás, pero <strong>ya no hace falta escribirlo</strong>.
+      </p>
+      <pre><code>&lt;script type="text/javascript"&gt;   &lt;!-- obsoleto, ya no hace falta --&gt;
+&lt;script&gt;alert("hola");&lt;/script&gt;             &lt;!-- sintaxis actual de HTML5 --&gt;
+
+&lt;script src="script.js"&gt;&lt;/script&gt;             &lt;!-- fichero externo, correcto --&gt;</code></pre>
+      <p class="error">
+        <strong>Sintaxis estricta de cierre:</strong> una etiqueta <code>&lt;script&gt;</code>
+        <em>jamas</em> puede cerrarse de forma abreviada. No es válido
+        <code>&lt;script src="script.js" /&gt;</code>: hay que escribir siempre
+        <code>&lt;/script&gt;</code>, incluso cuando el fichero externo está vacío de contenido
+        interno.
+      </p>
+
+      <nav>
+        <a href="./index.html">Índice</a>
+        <a href="./prueba5_1.html">Actividad 1: ficheros externos</a>
+        <a href="./prueba5_2.html">Actividad 2: código embebido</a>
+        <a href="./mi_proyecto/index.html">Práctica guiada: mi_proyecto</a>
+      </nav>
+    </main>
+  </body>
+</html>

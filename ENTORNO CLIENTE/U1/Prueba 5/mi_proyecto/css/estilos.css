@@ -1,0 +1,99 @@
+/* ============================================================
+   Práctica de laboratorio guiada - Apartado 1.5
+   Estructura de carpetas profesional de un proyecto web:
+
+   mi_proyecto/
+   |-- css/
+   |   `-- estilos.css      <- este fichero
+   |-- js/
+   |   `-- logica.js
+   `-- index.html
+
+   Ventaja de separar tambien el CSS: el navegador lo descarga una vez
+   y lo guarda en su caché, igual que ocurre con los .js
+   ============================================================ */
+
+body {
+  margin: 0;
+  padding: 2.5rem 1rem;
+  background-color: #eef2f7;
+  color: #1f2933;
+  font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
+  line-height: 1.6;
+}
+
+.contenedor {
+  max-width: 44rem;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border: 1px solid #d3d9e0;
+  border-radius: 10px;
+  padding: 2rem 2.2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+h1 {
+  color: #1d4ed8;
+  margin-top: 0;
+  border-bottom: 3px solid #1d4ed8;
+  padding-bottom: 0.4rem;
+}
+
+h2 {
+  color: #1d4ed8;
+  font-size: 1.15rem;
+  margin-top: 1.8rem;
+}
+
+code {
+  background-color: #eef1f5;
+  border-radius: 4px;
+  padding: 0.1rem 0.3rem;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 0.92em;
+}
+
+pre {
+  background-color: #1f2933;
+  color: #e5e7eb;
+  padding: 0.9rem 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 0.88rem;
+}
+
+/* ---------------------------------------------------------
+   ESTILO DEL BOTON
+   Aqui se define el color INICIAL del boton. El script js/logica.js
+   lo cambiara en tiempo de ejecucion mediante la propiedad
+   .style.backgroundColor, que tiene prioridad sobre esta regla CSS.
+   --------------------------------------------------------- */
+#btnColor {
+  background-color: #1d4ed8;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.6rem;
+  font-size: 1.05rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.15s ease;
+}
+
+#btnColor:hover {
+  filter: brightness(1.2);
+}
+
+#btnColor:active {
+  transform: scale(0.97);
+}
+
+#mensaje {
+  margin-top: 1.2rem;
+  padding: 0.8rem 1rem;
+  border-left: 4px solid #1d4ed8;
+  background-color: #eef1f5;
+  border-radius: 4px;
+  min-height: 1.4rem;
+}

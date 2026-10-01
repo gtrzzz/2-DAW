@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prueba 5 - Apartado 1.5 (índice de actividades)</title>
+    <link rel="stylesheet" href="./css/estilos.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Apartado 1.5 · Índice de actividades</h1>
+
+      <p class="criterio">
+        <strong>RA1</strong> – CE 1.e · Se han verificado los mecanismos de integración de los
+        lenguajes de marcas con los lenguajes de programación de clientes Web.
+      </p>
+
+      <h2>Los dos mecanismos de integración</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Mecanismo</th>
+            <th>Sintaxis</th>
+            <th>Ventaja</th>
+            <th>Inconveniente</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>A. Código embebido</strong></td>
+            <td><code>&lt;script&gt;...&lt;/script&gt;</code></td>
+            <td>Todo en un archivo; sin peticiones extra</td>
+            <td class="error">Difícil de mantener, no se cachea, no se reutiliza</td>
+          </tr>
+          <tr>
+            <td><strong>B. Fichero externo</strong> (recomendado)</td>
+            <td><code>&lt;script src="./js/x.js"&gt;&lt;/script&gt;</code></td>
+            <td class="ok">Cacheable, modular, mantenible y reutilizable</td>
+            <td>Una petición extra (que el navegador cachea)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Actividades</h2>
+      <table>
+        <thead>
+          <tr><th>Actividad</th><th>Contenido</th><th>Ir</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Código JavaScript en fichero externo separado (<code>js/script.js</code>)</td>
+            <td><a href="./prueba5_1.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Código JavaScript embebido dentro del HTML</td>
+            <td><a href="./prueba5_2.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td>Extra</td>
+            <td>Ubicación de los scripts: <code>&lt;head&gt;</code>, <code>defer</code> y <code>async</code></td>
+            <td><a href="./prueba5_3.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td>Práctica guiada</td>
+            <td>Reorganización del proyecto en <code>mi_proyecto/</code> con <code>css/</code> y <code>js/</code></td>
+            <td><a href="./mi_proyecto/index.html">Abrir</a></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Estructura de esta prueba</h2>
+      <pre><code>Prueba 5/
+├── css/
+│   └── estilos.css
+├── js/
+│   ├── script.js              <- Actividad 1
+│   ├── en_head_sin_defer.js   <- falla a proposito
+│   ├── en_head_con_defer.js   <- funciona
+│   └── cargador_async.js
+├── mi_proyecto/
+│   ├── css/
+│   │   └── estilos.css
+│   ├── js/
+│   │   └── logica.js
+│   └── index.html             <- práctica guiada
+├── index.html                 <- esta pagina
+├── prueba5_1.html
+├── prueba5_2.html
+└── prueba5_3.html</code></pre>
+
+      <h2>Errores frecuentes al integrar varios ficheros <code>.js</code></h2>
+      <p>
+        Todos los <code>&lt;script&gt;</code> externos de una misma página se ejecutan en el
+        <strong>mismo ámbito global</strong>. Eso tiene una consecuencia muy fácil de pasar por
+        alto:
+      </p>
+      <ul>
+        <li>
+          Dos ficheros que declaren el mismo <code>const</code> o <code>let</code> de primer
+          nivel producen un <code class="error">SyntaxError: Identifier 'X' has already been
+          declared</code> y <strong>el segundo fichero entero deja de ejecutarse</strong>.
+        </li>
+        <li>
+          Dos <code>function</code> con el mismo nombre no dan error: la segunda
+          <strong>sobrescribe silenciosamente</strong> a la primera, y el fallo solo se manifiesta
+          en forma de comportamiento raro.
+        </li>
+      </ul>
+      <p>
+        Por eso, en este proyecto cada <code>.js</code> usa nombres propios
+        (<code>ejecutarCalculoDias</code>, <code>ejecutarCalculoMes</code>,
+        <code>registrarIdioma</code>…). La otra solución, más limpia, es envolver cada fichero
+        entre paréntesis para crear un ámbito propio:
+      </p>
+      <pre><code>(function () {
+  // todo lo declarado aqui dentro es privado de este fichero
+  const TOTAL_PREGUNTAS = 7;
+  // ...
+})();</code></pre>
+      <p>
+        Esa misma construcción, escrita con la sintaxis moderna, es el <strong>módulo ES</strong>
+        (<code>type="module"</code>), que además da a cada fichero su propio ámbito de forma
+        nativa, pero obliga a cargar los ficheros con
+        <code>&lt;script type="module" src="..."&gt;</code>.
+      </p>
+
+      <h2>Ejercicios de los apartados 1.2 y 1.4 con esta estructura</h2>
+      <p>
+        El enunciado pide rehacer los ejercicios de los apartados <strong>1.2</strong> y
+        <strong>1.4</strong> usando la estructura profesional de carpetas que se acaba de
+        ver en la práctica guiada:
+      </p>
+      <ul>
+        <li>
+          <strong>Apartado 1.4</strong> (scripts, <code>Date</code> y sus ventajas y
+          desventajas): entrega completa en
+          <code>Prueba 4/</code>, con <code>css/estilos.css</code> y un <code>.js</code>
+          externo por ejercicio.
+        </li>
+        <li>
+          <strong>Apartado 1.2</strong> (capacidades y mecanismos de ejecución de los
+          navegadores): los originales están en <code>Prueba 2/</code> escritos con el
+          enfoque embebido, y la versión reorganizada con ficheros externos está en
+          <code>Prueba 2/profesional/</code>.
+        </li>
+      </ul>
+    </main>
+  </body>
+</html>

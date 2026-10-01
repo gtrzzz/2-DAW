@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 8 - Test interactivo</title>
+    <link rel="stylesheet" href="./css/estilos.css" />
+    <script defer src="./js/ej8_test_interactivo.js"></script>
+    <style>
+      /* Estilos propios de este ejercicio. En un proyecto profesional
+         tambien estarian en css/estilos.css; se dejan aqui para que se vea
+         la diferencia con los estilos que escribe JavaScript. */
+      .pregunta {
+        border-left: 4px solid #1d4ed8;
+        padding: 0.6rem 0.9rem;
+        margin: 0.8rem 0;
+        border-radius: 4px;
+        background-color: #ffffff;
+      }
+
+      .pregunta p {
+        margin: 0 0 0.4rem 0;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Ejercicio 8: test interactivo</h1>
+
+      <p class="criterio">
+        <strong>RA1</strong> – CE 1.a · Evaluación de la respuesta del usuario y modificación
+        dinámica de estilos mediante la propiedad <code>.style.color</code>.
+      </p>
+
+      <h2>Enunciado</h2>
+      <p>
+        Desarrollar un test interactivo de siete preguntas con botones «Verdadero» y «Falso».
+        Cuando el usuario hace clic, el script evalúa el acierto y modifica la propiedad de
+        estilo <code>.style.color = "green"</code> (acierto) o
+        <code>.style.color = "red"</code> (error).
+      </p>
+
+      <h2>Cómo se declaran las respuestas correctas</h2>
+      <p>
+        Cada bloque <code>&lt;div class="pregunta"&gt;</code> lleva un atributo
+        <code>data-correcta</code> con el valor real de la frase. El JavaScript lee ese atributo
+        y lo compara con la respuesta que pulses, de modo que la lógica
+        <strong>no está escrita a mano</strong>: se pueden añadir preguntas nuevas sin tocar el
+        <code>.js</code>.
+      </p>
+      <pre><code>&lt;div class="pregunta" data-numero="1" data-correcta="true"
+     data-enunciado="El sol es una estrella."&gt;
+  &lt;p&gt;Pregunta 1: El sol es una estrella.&lt;/p&gt;
+  &lt;button type="button" data-respuesta="true"&gt;Verdadero&lt;/button&gt;
+  &lt;button type="button" data-respuesta="false"&gt;Falso&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+
+      <h2>Test</h2>
+      <p id="contador" class="salida">Respondidas: 0 / 7   |   Aciertos: 0</p>
+      <p id="resultado" class="salida">Responde a una pregunta para ver el resultado.</p>
+      <p><button type="button" id="btnReiniciar">Reiniciar test</button></p>
+
+      <div
+        class="pregunta"
+        data-numero="1"
+        data-correcta="true"
+        data-enunciado="El sol es una estrella."
+      >
+        <p>Pregunta 1: El sol es una estrella.</p>
+        <button type="button" data-respuesta="true">Verdadero</button>
+        <button type="button" data-respuesta="false">Falso</button>
+      </div>
+
+      <div
+        class="pregunta"
+        data-numero="2"
+        data-correcta="false"
+        data-enunciado="La capital de Francia es Berlín."
+      >
+        <p>Pregunta 2: La capital de Francia es Berlín.</p>
+        <button type="button" data-respuesta="true">Verdadero</button>
+        <button type="button" data-respuesta="false">Falso</button>
+      </div>
+
+      <div
+        class="pregunta"
+        data-numero="3"
+        data-correcta="true"
+        data-enunciado="El agua hierve a 100 grados Celsius."
+      >
+        <p>Pregunta 3: El agua hierve a 100 grados Celsius a nivel del mar.</p>
+        <button type="button" data-respuesta="true">Verdadero</button>
+        <button type="button" data-respuesta="false">Falso</button>
+      </div>
+
+      <div
+        class="pregunta"
+        data-numero="4"
+        data-correcta="false"
+        data-enunciado="La Tierra es plana."
+      >
+        <p>Pregunta 4: La Tierra es plana.</p>
+        <button type="button" data-respuesta="true">Verdadero</button>
+        <button type="button" data-respuesta="false">Falso</button>
+      </div>
+
+      <div
+        class="pregunta"
+        data-numero="5"
+        data-correcta="true"
+        data-enunciado="La velocidad de la luz es de aproximadamente 300.000 km/s."
+      >
+        <p>Pregunta 5: La velocidad de la luz es de aproximadamente 300.000 km/s.</p>
+        <button type="button" data-respuesta="true">Verdadero</button>
+        <button type="button" data-respuesta="false">Falso</button>
+      </div>
+
+      <div
+        class="pregunta"
+        data-numero="6"
+        data-correcta="true"
+        data-enunciado="La capital de España es Madrid."
+      >
+        <p>Pregunta 6: La capital de España es Madrid.</p>
+        <button type="button" data-respuesta="true">Verdadero</button>
+        <button type="button" data-respuesta="false">Falso</button>
+      </div>
+
+      <div
+        class="pregunta"
+        data-numero="7"
+        data-correcta="true"
+        data-enunciado="La fórmula química del agua es H2O."
+      >
+        <p>Pregunta 7: La fórmula química del agua es H2O.</p>
+        <button type="button" data-respuesta="true">Verdadero</button>
+        <button type="button" data-respuesta="false">Falso</button>
+      </div>
+
+      <h2>Lógica del ejercicio</h2>
+      <pre><code>function comprobarRespuesta(boton) {
+  const respuestaElegida = boton.dataset.respuesta === "true";
+  const bloque = boton.closest(".pregunta");
+  const respuestaCorrecta = bloque.dataset.correcta === "true";
+  const acierto = respuestaElegida === respuestaCorrecta;
+
+  boton.style.color = acierto ? "green" : "red";
+  boton.style.fontWeight = "bold";
+
+  // se resaltan ambas respuestas, no solo la pulsada
+  bloque.querySelectorAll("button").forEach((otro) =&gt; {
+    if (otro !== boton) {
+      otro.style.color = "";
+      otro.style.fontWeight = "";
+    }
+  });
+}</code></pre>
+
+      <h2>Prioridad de los estilos</h2>
+      <p>
+        El color de los botones se escribe con <code>boton.style.color</code>, es decir, en el
+        <strong>estilo en línea</strong> del elemento. En la cascada de CSS, el estilo en línea
+        solo lo puede ganar una regla con <code>!important</code>, así que el JavaScript manda
+        sobre la hoja <code>css/estilos.css</code> sin necesidad de ninguna regla adicional.
+      </p>
+
+      <nav class="menu">
+        <a href="./index.html">Índice de la prueba</a>
+        <a href="./ejercicio1_modificar_html.html">Ejercicio 1: modificar el contenido del HTML</a>
+        <a href="./ejercicio2_3_eventos.html">Ejercicios 2 y 3: eventos, console.log y alert</a>
+        <a href="./ejercicio4_5_6_idiomas.html">Ejercicios 4, 5 y 6: idiomas y colores</a>
+        <a href="./ejercicio7_interfaz.html">Ejercicio 7: interfaz de usuario</a>
+        <a href="./ejercicio9_secuencia.html">Ejercicio 9: secuencia de imágenes</a>
+      </nav>
+    </main>
+  </body>
+</html>

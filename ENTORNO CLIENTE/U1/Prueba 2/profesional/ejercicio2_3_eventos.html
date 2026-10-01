@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicios 2 y 3 - Eventos, console.log y alert</title>
+    <link rel="stylesheet" href="./css/estilos.css" />
+    <script defer src="./js/ej2_3_eventos.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>Ejercicios 2 y 3: captura del evento clic</h1>
+
+      <p class="criterio">
+        <strong>RA1</strong> – CE 1.a · Mecanismos de ejecución de los navegadores Web: el modelo
+        de eventos y los métodos de salida disponibles.
+      </p>
+
+      <h2>Enunciado del ejercicio 2</h2>
+      <p>
+        Implementar una página que capture el evento clic de un botón para emitir una traza
+        informativa a las herramientas de desarrollo mediante <code>console.log()</code>.
+      </p>
+
+      <h2>Enunciado del ejercicio 3</h2>
+      <p>
+        Modificar el ejercicio anterior sustituyendo la escritura en el párrafo por ventanas de
+        aviso emergentes modales utilizando el método <code>window.alert()</code>.
+      </p>
+
+      <h2>Código del fichero externo <code>./js/ej2_3_eventos.js</code></h2>
+      <pre><code>function trazarEnConsola() {
+  console.log("Se ha pulsado el botón");
+}
+
+function mostrarAlerta() {
+  window.alert("Se ha pulsado el botón");
+}
+
+document.addEventListener("DOMContentLoaded", () =&gt; {
+  document.getElementById("btnConsola").addEventListener("click", trazarEnConsola);
+  document.getElementById("btnAlerta").addEventListener("click", mostrarAlerta);
+});</code></pre>
+
+      <h2>Demostración</h2>
+      <div class="demo">
+        <p>Capturando el evento clic de un botón</p>
+        <button type="button" id="btnConsola">¡Dale! (console.log)</button>
+        <button type="button" id="btnAlerta">¡Dale! (window.alert)</button>
+      </div>
+
+      <h2>Comparación de los dos mecanismos de salida</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Aspecto</th>
+            <th><code>console.log()</code></th>
+            <th><code>window.alert()</code></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Destinatario</td>
+            <td>El desarrollador (pestaña Console)</td>
+            <td>El usuario final</td>
+          </tr>
+          <tr>
+            <td>¿Interrumpe la página?</td>
+            <td class="ok">No, la ejecución continúa</td>
+            <td class="error">Sí, es modal y bloqueante</td>
+          </tr>
+          <tr>
+            <td>Uso adecuado</td>
+            <td>Depuración y diagnóstico</td>
+            <td>Avisos y mensajes de confirmación</td>
+          </tr>
+          <tr>
+            <td>Devuelve un valor</td>
+            <td class="ok">Sí, lo que se le pase (útil con <code>const x = console.log(1)</code>)</td>
+            <td class="error">No, siempre <code>undefined</code></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Por qué <code>addEventListener()</code> y no el atributo <code>onclick</code></h2>
+      <pre><code>&lt;!-- Enfoque embebido: el codigo viaja dentro del HTML --&gt;
+&lt;button onclick="console.log('Se ha pulsado el boton')"&gt;¡Dale!&lt;/button&gt;
+
+&lt;!-- Enfoque externo: el codigo vive en un .js y se enlaza al elemento --&gt;
+&lt;button id="btnConsola"&gt;¡Dale!&lt;/button&gt;
+&lt;script src="./js/ej2_3_eventos.js"&gt;&lt;/script&gt;</code></pre>
+      <p>Ventajas de <code>addEventListener()</code>:</p>
+      <ul>
+        <li>Permite registrar <strong>varios</strong> manejadores para el mismo evento.</li>
+        <li>Permite <strong>quitarlo</strong> con <code>removeEventListener()</code>.</li>
+        <li>Permite indicar opciones como <code>{ once: true }</code>.</li>
+        <li>Separa la estructura del documento de la lógica.</li>
+      </ul>
+
+      <nav class="menu">
+        <a href="./index.html">Índice de la prueba</a>
+        <a href="./ejercicio1_modificar_html.html">Ejercicio 1: modificar el contenido del HTML</a>
+        <a href="./ejercicio4_5_6_idiomas.html">Ejercicios 4, 5 y 6: idiomas y colores</a>
+        <a href="./ejercicio7_interfaz.html">Ejercicio 7: interfaz de usuario</a>
+        <a href="./ejercicio8_test_interactivo.html">Ejercicio 8: test interactivo</a>
+        <a href="./ejercicio9_secuencia.html">Ejercicio 9: secuencia de imágenes</a>
+      </nav>
+    </main>
+  </body>
+</html>

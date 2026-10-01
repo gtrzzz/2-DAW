@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 7 - Interfaz de usuario</title>
+    <link rel="stylesheet" href="./css/estilos.css" />
+    <script defer src="./js/ej7_interfaz.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>Ejercicio 7: interfaz de usuario</h1>
+
+      <p class="criterio">
+        <strong>RA1</strong> – CE 1.a · Combinación de los distintos mecanismos de salida del
+        navegador: <code>console.log()</code>, <code>innerHTML</code> con
+        <code>.style.backgroundColor</code> y <code>window.alert()</code>.
+      </p>
+
+      <h2>Enunciado</h2>
+      <p>
+        Diseñar una interfaz compuesta por un titular <code>&lt;h1&gt;</code>, un párrafo
+        <code>&lt;p id="estado"&gt;Sistema en espera&lt;/p&gt;</code> y tres botones:
+      </p>
+      <ul>
+        <li>
+          <strong>Botón 1 (Consola):</strong> emite una traza mediante <code>console.log()</code>
+          indicando la hora del sistema.
+        </li>
+        <li>
+          <strong>Botón 2 (Estilo):</strong> modifica el color de fondo del párrafo a verde y su
+          texto a "Sistema Activo" mediante <code>innerHTML</code> y
+          <code>.style.backgroundColor</code>.
+        </li>
+        <li>
+          <strong>Botón 3 (Alerta):</strong> lanza un cuadro modal mediante
+          <code>window.alert()</code> avisando de que el proceso ha concluido.
+        </li>
+      </ul>
+
+      <h2>Demostración</h2>
+      <div class="demo">
+        <h2 id="titular">Interfaz de usuario</h2>
+        <p id="estado">Sistema en espera</p>
+        <button type="button" id="btnConsola">Consola</button>
+        <button type="button" id="btnEstilo">Estilo</button>
+        <button type="button" id="btnAlerta">Alerta</button>
+        <button type="button" id="btnReset">Restablecer</button>
+      </div>
+      <p id="salida" class="salida">(las trazas aparecerán aquí y en la consola del navegador)</p>
+
+      <h2>Código del fichero externo <code>./js/ej7_interfaz.js</code></h2>
+      <pre><code>function botonConsola() {
+  const hora = new Date().toLocaleTimeString();
+  console.log("Hora del sistema: " + hora);
+}
+
+function botonEstilo() {
+  const estado = document.getElementById("estado");
+  estado.innerHTML = "Sistema Activo";
+  estado.style.backgroundColor = "green";
+}
+
+function botonAlerta() {
+  window.alert("El proceso ha concluido.");
+}
+
+document.addEventListener("DOMContentLoaded", () =&gt; {
+  document.getElementById("btnConsola").addEventListener("click", botonConsola);
+  document.getElementById("btnEstilo").addEventListener("click", botonEstilo);
+  document.getElementById("btnAlerta").addEventListener("click", botonAlerta);
+});</code></pre>
+
+      <h2>Qué demuestra cada botón</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Botón</th>
+            <th>Método</th>
+            <th>Dónde se refleja</th>
+            <th>¿Bloquea la página?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Consola</td><td><code>console.log()</code></td><td>Herramientas de desarrollo</td><td class="ok">No</td></tr>
+          <tr><td>Estilo</td><td><code>innerHTML</code> + <code>.style.backgroundColor</code></td><td>La propia página</td><td class="ok">No</td></tr>
+          <tr><td>Alerta</td><td><code>window.alert()</code></td><td>Cuadro modal sobre la página</td><td class="error">Sí</td></tr>
+        </tbody>
+      </table>
+      <p>
+        La hora del sistema se obtiene con <code>new Date().toLocaleTimeString()</code>, que
+        devuelve la hora local en el formato del usuario. Con
+        <code>toLocaleTimeString("es-ES")</code> se forzaría el formato español, y con
+        <code>toISOString()</code> se obtendría la hora universal en UTC.
+      </p>
+
+      <nav class="menu">
+        <a href="./index.html">Índice de la prueba</a>
+        <a href="./ejercicio1_modificar_html.html">Ejercicio 1: modificar el contenido del HTML</a>
+        <a href="./ejercicio2_3_eventos.html">Ejercicios 2 y 3: eventos, console.log y alert</a>
+        <a href="./ejercicio4_5_6_idiomas.html">Ejercicios 4, 5 y 6: idiomas y colores</a>
+        <a href="./ejercicio8_test_interactivo.html">Ejercicio 8: test interactivo</a>
+        <a href="./ejercicio9_secuencia.html">Ejercicio 9: secuencia de imágenes</a>
+      </nav>
+    </main>
+  </body>
+</html>

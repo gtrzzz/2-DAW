@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prueba 4 - Ejercicio 6 | Apartado 1.4</title>
+    <link rel="stylesheet" href="./css/estilos.css" />
+    <script defer src="./js/ej6_ventajas.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>Ejercicio 6: ventajas de usar JavaScript en el desarrollo web moderno</h1>
+
+      <p class="criterio">
+        <strong>RA1</strong> – CE 1.d · Análisis de ventajas y desventajas de la programación de
+        guiones sobre la programación tradicional.
+      </p>
+
+      <h2>Enunciado</h2>
+      <p>Describe las ventajas más importantes de usar JavaScript en el desarrollo web moderno.</p>
+
+      <h2>Ventajas analizadas</h2>
+
+      <div class="tarjeta">
+        <h3>1. Es el único lenguaje que ejecuta el navegador</h3>
+        <p>
+          Ningún otro lenguaje puede ejecutar lógica en el cliente sin instalar complementos o
+          máquinas virtuales. JavaScript es el estándar <em>de facto</em> (norma <strong>ECMA-262</strong>)
+          y todos los navegadores lo implementan, así que no hay que preocupar de la
+          segmentación del mercado.
+        </p>
+        <p>
+          <strong>Consecuencia práctica:</strong> la lógica de la interfaz se escribe una sola
+          vez y funciona en Chrome, Firefox, Safari, Edge, en móviles, en tabletas y en sistemas
+          embebidos, sin mantener varias versiones del mismo código.
+        </p>
+      </div>
+
+      <div class="tarjeta">
+        <h3>2. Portabilidad y ubicuidad gracias al anfitrión</h3>
+        <p>
+          El mismo archivo <code>.js</code> se ejecuta en un ordenador de sobremesa, en un
+          portátil, en una tableta y en un teléfono inteligente sin recompilar nada, porque el
+          código no se compila para una plataforma concreta: lo interpreta el navegador. Es la
+          <strong>ventaja estructural</strong> de los lenguajes de script frente a los
+          compilados nativos, donde un binario de C++ para Windows no se ejecuta en Linux.
+        </p>
+      </div>
+
+      <div class="tarjeta">
+        <h3>3. Sencillez y curva de aprendizaje rápida</h3>
+        <p>
+          Los lenguajes de script se diseñaron expresamente para ser fáciles de usar: no
+          exigen declaraciones de tipo, ni jerarquía de clases obligatoria, ni compilación
+          previa. Todo lo que necesita un programador para pasar de cero a una página
+          interactiva cabe en un día de estudio.
+        </p>
+      </div>
+
+      <div class="tarjeta">
+        <h3>4. Agilidad en el ciclo de desarrollo</h3>
+        <p>
+          No hay fase de compilación ni de enlazado. Un cambio en el código fuente se verifica
+          <strong>recargando la página</strong>. En un proyecto en C++ el ciclo real entre
+          escribir y probar incluye compilar, enlazar y, si hay errores, repetir el proceso.
+          Esa comodidad es la razón por la que casi todo el prototipado web se hace en
+          JavaScript.
+        </p>
+      </div>
+
+      <div class="tarjeta">
+        <h3>5. Integración natural con HTML y CSS</h3>
+        <p>
+          Se incrusta directamente entre etiquetas del documento mediante
+          <code>&lt;script&gt;</code> o se enlaza con ficheros externos. Al no necesitar
+          dependencias ni configuración, es el complemento natural del
+          <strong>lenguaje de marcas</strong> que se estudia en este módulo: el mismo proyecto
+          contiene la estructura y el comportamiento, o se separan en <code>.html</code> y
+          <code>.js</code> sin ninguna herramienta intermedia.
+        </p>
+      </div>
+
+      <div class="tarjeta">
+        <h3>6. Ecosistema, librerías y comunidad</h3>
+        <p>
+          JavaScript dispone del ecosistema más grande del sector: <em>frameworks</em> de
+          interfaz (React, Vue, Angular), uso en servidor con Node.js, Deno o Bun, y
+          WebAssembly, que permite llevar lenguajes tradicionales como C++, Rust o Go también
+          al cliente cuando hace falta rendimiento nativo.
+        </p>
+      </div>
+
+      <div class="tarjeta">
+        <h3>7. Control total de la interfaz sin recargar</h3>
+        <p>
+          El modelo basado en eventos y el acceso al DOM permiten modificar la página
+          <strong>en caliente</strong>: cambiar textos, colores, imágenes, clases CSS o mostrar
+          y ocultar elementos sin una sola petición al servidor. Eso hace posibles interfaces
+          que en los años noventa exigían complementos como Flash, y que hoy son nativas de
+          cualquier web.
+        </p>
+      </div>
+
+      <div class="tarjeta">
+        <h3>8. Rendimiento razonable gracias a los motores modernos</h3>
+        <p>
+          Aunque el lenguaje se interpreta, los motores actuales (V8, SpiderMonkey,
+          JavaScriptCore) aplican <strong>compilación en tiempo real (JIT)</strong> a las
+          funciones que se repiten, de modo que la desventaja de rendimiento frente a C++ es
+          bastante menor de lo que sugiere la definición clásica. En la mayoría de los casos de
+          una web, el cuello de botella real es la red, no el intérprete.
+        </p>
+      </div>
+
+      <h2>Tabla resumen frente a la programación tradicional</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Criterio</th>
+            <th>Lenguaje tradicional (C, C++, Java, C#)</th>
+            <th>Lenguaje de script (JavaScript, Python, PHP)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Traducción</td><td>Compilación previa obligatoria</td><td class="ok">Interpretación directa, sin compilación</td></tr>
+          <tr><td>Ciclo de desarrollo</td><td>Editar, compilar, ejecutar</td><td class="ok">Editar y recargar</td></tr>
+          <tr><td>Ejecución en el navegador</td><td class="error">Imposible sin máquina virtual</td><td class="ok">Nativa, es su propósito</td></tr>
+          <tr><td>Portabilidad</td><td>Un binario por plataforma</td><td class="ok">El mismo código en todas partes</td></tr>
+          <tr><td>Reutilización del anfitrión</td><td>Construye sus propias librerías</td><td class="ok">Usa DOM, red, temporizadores y gráficos del navegador</td></tr>
+          <tr><td>Curva de aprendizaje</td><td>Estricta y lenta</td><td class="ok">Suave y rápida</td></tr>
+          <tr><td>Detección de errores</td><td class="ok">En compilación, estricta</td><td class="error">En ejecución, línea a línea</td></tr>
+          <tr><td>Rendimiento bruto</td><td class="ok">Superior (binario optimizado)</td><td>Inferior, aunque compensado por el JIT</td></tr>
+          <tr><td>Exposición del código</td><td class="ok">El binario es difícil de leer</td><td class="error">El texto plano viaja al cliente</td></tr>
+          <tr><td>Ejemplo de uso típico</td><td>Sistemas de gestión, servidores, juegos</td><td>Clientes web, páginas interactivas, scripts de sistema</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Demostración práctica de la agilidad</h2>
+      <p>
+        Los botones siguientes modifican el DOM en el momento, sin recargar la página y sin
+        ninguna petición al servidor. Cada cambio es una instrucción de JavaScript ejecutada
+        por el navegador, y el efecto es idéntico al que se obtendría reescribiendo el HTML,
+        pero de forma inmediata.
+      </p>
+      <p>
+        <button type="button" id="btnTexto">Cambiar el texto (textContent)</button>
+        <button type="button" id="btnHtml">Cambiar el marcado (innerHTML)</button>
+        <button type="button" id="btnColor">Cambiar el color (.style.color)</button>
+        <button type="button" id="btnOcultar">Ocultar / mostrar (.style.display)</button>
+        <button type="button" id="btnReset">Restablecer</button>
+      </p>
+      <div class="tarjeta">
+        <p id="demoVentaja"><strong>Elemento de demostración</strong></p>
+      </div>
+      <p id="salidaDemo" class="salida"></p>
+
+      <nav>
+        <a href="./prueba4_1.html">Ejercicio 1</a>
+        <a href="./prueba4_2.html">Ejercicio 2</a>
+        <a href="./prueba4_3.html">Ejercicio 3</a>
+        <a href="./prueba4_4.html">Ejercicio 4</a>
+        <a href="./prueba4_5.html">Ejercicio 5</a>
+        <a href="./prueba4_7.html">Siguiente: Ejercicio 7</a>
+        <a href="./prueba4_metodos.html">Complemento: métodos de Date</a>
+      </nav>
+    </main>
+  </body>
+</html>

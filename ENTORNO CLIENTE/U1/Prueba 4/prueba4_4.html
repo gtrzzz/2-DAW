@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prueba 4 - Ejercicio 4 | Apartado 1.4</title>
+    <link rel="stylesheet" href="./css/estilos.css" />
+    <script defer src="./js/ej4_formatear.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>Ejercicio 4: formateador manual de fechas sin librerías</h1>
+
+      <p class="criterio">
+        <strong>RA1</strong> – CE 1.d · Ventaja de los lenguajes de script: su sintaxis reducida
+        permite resolver en pocas líneas lo que en un lenguaje tradicional exigiría tipos,
+        sobrecarga de operadores y concatenación de cadenas. Aquí además se demuestra el método
+        de cadenas <code>padStart()</code>.
+      </p>
+
+      <h2>Enunciado</h2>
+      <p>
+        Escribir una función <code>formatearFechaEspanola(fecha)</code> que reciba un objeto
+        <code>Date</code> y devuelva una cadena con el formato exacto
+        <code>DD/MM/YYYY HH:mm</code>. Los números menores de 10 deben incluir un cero a la
+        izquierda (01, 02, … 09) utilizando el método de cadenas
+        <code>.padStart(2, "0")</code>.
+      </p>
+
+      <h2>Implementación</h2>
+      <pre><code>function formatearFechaEspanola(fecha) {
+  const dia = String(fecha.getDate()).padStart(2, "0");
+  const mes = String(fecha.getMonth() + 1).padStart(2, "0"); // +1 porque el mes es base 0
+  const anio = fecha.getFullYear();
+  const hora = String(fecha.getHours()).padStart(2, "0");
+  const minuto = String(fecha.getMinutes()).padStart(2, "0");
+
+  return `${dia}/${mes}/${anio} ${hora}:${minuto}`;
+}</code></pre>
+
+      <h2>El método <code>padStart()</code></h2>
+      <p>
+        <code>string.padStart(length, string)</code> devuelve una <strong>nueva cadena</strong>
+        de longitud total <code>length</code>, rellenando por el principio (por la izquierda)
+        con el texto indicado hasta alcanzar esa longitud. Si se omite el segundo parámetro,
+        el relleno es un espacio en blanco.
+      </p>
+      <table>
+        <thead>
+          <tr><th>Expresión</th><th>Valor devuelto</th><th>Explicación</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>"5".padStart(2, "0")</code></td><td><code>"05"</code></td><td>Rellena con un 0 hasta longitud 2</td></tr>
+          <tr><td><code>"5".padStart(4, "0")</code></td><td><code>"0005"</code></td><td>Rellena con tres 0 hasta longitud 4</td></tr>
+          <tr><td><code>"12".padStart(2, "0")</code></td><td><code>"12"</code></td><td>Ya tiene longitud 2, no se toca</td></tr>
+          <tr><td><code>"9".padStart(3, "-")</code></td><td><code>"--9"</code></td><td>El relleno puede ser cualquier texto</td></tr>
+          <tr><td><code>"hola".padStart(8, "*")</code></td><td><code>"****hola"</code></td><td>Se repite el relleno si hace falta</td></tr>
+          <tr><td><code>"7".padStart(3)</code></td><td><code>"&nbsp;&nbsp;7"</code></td><td>Sin segundo parámetro rellena con espacios</td></tr>
+        </tbody>
+      </table>
+      <p class="aviso">
+        Detalle imprescindible: hay que aplicar <code>String(...)</code> antes de
+        <code>padStart()</code>, porque los getters de <code>Date</code> devuelven
+        <strong>números</strong> y el método <code>padStart</code> solo existe en las cadenas.
+      </p>
+
+      <h2>Probador interactivo</h2>
+      <div class="tarjeta">
+        <div class="campo">
+          <label for="fecha">Fecha y hora</label>
+          <input type="datetime-local" id="fecha" value="2026-09-28T14:45" />
+        </div>
+        <button type="button" id="btnFormatear">Formatear</button>
+        <p id="resultado" class="salida">(pulsa el botón para formatear)</p>
+        <button type="button" id="btnAhora">Usar la hora actual</button>
+      </div>
+
+      <h2>Comprobaciones</h2>
+      <div id="tablaCasos" class="salida"></div>
+
+      <h2>Ventaja frente a un lenguaje tradicional</h2>
+      <p>
+        En JavaScript la interpolación de plantillas
+        (<code>`${dia}/${mes}/${anio}`</code>) resuelve la concatenación directamente, sin
+        necesidad de declarar el tipo de cada dato ni de concatenar de forma explícita con el
+        operador <code>+</code>. En C o C++ traditional habría que declarar la clase, definir
+        el método <code>ToString()</code> o usar <code>stringstream</code>; en Java, invocar
+        <code>String.format()</code> con la máscara <code>%02d</code>. En un lenguaje de script
+        la versión dinámica de esta función son cinco líneas.
+      </p>
+
+      <nav>
+        <a href="./prueba4_1.html">Ejercicio 1</a>
+        <a href="./prueba4_2.html">Ejercicio 2</a>
+        <a href="./prueba4_3.html">Ejercicio 3</a>
+        <a href="./prueba4_5.html">Siguiente: Ejercicio 5</a>
+        <a href="./prueba4_6.html">Ejercicio 6</a>
+        <a href="./prueba4_7.html">Ejercicio 7</a>
+        <a href="./prueba4_metodos.html">Complemento: métodos de Date</a>
+      </nav>
+    </main>
+  </body>
+</html>

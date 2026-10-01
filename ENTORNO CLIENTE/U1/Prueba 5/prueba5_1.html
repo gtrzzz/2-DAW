@@ -3,7 +3,124 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ejercicio 1</title>
+    <title>Prueba 5 - Actividad 1 | Ficheros externos separados</title>
+    <link rel="stylesheet" href="./css/estilos.css" />
+
+    <!--
+      MECANISMO DE INTEGRACION A: FICHERO EXTERNO SEPARADO
+      El atributo src indica la RUTA RELATIVA del fichero .js.
+      Al no llevar "defer", el navegador detiene el analisis del HTML aqui
+      hasta que el script se descarga y se ejecuta por completo.
+    -->
+    <script src="./js/script.js"></script>
   </head>
-  <body></body>
+  <body>
+    <main>
+      <h1>Actividad 1: código JavaScript en un fichero externo separado</h1>
+
+      <p class="criterio">
+        <strong>RA1</strong> – CE 1.e · Verificación de los mecanismos de integración de los
+        lenguajes de marcas con los lenguajes de programación de clientes Web.
+      </p>
+
+      <h2>Comprobación</h2>
+      <p>
+        Al cargar esta página aparece un cuadro de alerta con el texto <strong>hola</strong>.
+        Pulsa "Aceptar" para seguir leyendo: el <code>alert()</code> es modal, así que el
+        navegador congela la ejecución hasta que se acepta.
+      </p>
+
+      <h2>Código del archivo HTML</h2>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Myfpschool&lt;/title&gt;
+  &lt;!-- Enlace al fichero script.js --&gt;
+  &lt;script src="script.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>Código del archivo <code>./js/script.js</code></h2>
+      <pre><code>function diAlgo() {
+  alert("hola"); // Muestra un cuadro modal emergente con el texto "hola"
+}
+
+// Invocacion directa al cargarse el fichero
+diAlgo();</code></pre>
+
+      <h2>Sobre la ruta del atributo <code>src</code></h2>
+      <p>
+        El enunciado pide que los dos archivos estén <em>en la misma carpeta</em>, y en ese
+        caso la ruta es <code>src="script.js"</code>. Este proyecto aplica la
+        <strong>buena práctica profesional</strong> que indica el tema: guardar los scripts en
+        una carpeta propia llamada <code>js</code>, de modo que la ruta relativa es
+        <code>src="./js/script.js"</code>.
+      </p>
+      <p>
+        Las tres formas de escribir la ruta son equivalentes desde la raíz del proyecto, pero
+        es preferible usar siempre la barra inicial <code>./</code> porque deja claro que se
+        trata de una ruta relativa y no absoluta:
+      </p>
+      <pre><code>&lt;script src="script.js"&gt;&lt;/script&gt;        &lt;!-- misma carpeta --&gt;
+&lt;script src="./js/script.js"&gt;&lt;/script&gt;   &lt;!-- subcarpeta js (recomendado) --&gt;
+&lt;script src="/js/script.js"&gt;&lt;/script&gt;        &lt;!-- desde la raiz del servidor --&gt;</code></pre>
+
+      <h2>Ventajas técnicas de los ficheros externos</h2>
+      <table>
+        <thead>
+          <tr><th>Ventaja</th><th>Explicación</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Velocidad de carga y memoria caché</strong></td>
+            <td>
+              El navegador descarga el <code>.js</code> una única vez y lo guarda en su caché.
+              Si el usuario navega a otra página del mismo sitio que use ese script, no lo
+              vuelve a descargar por la red: menos ancho de banda y respuesta más rápida.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Independencia de facetas (modularidad)</strong></td>
+            <td>
+              Se separa estrictamente el contenido (<code>.html</code>) del comportamiento
+              dinámico (<code>.js</code>). Diseñadores y programadores pueden trabajar a la
+              vez sobre el mismo proyecto sin pisarse el código.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Mantenimiento y reutilización</strong></td>
+            <td>
+              Para corregir una función basta con modificar <strong>un solo archivo</strong>, y
+              el cambio se refleja en todas las páginas que lo referencian.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Organización</strong></td>
+            <td>
+              Las empresas y los desarrolladores experimentados agrupan los recursos en
+              carpetas dedicadas: <code>css/</code>, <code>js/</code>, <code>img/</code>.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Comprobación en la pestaña Network</h2>
+      <p>
+        Con <code>F12</code> abierto, en la pestaña <strong>Network (Red)</strong>, recarga la
+        página. Debería aparecer la petición <code>./js/script.js</code> con estado
+        <strong class="ok">200 OK</strong>, junto con <code>./css/estilos.css</code>.
+        Si apareciera <strong class="error">404 Not Found</strong>, la ruta relativa
+        <code>src</code> estaría mal escrita.
+      </p>
+
+      <nav>
+        <a href="./index.html">Índice</a>
+        <a href="./prueba5_2.html">Actividad 2: código embebido</a>
+        <a href="./prueba5_3.html">Ubicación, defer y async</a>
+        <a href="./mi_proyecto/index.html">Práctica guiada: mi_proyecto</a>
+      </nav>
+    </main>
+  </body>
 </html>

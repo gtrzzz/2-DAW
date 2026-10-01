@@ -3,9 +3,141 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ejercicio 2</title>
+    <title>Prueba 4 - Ejercicio 2 | Apartado 1.4</title>
+    <link rel="stylesheet" href="./css/estilos.css" />
+    <script defer src="./js/ej2_dias_diferencia.js"></script>
   </head>
   <body>
-    let fechaInicial = new Date(); function obtenerUltimoDiaMes() { return }
+    <main>
+      <h1>Ejercicio 2: cálculo de diferencia temporal entre dos fechas</h1>
+
+      <p class="criterio">
+        <strong>RA1</strong> – CE 1.d · Ventajas de la programación de guiones: agilidad y
+        reutilización de tipos nativos del anfitrión (<code>Date</code>) frente a tener que
+        implementar la aritmética temporal a mano.
+      </p>
+
+      <h2>Enunciado</h2>
+      <p>
+        Implementar la función <code>calcularDiasDiferencia(fechaInicio, fechaFin)</code> que
+        reciba dos cadenas de texto en formato <code>YYYY-MM-DD</code> y devuelva el número
+        entero de días transcurridos entre ambas fechas, usando la diferencia en
+        milisegundos con <code>.getTime()</code> y redondeando con <code>Math.round()</code>
+        para evitar inconsistencias con los cambios de horario de verano/invierno.
+      </p>
+
+      <h2>Implementación</h2>
+      <pre><code>const MS_POR_DIA = 86400000; // 24 h × 60 min × 60 s × 1000 ms
+
+function calcularDiasDiferencia(fechaInicio, fechaFin) {
+  // Se concatena "T00:00:00" para forzar la interpretación en HORA LOCAL.
+  // Si se hiciera new Date("2026-03-28") el motor lo leería como medianoche UTC.
+  const inicio = new Date(fechaInicio + "T00:00:00");
+  const fin = new Date(fechaFin + "T00:00:00");
+
+  if (isNaN(inicio.getTime()) || isNaN(fin.getTime())) {
+    return NaN;
+  }
+
+  return Math.round((fin.getTime() - inicio.getTime()) / MS_POR_DIA);
+}</code></pre>
+
+      <h2>Probador interactivo</h2>
+      <div class="tarjeta">
+        <div class="campo">
+          <label for="inicio">Fecha de inicio (YYYY-MM-DD)</label>
+          <input type="date" id="inicio" value="2026-03-27" />
+        </div>
+        <div class="campo">
+          <label for="fin">Fecha de fin (YYYY-MM-DD)</label>
+          <input type="date" id="fin" value="2026-03-31" />
+        </div>
+        <button type="button" id="btnCalcular">Calcular días</button>
+        <p id="resultado" class="salida">(pulsa el botón para calcular)</p>
+      </div>
+
+      <h2>Por qué hay que redondear y no truncar</h2>
+      <p>
+        El 29 de marzo de 2026 a las 02:00 la hora local salta de 02:00 a 03:00 (comienza
+        el horario de verano). Ese día <strong>no tiene 24 horas reales</strong>, tiene 23. Por
+        eso la diferencia en milisegundos entre dos medianoche locales que cruzan ese cambio
+        <strong>no es múltiplo exacto de 86.400.000</strong>.
+      </p>
+      <p>Comprobado con el ejemplo del probador (27 de marzo -&gt; 31 de marzo de 2026):</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Variante</th>
+            <th>Diferencia en ms</th>
+            <th><code>Math.round()</code></th>
+            <th><code>Math.floor()</code></th>
+            <th>Correcto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Hora local + <code>Math.round()</code></td>
+            <td>342.000.000</td>
+            <td>4 días</td>
+            <td>3 días</td>
+            <td class="ok">Sí (con <code>round</code>)</td>
+          </tr>
+          <tr>
+            <td>Hora local + <code>Math.floor()</code></td>
+            <td>342.000.000</td>
+            <td>4 días</td>
+            <td class="error">3 días</td>
+            <td class="error">No: trunca y pierde un día</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        342.000.000 ms son 3,958 días: truncar se queda con 3, pero entre el 27 y el 31 de
+        marzo hay <strong>4 días de calendario</strong>. <code>Math.round()</code> absorbe el
+        desfase de una hora y devuelve el valor correcto.
+      </p>
+      <p class="aviso">
+        Conclusión: la combinación segura es <strong>interpretar en hora local con
+        <code>T00:00:00</code></strong> (así se cuentan días de calendario) y
+        <strong>redondear con <code>Math.round()</code></strong> (así se absorbe el cambio
+        horario). <code>Math.floor()</code> solo es válido si la resta da un múltiplo exacto de
+        86.400.000, cosa que no ocurre al cruzar un cambio de horario.
+      </p>
+
+      <h2>Casos de prueba</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>fechaInicio</th>
+            <th>fechaFin</th>
+            <th>Días</th>
+            <th>Explicación</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>2026-01-01</td><td>2026-12-31</td><td>364</td><td>Año no bisiesto de 2026</td></tr>
+          <tr><td>2026-02-28</td><td>2026-03-01</td><td>1</td><td>28 -&gt; 29 (no bisiesto) -&gt; 1</td></tr>
+          <tr><td>2024-02-28</td><td>2024-03-01</td><td>2</td><td>2024 es bisiesto: existe el 29</td></tr>
+          <tr><td>2026-03-27</td><td>2026-03-31</td><td>4</td><td>Cruza el cambio a horario de verano</td></tr>
+          <tr><td>2026-10-23</td><td>2026-10-27</td><td>4</td><td>Cruza el cambio a horario de invierno</td></tr>
+          <tr><td>2026-05-10</td><td>2026-05-10</td><td>0</td><td>Misma fecha: 0 días</td></tr>
+        </tbody>
+      </table>
+      <p>
+        La tabla se genera automáticamente al cargar la página con la misma función, para
+        comprobar que los valores esperados coinciden con los calculados.
+      </p>
+      <div id="tablaCasos" class="salida"></div>
+
+      <nav>
+        <a href="./prueba4_1.html">Anterior: Ejercicio 1</a>
+        <a href="./prueba4_3.html">Siguiente: Ejercicio 3</a>
+        <a href="./prueba4_4.html">Ejercicio 4</a>
+        <a href="./prueba4_5.html">Ejercicio 5</a>
+        <a href="./prueba4_6.html">Ejercicio 6</a>
+        <a href="./prueba4_7.html">Ejercicio 7</a>
+        <a href="./prueba4_metodos.html">Complemento: métodos de Date</a>
+      </nav>
+    </main>
   </body>
 </html>
