@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicios 4, 5 y 6 - Idiomas, colores y document.write</title>
+    <link rel="stylesheet" href="./css/estilos.css" />
+    <script defer src="./js/ej4_5_6_idiomas.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>Ejercicios 4, 5 y 6: idiomas, colores y <code>document.write()</code></h1>
+
+      <p class="criterio">
+        <strong>RA1</strong> – CE 1.a · Capacidades de los navegadores Web: los cuatro métodos de
+        salida disponibles (<code>innerHTML</code>, <code>console.log()</code>,
+        <code>document.write()</code> y <code>alert()</code>) y el acceso al estilo CSS de los
+        elementos.
+      </p>
+
+      <h2>Enunciado del ejercicio 4</h2>
+      <p>
+        Construir una web con tres botones ("Ruso", "Español", "Inglés") que alteren un párrafo
+        (<code>&lt;p&gt;</code>) mostrando un saludo en el idioma elegido y aplicando a dicho
+        párrafo un color de fuente CSS diferente para cada uno mediante
+        <code>.style.color</code>.
+      </p>
+
+      <h2>Enunciado del ejercicio 5</h2>
+      <p>
+        Adaptar el mismo ejercicio para que las salidas en los tres idiomas se impriman
+        únicamente a través de la consola de desarrollador.
+      </p>
+
+      <h2>Enunciado del ejercicio 6</h2>
+      <p>
+        Transformar el código para generar los textos directamente en el flujo de la página
+        mediante el método <code>document.write()</code>.
+      </p>
+
+      <h2>Ejercicio 4 · Cambio del párrafo y de su color</h2>
+      <div class="demo">
+        <p id="saludo">Selecciona un idioma</p>
+        <button type="button" id="btn4_es">Español</button>
+        <button type="button" id="btn4_en">Inglés</button>
+        <button type="button" id="btn4_ru">Ruso</button>
+      </div>
+
+      <h2>Ejercicio 5 · Salida solo por consola</h2>
+      <p>
+        Al pulsar cualquiera de estos botones no se toca el párrafo: el texto sale únicamente
+        por la consola (<code>F12</code>).
+      </p>
+      <div class="demo">
+        <button type="button" id="btn5_es">Español consola</button>
+        <button type="button" id="btn5_en">Inglés consola</button>
+        <button type="button" id="btn5_ru">Ruso consola</button>
+      </div>
+
+      <h2>Ejercicio 6 · Inserción en el flujo de la página</h2>
+      <div class="demo">
+        <p id="zonaWrite">Selecciona un idioma para insertar el texto aquí:</p>
+        <button type="button" id="btn6_es">Español write</button>
+        <button type="button" id="btn6_en">Inglés write</button>
+        <button type="button" id="btn6_ru">Ruso write</button>
+      </div>
+
+      <p id="salida" class="salida">(pulsa cualquier botón para ver la traza)</p>
+
+      <h2>Código del fichero externo <code>./js/ej4_5_6_idiomas.js</code></h2>
+      <pre><code>const IDIOMAS = [
+  { clave: "es", texto: "HOLA", color: "red", nombre: "Espanol" },
+  { clave: "en", texto: "HELLO", color: "blue", nombre: "Ingles" },
+  { clave: "ru", texto: "PRIVET/ПРИВЕТ", color: "green", nombre: "Ruso" }
+];
+
+// Ejercicio 4
+function saludarEnIdioma(clave) {
+  const idioma = IDIOMAS.find((i) =&gt; i.clave === clave);
+  const parrafo = document.getElementById("saludo");
+  parrafo.innerHTML = idioma.texto;
+  parrafo.style.color = idioma.color;
+}
+
+// Ejercicio 5
+function trazarEnConsola(clave) {
+  console.log(IDIOMAS.find((i) =&gt; i.clave === clave).texto);
+}
+
+// Ejercicio 6
+function escribirEnElFlujo(clave) {
+  document.getElementById("zonaWrite").innerHTML = idioma.texto;
+}</code></pre>
+
+      <h2>Comparación de los cuatro métodos de salida</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Método</th>
+            <th>Dónde aparece</th>
+            <th>Interrumpe</th>
+            <th>Cuándo usarlo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>innerHTML</code></td>
+            <td>En la página, dentro de un elemento</td>
+            <td class="ok">No</td>
+            <td>Modificar contenido de la interfaz</td>
+          </tr>
+          <tr>
+            <td><code>.style.color</code></td>
+            <td>En el estilo CSS del elemento</td>
+            <td class="ok">No</td>
+            <td>Cambiar el aspecto visual</td>
+          </tr>
+          <tr>
+            <td><code>console.log()</code></td>
+            <td>En la consola del desarrollador</td>
+            <td class="ok">No</td>
+            <td>Depuración y diagnóstico</td>
+          </tr>
+          <tr>
+            <td><code>document.write()</code></td>
+            <td>En el flujo del documento</td>
+            <td class="error">Sí, si se usa fuera de la carga</td>
+            <td>Solo durante la carga inicial de la página</td>
+          </tr>
+          <tr>
+            <td><code>alert()</code></td>
+            <td>En un cuadro modal sobre la página</td>
+            <td class="error">Sí, es modal</td>
+            <td>Avisos al usuario</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="aviso">
+        <strong>Cuidado con <code>document.write()</code>:</strong> si se invoca <em>después</em>
+        de que la página ha terminado de cargarse, el navegador <strong>borra el documento
+        entero</strong> y lo vuelve a construir con el texto insertado, perdiendo todos los
+        scripts y estilos ya cargados. Solo es seguro durante la carga inicial. En la
+        demostración se reproduce el mismo efecto escribiendo dentro de un contenedor, que es
+        la forma equivalente y segura.
+      </p>
+
+      <nav class="menu">
+        <a href="./index.html">Índice de la prueba</a>
+        <a href="./ejercicio1_modificar_html.html">Ejercicio 1: modificar el contenido del HTML</a>
+        <a href="./ejercicio2_3_eventos.html">Ejercicios 2 y 3: eventos, console.log y alert</a>
+        <a href="./ejercicio7_interfaz.html">Ejercicio 7: interfaz de usuario</a>
+        <a href="./ejercicio8_test_interactivo.html">Ejercicio 8: test interactivo</a>
+        <a href="./ejercicio9_secuencia.html">Ejercicio 9: secuencia de imágenes</a>
+      </nav>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prueba 4 - Ejercicio 3 | Apartado 1.4</title>
+    <link rel="stylesheet" href="./css/estilos.css" />
+    <script defer src="./js/ej3_ultimo_dia.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>Ejercicio 3: calculadora del último día de un mes</h1>
+
+      <p class="criterio">
+        <strong>RA1</strong> – CE 1.d · se explota el comportamiento de desbordamiento del
+        objeto <code>Date</code>: en lugar de escribir una tabla de días por mes, se aprovecha
+        que el motor ya sabe calcular el desbordamiento.
+      </p>
+
+      <h2>Enunciado</h2>
+      <p>
+        Gracias al comportamiento de desbordamiento, pasar el día <code>0</code> al constructor
+        permite obtener el último día del mes inmediatamente anterior. Crear la función
+        <code>obtenerUltimoDiaMes(año, mes)</code> donde <code>mes</code> se pase en
+        <strong>formato humano</strong> (1 enero, 2 febrero, …) y que retorne el número entero
+        de días que tiene ese mes.
+      </p>
+
+      <h2>Implementación</h2>
+      <pre><code>function obtenerUltimoDiaMes(anio, mes) {
+  // "dia 0" del mes que sigue al indicado = ultimo dia del mes pedido.
+  // Ejemplo: mes = 12 (diciembre) -> new Date(2026, 12, 0) = 31 de diciembre de 2026
+  return new Date(anio, mes, 0).getDate();
+}</code></pre>
+
+      <h2>Por qué funciona el truco del día 0</h2>
+      <p>
+        Los meses en JavaScript van de <strong>0 a 11</strong>. Como el constructor acepta
+        <em>mes en base 0</em>, pasar el mes humano <code>12</code> equivale a pasar el índice
+        <code>12</code>, que ya es "enero del año siguiente". Al combinarlo con
+        <strong>día 0</strong>, el motor retrocede un día desde el 1 de enero y cae
+        precisamente en el 31 de diciembre.
+      </p>
+      <p>El desbordamiento se usa como una <strong>suma y resta silenciosa</strong>:</p>
+      <pre><code>new Date(2026, 12, 0)  // dia 0 de "enero de 2027" -> 31 dic 2026
+new Date(2026,  2, 0)  // dia 0 de "marzo de 2026"    -> 28 feb 2026
+new Date(2024,  2, 0)  // dia 0 de "marzo de 2024"    -> 29 feb 2024 (bisiesto)
+new Date(2026,  4, 0)  // dia 0 de "mayo de 2026"     -> 30 abr 2026</code></pre>
+      <p>
+        No hace falta ninguna lógica especial para el mes bisiesto: el motor ya lo tiene en
+        cuenta, y por eso la función vale para cualquier año.
+      </p>
+
+      <h2>Probador interactivo</h2>
+      <div class="tarjeta">
+        <div class="campo">
+          <label for="anio">Año</label>
+          <input type="number" id="anio" value="2026" min="1" max="9999" />
+        </div>
+        <div class="campo">
+          <label for="mes">Mes (formato humano 1-12)</label>
+          <select id="mes">
+            <option value="1">1 - Enero</option>
+            <option value="2">2 - Febrero</option>
+            <option value="3">3 - Marzo</option>
+            <option value="4">4 - Abril</option>
+            <option value="5">5 - Mayo</option>
+            <option value="6">6 - Junio</option>
+            <option value="7">7 - Julio</option>
+            <option value="8">8 - Agosto</option>
+            <option value="9">9 - Septiembre</option>
+            <option value="10">10 - Octubre</option>
+            <option value="11">11 - Noviembre</option>
+            <option value="12">12 - Diciembre</option>
+          </select>
+        </div>
+        <button type="button" id="btnCalcular">Obtener último día</button>
+        <p id="resultado" class="salida">(pulsa el botón para calcular)</p>
+      </div>
+
+      <h2>Tabla de días de cada mes</h2>
+      <p>Se genera con la propia función y sirve de tabla de referencia:</p>
+      <div id="tablaMeses" class="salida"></div>
+
+      <h2>Bisiesto, un detalle importante</h2>
+      <p>
+        Febrero tiene 28 días, salvo en los años bisiestos, en los que tiene 29. Un año es
+        bisiesto si es divisible por 4, <strong>excepto</strong> los años divisibles por 100
+        (que no lo son) <strong>salvo</strong> los divisibles por 400 (que sí lo son).
+      </p>
+      <pre><code>function esBisiesto(anio) {
+  return anio % 400 === 0 || (anio % 4 === 0 && anio % 100 !== 0);
+}
+
+esBisiesto(2024); // true  -> febrero de 29 dias
+esBisiesto(2026); // false -> febrero de 28 dias
+esBisiesto(1900); // false -> divisible por 100 pero no por 400
+esBisiesto(2000); // true  -> divisible por 400</code></pre>
+      <p>
+        Esta función es un <strong>complemento</strong> de <code>obtenerUltimoDiaMes</code>:
+        no hace falta para calcular el último día (el motor ya lo resuelve), pero sí para
+        <em>saber</em> si ese mes es de 28 o de 29 días.
+      </p>
+      <p id="pruebaBisiesto" class="salida"></p>
+
+      <nav>
+        <a href="./prueba4_1.html">Ejercicio 1</a>
+        <a href="./prueba4_2.html">Ejercicio 2</a>
+        <a href="./prueba4_4.html">Siguiente: Ejercicio 4</a>
+        <a href="./prueba4_5.html">Ejercicio 5</a>
+        <a href="./prueba4_6.html">Ejercicio 6</a>
+        <a href="./prueba4_7.html">Ejercicio 7</a>
+        <a href="./prueba4_metodos.html">Complemento: métodos de Date</a>
+      </nav>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 1 - Modificar el contenido del HTML</title>
+    <link rel="stylesheet" href="./css/estilos.css" />
+    <script defer src="./js/ej1_modificar_html.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>Ejercicio 1: modificar el código HTML</h1>
+
+      <p class="criterio">
+        <strong>RA1</strong> – CE 1.a · Capacidades y mecanismos de ejecución de código de los
+        navegadores Web. Acceso y modificación del DOM.
+      </p>
+
+      <h2>Enunciado</h2>
+      <p>
+        Modificar el contenido de un párrafo del documento mediante
+        <code>document.getElementById(...)</code> e <code>innerHTML</code>. Añadir un segundo
+        botón que, al pulsarlo, cambie también el texto del encabezado
+        <code>&lt;h1&gt;</code> con el mismo mecanismo.
+      </p>
+
+      <h2>Código del HTML</h2>
+      <pre><code>&lt;h1 id="h1cambio"&gt;Modificando el código HTML&lt;/h1&gt;
+&lt;p id="prueba"&gt;Modificando el contenido.&lt;/p&gt;
+&lt;button type="button" id="btnParrafo"&gt;¡Dale!&lt;/button&gt;
+&lt;button type="button" id="btnEncabezado"&gt;¡Dale al segundo botón!&lt;/button&gt;</code></pre>
+
+      <h2>Código del fichero externo <code>./js/ej1_modificar_html.js</code></h2>
+      <pre><code>function cambiarParrafo() {
+  const parrafo = document.getElementById("prueba");
+  parrafo.innerHTML = "CAMBIANDO el contenido!";
+}
+
+function cambiarEncabezado() {
+  const encabezado = document.getElementById("h1cambio");
+  encabezado.textContent = "CAMBIANDO el encabezado!";
+}
+
+document.addEventListener("DOMContentLoaded", () =&gt; {
+  document.getElementById("btnParrafo").addEventListener("click", cambiarParrafo);
+  document.getElementById("btnEncabezado").addEventListener("click", cambiarEncabezado);
+});</code></pre>
+
+      <h2>Diferencia con los apuntes originales</h2>
+      <p>
+        Los apuntes resolvían este ejercicio escribiendo el código directamente dentro del
+        atributo <code>onclick</code> del botón:
+      </p>
+      <pre><code>&lt;button onclick="document.getElementById('prueba').innerHTML = '...'"&gt;
+  ¡Dale!
+&lt;/button&gt;</code></pre>
+      <p>
+        El resultado es exactamente el mismo, pero el enfoque embebido tiene tres
+        inconvenientes: mezcla la lógica con el marcado, no se puede reutilizar en otra
+        página y complica el mantenimiento. Aquí la lógica está en
+        <code>./js/ej1_modificar_html.js</code>, enlazado con
+        <code>addEventListener()</code>, que además permite registrar <strong>más de un
+        manejador</strong> para el mismo evento.
+      </p>
+
+      <h2>Demostración</h2>
+      <div class="demo">
+        <!--
+          El id se llama "h1cambio" por continuidad con los apuntes, aunque
+          visualmente aqui sea un <h2> para no repetir dos veces el <h1> de la
+          pagina. El JavaScript no depende de la etiqueta: solo del id.
+        -->
+        <h2 id="h1cambio">Modificando el código HTML</h2>
+        <p id="prueba">Modificando el contenido.</p>
+        <button type="button" id="btnParrafo">¡Dale!</button>
+        <button type="button" id="btnEncabezado">¡Dale al segundo botón!</button>
+      </div>
+      <p id="salida" class="salida">(pulsa el segundo botón para ver la traza)</p>
+
+      <h2>innerHTML frente a textContent</h2>
+      <table>
+        <thead>
+          <tr><th>Método</th><th>Qué hace</th><th>Cuándo usarlo</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>innerHTML</code></td>
+            <td>Interpreta el contenido como <strong>HTML</strong>: si la cadena lleva etiquetas, las crea</td>
+            <td>Cuando hay que insertar marcado nuevo</td>
+          </tr>
+          <tr>
+            <td><code>textContent</code></td>
+            <td>Inserta el valor como <strong>texto plano</strong>, sin interpretar nada</td>
+            <td>Cuando solo se cambia texto: más rápido y evita inyección de HTML</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <nav class="menu">
+        <a href="./index.html">Índice de la prueba</a>
+        <a href="./ejercicio2_3_eventos.html">Ejercicios 2 y 3: eventos, console.log y alert</a>
+        <a href="./ejercicio4_5_6_idiomas.html">Ejercicios 4, 5 y 6: idiomas y colores</a>
+        <a href="./ejercicio7_interfaz.html">Ejercicio 7: interfaz de usuario</a>
+        <a href="./ejercicio8_test_interactivo.html">Ejercicio 8: test interactivo</a>
+        <a href="./ejercicio9_secuencia.html">Ejercicio 9: secuencia de imágenes</a>
+      </nav>
+    </main>
+  </body>
+</html>

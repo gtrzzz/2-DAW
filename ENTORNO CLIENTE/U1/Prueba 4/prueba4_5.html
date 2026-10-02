@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prueba 4 - Ejercicio 5 | Apartado 1.4</title>
+    <link rel="stylesheet" href="./css/estilos.css" />
+    <script defer src="./js/ej5_teoria.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>Ejercicio 5: ¿en qué se diferencia técnicamente JavaScript de Java?</h1>
+
+      <p class="criterio">
+        <strong>RA1</strong> – CE 1.d · Clasificación de los lenguajes de programación de
+        clientes Web y comparación con la programación tradicional.
+      </p>
+
+      <h2>Enunciado</h2>
+      <p>¿En qué se diferencia técnicamente JavaScript de Java?</p>
+
+      <h2>Resumen</h2>
+      <p>
+        Java y JavaScript <strong>no tienen ninguna relación técnica</strong>. El nombre común
+        se debe a una decisión comercial de 1995: Sun Microsystems quería transmitir que su
+        lenguaje tradicional, Java, era el lenguaje de moda para internet, y el nuevo lenguaje
+        de Netscape, pensado inicialmente como <em>LiveScript</em>, se renombró a
+        <strong>JavaScript</strong> para aprovechar esa publicidad. ECMA International lo
+        estandarizó en 1996 y, para evitar problemas legales de marca, lo rebautizó
+        <strong>ECMAScript</strong>, nombre que sigue siendo el nombre oficial del lenguaje.
+        Ninguno de los dos deriva del otro.
+      </p>
+
+      <h2>Comparativa técnica completa</h2>
+      <table>
+        <thead>
+          <tr><th>Característica</th><th>Java</th><th>JavaScript</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Clasificación (CE 1.d)</strong></td>
+            <td class="ok">Lenguaje de programación tradicional</td>
+            <td>Lenguaje de script / guiones</td>
+          </tr>
+          <tr>
+            <td><strong>Proceso de traducción</strong></td>
+            <td>Compilado a <em>bytecode</em> (.class) y ejecutado por la JVM</td>
+            <td>Interpretado por el motor del navegador (o por Node.js) sin compilación previa</td>
+          </tr>
+          <tr>
+            <td><strong>Sistema anfitrión (host)</strong></td>
+            <td>La máquina virtual Java (JVM), instalada en el sistema</td>
+            <td>El navegador web (o el intérprete de Node.js)</td>
+          </tr>
+          <tr>
+            <td><strong>Tipado</strong></td>
+            <td>Estático y <strong>fuertemente tipado</strong>: el tipo se declara y se comprueba en compilación</td>
+            <td>Dinámico y <strong>débilmente tipado</strong>: el tipo se decide en ejecución, solo por el valor</td>
+          </tr>
+          <tr>
+            <td><strong>Paradigma</strong></td>
+            <td>Orientado a objetos <strong>riguroso</strong> (todo vive en clases)</td>
+            <td><strong>Multiparadigma</strong>: orientación a objetos, funcional, imperativo, basado en eventos</td>
+          </tr>
+          <tr>
+            <td><strong>Modelo de ejecución</strong></td>
+            <td>Hilos (<em>threads</em>), normalmente con sincronización explícita</td>
+            <td><strong>Un solo hilo</strong> con bucle de eventos (<em>event loop</em>); la concurrencia se resuelve con <code>async/await</code> y promesas</td>
+          </tr>
+          <tr>
+            <td><strong>Compilación JIT</strong></td>
+            <td>Sí, de forma nativa en la JVM desde Java 6u23</td>
+            <td>Sí, de forma nativa en los motores modernos (V8, SpiderMonkey, JavaScriptCore) en los funciones más repetidas</td>
+          </tr>
+          <tr>
+            <td><strong>Nombre oficial</strong></td>
+            <td>Java (JLS, Java Language Specification)</td>
+            <td><strong>ECMAScript</strong> (norma ECMA-262)</td>
+          </tr>
+          <tr>
+            <td><strong>Ámbito de uso</strong></td>
+            <td>Aplicaciones de escritorio, Android, backend, sistemas empresariales</td>
+            <td>Programación de clientes Web en el navegador y, con Node.js, servidor</td>
+          </tr>
+          <tr>
+            <td><strong>Detección de errores</strong></td>
+            <td>En <strong>compilación</strong>: si hay un error de tipo, el .class no se genera</td>
+            <td>En <strong>tiempo de ejecución</strong> (<em>runtime</em>), línea a línea</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>El mismo resultado, philosophies opuestas</h2>
+      <p>Declarar e inicializar el número 42 en cada lenguaje:</p>
+      <pre><code>// JAVA: compilado a bytecode, tipo declarado de forma explicita
+public class Main {
+    public static void main(String[] args) {
+        int numero = 42;              // el tipo forma parte de la declaracion
+        System.out.println(numero);  // 42
+    }
+}</code></pre>
+      <pre><code>// JAVASCRIPT: interpretado, el tipo se deduce del valor
+let numero = 42;
+console.log(numero);   // 42
+numero = "cuarenta y dos";  // permitido: ahora es una cadena
+console.log(numero + 1);    // "cuarenta y dos1" (concatenacion, no suma)</code></pre>
+      <p>
+        Esa última línea es la demostración más clara de la diferencia de tipado: en Java el
+        compilador <strong>rechazaría</strong> la asignación (<em>incompatible types</em>), y en
+        JavaScript se acepta y produce una concatenación silenciosa. Es la contrapartida de la
+        flexibilidad del lenguaje dinámico.
+      </p>
+
+      <h2>Por qué importa la diferencia para el RA1</h2>
+      <p>
+        Elegir JavaScript para el cliente web no es una cuestión de gusto, es una
+        <strong>imposibilidad técnica</strong>: el navegador <em>solo</em> admite HTML, CSS y
+        JavaScript. No se puede ejecutar bytecode de la JVM en el navegador sin instalar una
+        máquina virtual completa, y JavaScript es, por definición, el lenguaje de script que se
+        acopla al documento HTML mediante la etiqueta <code>&lt;script&gt;</code> y se
+        ejecuta en ese entorno anfitrión.
+      </p>
+      <p>
+        En la práctica, Java se usa en el <strong>servidor</strong> (Spring, Jakarta) y
+        JavaScript en el <strong>cliente</strong>, y ambos se comunican por HTTP con JSON. Esa
+        separación es la arquitectura cliente/servidor clásica reaplicada a la web moderna.
+      </p>
+
+      <h2>Demostración interactiva del tipado dinámico</h2>
+      <p>
+        El botón inferior concatena el número 42 con el texto "1" de dos formas: primero
+        mediante el operador <code>+</code> de JavaScript y después mediante una función que
+        <strong>simula</strong> la comprobación de tipos en tiempo de compilación que hace
+        Java. La diferencia entre ambos resultados demuestra el cambio de paradigma.
+      </p>
+      <p>
+        <button type="button" id="btnDemo">Ver la diferencia de tipado</button>
+      </p>
+      <div id="salidaDemo" class="salida">(pulsa el botón)</div>
+
+      <nav>
+        <a href="./prueba4_1.html">Ejercicio 1</a>
+        <a href="./prueba4_2.html">Ejercicio 2</a>
+        <a href="./prueba4_3.html">Ejercicio 3</a>
+        <a href="./prueba4_4.html">Ejercicio 4</a>
+        <a href="./prueba4_6.html">Siguiente: Ejercicio 6</a>
+        <a href="./prueba4_7.html">Ejercicio 7</a>
+        <a href="./prueba4_metodos.html">Complemento: métodos de Date</a>
+      </nav>
+    </main>
+  </body>
+</html>

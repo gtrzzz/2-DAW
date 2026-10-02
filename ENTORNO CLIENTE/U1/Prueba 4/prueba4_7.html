@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prueba 4 - Ejercicio 7 | Apartado 1.4</title>
+    <link rel="stylesheet" href="./css/estilos.css" />
+    <!--
+      calculo.js se carga aqui a proposito, al principio del <head> y SIN "defer".
+      Asi se ve que un fallo en tiempo de ejecucion de un script no impide que
+      el navegador siga construyendo y pintando el resto del documento HTML.
+    -->
+    <script src="./js/calculo.js"></script>
+    <!-- El script de la demo del modo estricto sí usa defer: así no interrumpe el análisis del HTML -->
+    <script defer src="./js/ej7_estricto.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>Ejercicio 7: laboratorio de errores en tiempo de ejecución</h1>
+
+      <p class="criterio">
+        <strong>RA1</strong> – CE 1.d · Desventaja de la programación de guiones: los errores se
+        detectan en <em>tiempo de ejecución</em> y no antes, lo que obliga a un plan de pruebas
+        mucho más exhaustivo.
+      </p>
+
+      <h2>Enunciado</h2>
+      <p>
+        Crear un script sencillo en un archivo <code>calculo.js</code> que intente ejecutar una
+        operación matemática con una variable no declarada previamente. Comprobar en el
+        navegador qué sucede: observar cómo las líneas anteriores a la instrucción fallida se
+        ejecutan con normalidad y cómo el intérprete se detiene únicamente al alcanzar el fallo
+        en tiempo de ejecución, comprobando en la consola el error emitido.
+      </p>
+
+      <h2>Código de <code>./js/calculo.js</code></h2>
+      <pre><code>console.log("--- calculo.js: inicio de la ejecucion ---");
+
+const precio = 25;
+const iva = 0.21;
+
+console.log("1. precio declarado:", precio);
+console.log("2. iva declarado:", iva);
+
+const subtotal = precio * 3;
+console.log("3. Subtotal (precio * 3):", subtotal);
+
+console.log("4. A partir de aqui se intenta usar una variable NO declarada...");
+const total = subtotal - descuento; // &lt;-- ReferenceError: descuento is not defined
+
+console.log("5. Esta linea no llega a mostrarse porque el script ya se detuvo.");
+console.log("6. Total con descuento:", total);</code></pre>
+
+      <h2>Resultado esperado al abrir la página</h2>
+      <p>
+        Con <code>F12</code> abierto en la pestaña <strong>Consola</strong>, la salida es
+        exactamente esta, en este orden:
+      </p>
+      <pre><code>--- calculo.js: inicio de la ejecucion ---
+1. precio declarado: 25
+2. iva declarado: 0.21
+3. Subtotal (precio * 3): 75
+4. A partir de aqui se intenta usar una variable NO declarada...
+Uncaught ReferenceError: descuento is not defined
+    at calculo.js:25:32</code></pre>
+      <p class="error">
+        <strong>Las trazas 5 y 6 no aparecen.</strong> Eso es la prueba de que el intérprete se
+        detiene en el momento exacto del fallo.
+      </p>
+
+      <h2>Qué demuestra este experimento</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Aspecto</th>
+            <th>Lenguaje tradicional (Java, C++, C#)</th>
+            <th>Lenguaje de script (JavaScript)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cuándo se detecta el error</td>
+            <td class="ok">En <strong>compilación</strong>, antes de ejecutar nada</td>
+            <td class="error">En <strong>ejecución</strong>, al alcanzar la línea</td>
+          </tr>
+          <tr>
+            <td>Qué ocurre con el programa</td>
+            <td>El binario <strong>no llega a generarse</strong></td>
+            <td>Las líneas anteriores <strong>sí</strong> se ejecutan</td>
+          </tr>
+          <tr>
+            <td>Consecuencia</td>
+            <td>Un error de nombre nunca llega al usuario</td>
+            <td class="error">Un error en una rama poco transitada puede llegar al usuario final</td>
+          </tr>
+          <tr>
+            <td>Plan de pruebas</td>
+            <td>El compilador cubre la mayoría de errores</td>
+            <td class="error">Hay que probar todas las ramas a mano</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>La página, pese al error, se muestra entera</h2>
+      <p>
+        Este es el segundo aprendizaje de la práctica. El <code>ReferenceError</code> detiene
+        <strong>el fichero <code>calculo.js</code></strong>, no el documento. El navegador
+        continúa interpretando el HTML, aplica el CSS y dibuja la página con normalidad, y los
+        demás <code>&lt;script&gt;</code> del proyecto se ejecutan igualmente. Estás leyendo
+        precisamente esa página ahora mismo, con un script roto cargado en el
+        <code>&lt;head&gt;</code>.
+      </p>
+      <p>
+        Esto explica por qué un sitio web puede verse "medio roto" en lugar de mostrar un error
+        general: cada script es una unidad de ejecución independiente y un fallo aislado solo
+        afecta a su propio bloque de código.
+      </p>
+
+      <h2>Cómo evitarlo</h2>
+      <pre><code>// 1. Declarar la variable (la solución directa)
+const descuento = 10;
+const total = subtotal - descuento;
+
+// 2. Comprobar antes de usarla
+const total = typeof descuento !== "undefined" ? subtotal - descuento : subtotal;
+
+// 3. Declarar al principio de la funcion todas las variables (buena practica)
+function calcular() {
+  const precio = 25;
+  const iva = 0.21;
+  const descuento = 10;   // <- declarada, sin sorpresas
+  return precio * 3 - descuento;
+}
+
+// 4. En modo estricto, el error se detecta antes y no se crean globales por error
+//    (se activa con "use strict" al principio del fichero o del bloque)</code></pre>
+
+      <h2>Variante: <code>"use strict"</code></h2>
+      <p>
+        En los <em>scripts</em> normales, si en lugar de <em>leer</em> una variable se le
+        <em>asigna</em> sin declararla, JavaScript crea una global silenciosamente. Con
+        <code>"use strict"</code> eso deja de ocurrir y se lanza un <code>ReferenceError</code>
+        en el momento, que es exactamente lo que se busca en un lenguaje compilado. Botón para
+        comprobarlo:
+      </p>
+      <p>
+        <button type="button" id="btnEstricto">Comparar Assignación sin y con "use strict"</button>
+      </p>
+      <div id="salidaEstricto" class="salida">(pulsa el botón)</div>
+
+      <nav>
+        <a href="./prueba4_1.html">Ejercicio 1</a>
+        <a href="./prueba4_2.html">Ejercicio 2</a>
+        <a href="./prueba4_3.html">Ejercicio 3</a>
+        <a href="./prueba4_4.html">Ejercicio 4</a>
+        <a href="./prueba4_5.html">Ejercicio 5</a>
+        <a href="./prueba4_6.html">Ejercicio 6</a>
+        <a href="./prueba4_metodos.html">Complemento: métodos de Date</a>
+      </nav>
+    </main>
+  </body>
+</html>

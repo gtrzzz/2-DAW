@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prueba 4 - Complemento métodos de Date | Apartado 1.4</title>
+    <link rel="stylesheet" href="./css/estilos.css" />
+    <script defer src="./js/metodos_date.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>Complemento: métodos del objeto <code>Date</code></h1>
+
+      <p class="criterio">
+        <strong>RA1</strong> – CE 1.d · Ejemplo práctico de la ventaja de los lenguajes de
+        script: <em>reutilizar componentes preexistentes del sistema anfitrión</em>. El
+        navegador ya trae un objeto <code>Date</code> completo con conversores, getters y
+        setters; un lenguaje tradicional tendría que desarrollar esa librería desde cero.
+      </p>
+
+      <h2>1. Naturaleza del objeto</h2>
+      <p>
+        En JavaScript la fecha <strong>no es un tipo primitivo</strong>: es una instancia del
+        objeto nativo <code>Date</code>. Por dentro almacena un único entero, los
+        <strong>milisegundos desde la época Unix</strong> (1 de enero de 1970 00:00:00 UTC). Un
+        valor positivo indica instantes posteriores a esa fecha y uno negativo, anteriores.
+      </p>
+      <pre><code>const tiempoActualMs = Date.now();  // timestamp actual sin instanciar nada
+// Ejemplo: 1790591037183
+
+1 dia = 24 h * 60 min * 60 s * 1000 ms = 86.400.000 ms</code></pre>
+      <p>
+        La fecha es una <strong>instantánea congelada</strong>: no avanza sola. Para tener la
+        hora actual hay que crear un objeto nuevo o llamar a <code>Date.now()</code>.
+      </p>
+
+      <h2>2. Conversión y salida de la fecha actual</h2>
+      <p>
+        Estos seis métodos hacen la misma tarea con distintos formatos y destinatarios. La
+        diferencia entre ellos <strong>no es cosmética</strong>: elegir el correcto evita
+        errores al intercambiar datos con el exterior.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Método</th>
+            <th>Estándar</th>
+            <th>Salida típica</th>
+            <th>Cuándo usarlo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>toString()</code></td><td>Texto local completo</td><td><code>Mon Sep 28 2026 12:23:57 GMT+0200 (CEST)</code></td><td>Depuración rápida, conversión por defecto</td></tr>
+          <tr><td><code>toDateString()</code></td><td>Solo fecha legible</td><td><code>Mon Sep 28 2026</code></td><td>Interfaces sin detalle de horas</td></tr>
+          <tr><td><code>toTimeString()</code></td><td>Solo hora con huso</td><td><code>12:23:57 GMT+0200 (CEST)</code></td><td>Registros de eventos horarios</td></tr>
+          <tr><td><code>toISOString()</code></td><td><strong>ISO 8601 en UTC</strong></td><td><code>2026-09-28T10:23:57.000Z</code></td><td>Intercambio con APIs y bases de datos</td></tr>
+          <tr><td><code>toUTCString()</code></td><td>HTTP / RFC 7231</td><td><code>Mon, 28 Sep 2026 10:23:57 GMT</code></td><td>Cabeceras HTTP y cookies</td></tr>
+          <tr><td><code>toLocaleDateString()</code></td><td>Localización del usuario</td><td><code>28/9/2026</code> (es-ES)</td><td>Interfaz de usuario final</td></tr>
+        </tbody>
+      </table>
+      <p class="aviso">
+        <strong>Regla práctica:</strong> <code>toISOString()</code> para hablar con el
+        servidor, <code>toLocaleDateString()</code> para hablar con el usuario y
+        <code>toString()</code> para depurar. Nunca usar <code>toString()</code> para enviar
+        datos a una API, porque su formato depende del idioma del navegador.
+      </p>
+
+      <h2>3. Getters y setters</h2>
+      <pre><code>const f = new Date(2026, 8, 28, 14, 45, 10); // 28 de septiembre de 2026
+
+// LECTURA
+f.getFullYear();   // 2026
+f.getMonth();      // 8  -> septiembre, porque enero es 0
+f.getDate();       // 28 -> dia del mes (este si empieza en 1)
+f.getDay();        // 1  -> dia de la semana (0 domingo ... 6 sabado)
+f.getHours();      // 14
+f.getMinutes();    // 45
+f.getSeconds();    // 10
+f.getTime();       // timestamp en ms (equivalente a valueOf())
+
+// ESCRITURA
+f.setFullYear(2027);
+f.setMonth(0);
+f.setDate(15);</code></pre>
+
+      <h2>Demostración en vivo</h2>
+      <div class="tarjeta">
+        <p>
+          <button type="button" id="btnAhora">Generar fecha y hora actuales</button>
+          <button type="button" id="btnISO">Fijar una fecha concreta</button>
+        </p>
+        <p id="salidaMetodos" class="salida">(pulsa un botón)</p>
+      </div>
+
+      <h2>Tabla de conversores aplicada</h2>
+      <div id="tablaConversores" class="salida"></div>
+
+      <h2>Getters y setters aplicados</h2>
+      <div id="tablaGetters" class="salida"></div>
+
+      <nav>
+        <a href="./prueba4_1.html">Ejercicio 1</a>
+        <a href="./prueba4_2.html">Ejercicio 2</a>
+        <a href="./prueba4_3.html">Ejercicio 3</a>
+        <a href="./prueba4_4.html">Ejercicio 4</a>
+        <a href="./prueba4_5.html">Ejercicio 5</a>
+        <a href="./prueba4_6.html">Ejercicio 6</a>
+        <a href="./prueba4_7.html">Ejercicio 7</a>
+      </nav>
+    </main>
+  </body>
+</html>

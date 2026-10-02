@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prueba 5 - Actividad 2 | Código embebido</title>
+    <link rel="stylesheet" href="./css/estilos.css" />
+
+    <!--
+      MECANISMO DE INTEGRACION B: CODIGO EMBEBIDO
+      Bloque <script> sin atributo src, con el codigo escrito dentro.
+      Todo el programa vive en el mismo archivo .html.
+    -->
+    <script>
+      // Se declara la funcion dentro de la cabecera head
+      function diAlgo() {
+        alert("Hola");
+      }
+    </script>
+  </head>
+  <body>
+    <main>
+      <h1>Actividad 2: código JavaScript embebido dentro del HTML</h1>
+
+      <p class="criterio">
+        <strong>RA1</strong> – CE 1.e · El segundo mecanismo de integración: bloques
+        <code>&lt;script&gt;</code> sin <code>src</code>, escritos entre las líneas del propio
+        marcado.
+      </p>
+
+      <h2>Comprobación</h2>
+      <p>
+        Al cargar la página aparece el cuadro de alerta con el texto <strong>Hola</strong>
+        aunque en esta variante <strong>no hay ningún fichero <code>.js</code> externo</strong>:
+        el código está escrito dentro del propio HTML. Pulsa "Aceptar" para continuar.
+      </p>
+      <p>Justo debajo, el segundo botón de la demostración sí es externo, para poder comparar
+        en la misma página los dos mecanismos y comprobar que
+        <strong>el resultado visual es idéntico</strong>.</p>
+
+      <h2>Código completo de la página</h2>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Myfpschool&lt;/title&gt;
+  &lt;script&gt;
+    // Se declara la funcion dentro de la cabecera head
+    function diAlgo() {
+      alert("Hola");
+    }
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;!-- Se ejecuta la funcion en el cuerpo del documento body --&gt;
+  &lt;script&gt;
+    diAlgo();
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>Comparación de los dos mecanismos</h2>
+      <p>
+        <button type="button" id="btnEmbebido">Embebido: alert("Hola")</button>
+        <button type="button" id="btnExterno">Segundo botón: mismo efecto</button>
+      </p>
+      <p>
+        Los dos botones producen el mismo cuadro de texto. Lo que cambia no es el resultado,
+        sino la <strong>organización del código</strong>:
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Aspecto</th>
+            <th>Código embebido</th>
+            <th>Código externo (recomendado)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Número de archivos</td><td>1</td><td class="ok">2 o más</td></tr>
+          <tr><td>Resultado visual</td><td>Idéntico</td><td>Idéntico</td></tr>
+          <tr><td>Mantenimiento</td><td class="error">Difícil si hay muchos bloques</td><td class="ok">Fácil: un archivo por función</td></tr>
+          <tr><td>Memoria caché</td><td class="error">No se puede cachear (va dentro del HTML)</td><td class="ok">Se cachea el <code>.js</code></td></tr>
+          <tr><td>Reutilización</td><td class="error">Hay que copiar el bloque en cada página</td><td class="ok">Se enlaza y se reutiliza</td></tr>
+          <tr><td>Colaboración en equipo</td><td class="error">Diseñador y programador se pisan</td><td class="ok">Cada uno trabaja en su archivo</td></tr>
+          <tr><td>Legibilidad del HTML</td><td class="error">El marcado se mezcla con la lógica</td><td class="ok">El HTML queda limpio</td></tr>
+          <tr><td>Cuándo usarlo</td><td>Código mínimo de una sola página que no cambiará</td><td class="ok">Cualquier proyecto real</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Modificar el contenido de la página (ejemplo embebido)</h2>
+      <p>
+        Este segundo ejemplo, tomado del tema, <strong>sí</strong> va embebido al final del
+        <code>&lt;body&gt;</code> para mostrar el caso práctico: cambiar el texto de un párrafo y
+        el color de un encabezado con <code>addEventListener()</code> y
+        <code>textContent</code>.
+      </p>
+
+      <h1 id="tituloDemo">Modificando el código HTML</h1>
+      <p id="prueba">Modificando el contenido.</p>
+      <button type="button" id="btnCambiar">¡Dale!</button>
+      <p id="salidaEmbebido" class="salida">(pulsa el botón para ver la traza en la consola)</p>
+
+      <h2>Características y desventajas del enfoque embebido</h2>
+      <ul>
+        <li>
+          <strong>Mismo resultado visual.</strong> Tanto el enfoque embebido como el externo
+          provocan exactamente el mismo efecto ante el usuario: aquí, los dos, un cuadro
+          emergente con el saludo.
+        </li>
+        <li>
+          <strong>Dificultad de mantenimiento.</strong> Diseminar bloques
+          <code>&lt;script&gt;</code> desordenados por el <code>&lt;head&gt;</code> y el
+          <code>&lt;body&gt;</code> convierte el código en un bloque difícil de depurar,
+          entender y mantener a largo plazo.
+        </li>
+        <li>
+          <strong>Criterio de uso excepcional.</strong> Solo se justifica cuando las líneas de
+          código son mínimas, específicas de una sola página y no se van a modificar
+          prácticamente nunca.
+        </li>
+      </ul>
+
+      <script>
+        // --- Ejemplo 1: invocacion de la funcion declarada en el <head> ---
+        diAlgo();
+
+        // --- Ejemplo 2: modification del DOM con addEventListener ---
+        // Va al FINAL del <body> a proposito: asi todo el marcado ya esta
+        // construido en el DOM cuando se ejecuta esta logica.
+        function cambiarTexto() {
+          // textContent si solo cambia texto: mas rapido y seguro que innerHTML,
+          // porque no interpreta etiquetas ni permite inyeccion de HTML.
+          document.getElementById("prueba").textContent = "CAMBIANDO el contenido!";
+          document.getElementById("tituloDemo").textContent = "CAMBIANDO el encabezado!";
+
+          const traza =
+            "addEventListener('click') ejecutado.\n" +
+            "  document.getElementById('prueba').textContent = 'CAMBIANDO el contenido!'\n" +
+            "  document.getElementById('tituloDemo').textContent = 'CAMBIANDO el encabezado!'\n" +
+            "El HTML de esta pagina es el MISMO: solo ha cambiado el DOM en memoria.";
+          document.getElementById("salidaEmbebido").textContent = traza;
+          console.log(traza);
+        }
+
+        const boton = document.getElementById("btnCambiar");
+        boton.addEventListener("click", cambiarTexto);
+
+        // --- Botones de la tabla comparativa ---
+        document.getElementById("btnEmbebido").addEventListener("click", diAlgo);
+
+        document.getElementById("btnExterno").addEventListener("click", () => {
+          // Aqui diAlgo() tambien es la funcion LOCAL declarada en el <head>.
+          // La reutilizacion real del fichero externo se comprueba en la
+          // Actividad 1: ./js/script.js se enlaza y se reutiliza tal cual en
+          // cualquier otra pagina del sitio sin copiar el codigo.
+          console.log("diAlgo() definida en el propio HTML (mismo resultado visual).");
+          diAlgo();
+        });
+      </script>
+
+      <nav>
+        <a href="./index.html">Índice</a>
+        <a href="./prueba5_1.html">Actividad 1: ficheros externos</a>
+        <a href="./prueba5_3.html">Ubicación, defer y async</a>
+        <a href="./mi_proyecto/index.html">Práctica guiada: mi_proyecto</a>
+      </nav>
+    </main>
+  </body>
+</html>

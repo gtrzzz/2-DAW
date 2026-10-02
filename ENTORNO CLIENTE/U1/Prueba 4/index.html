@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prueba 4 - Apartado 1.4 (índice de ejercicios)</title>
+    <link rel="stylesheet" href="./css/estilos.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Apartado 1.4 · Índice de ejercicios</h1>
+
+      <p class="criterio">
+        <strong>RA1</strong> – CE 1.d · Se han reconocido las particularidades de la
+        programación de guiones y sus ventajas y desventajas sobre la programación tradicional.
+      </p>
+
+      <h2>Estructura del proyecto</h2>
+      <pre><code>Prueba 4/
+├── css/
+│   └── estilos.css          <- hoja de estilos compartida
+├── js/
+│   ├── ej1_verificacion.js  <- Ejercicio 1
+│   ├── ej2_dias_diferencia.js
+│   ├── ej3_ultimo_dia.js
+│   ├── ej4_formatear.js
+│   ├── ej5_teoria.js
+│   ├── ej6_ventajas.js
+│   ├── ej7_estricto.js
+│   ├── calculo.js           <- Ejercicio 7 (laboratorio, falla a proposito)
+│   └── metodos_date.js
+├── index.html               <- esta pagina
+├── prueba4_1.html
+├── prueba4_2.html
+├── prueba4_3.html
+├── prueba4_4.html
+├── prueba4_5.html
+├── prueba4_6.html
+├── prueba4_7.html
+└── prueba4_metodos.html    <- complemento del punto E del tema</code></pre>
+
+      <h2>Ejercicios</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Ejercicio</th>
+            <th>Contenido</th>
+            <th>Ficheiro JavaScript</th>
+            <th>Ir</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Interpretación de constructores y desbordamientos de <code>Date</code></td>
+            <td><code>js/ej1_verificacion.js</code></td>
+            <td><a href="./prueba4_1.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><code>calcularDiasDiferencia(fechaInicio, fechaFin)</code></td>
+            <td><code>js/ej2_dias_diferencia.js</code></td>
+            <td><a href="./prueba4_2.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><code>obtenerUltimoDiaMes(año, mes)</code> con desbordamiento</td>
+            <td><code>js/ej3_ultimo_dia.js</code></td>
+            <td><a href="./prueba4_3.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><code>formatearFechaEspanola(fecha)</code> con <code>padStart()</code></td>
+            <td><code>js/ej4_formatear.js</code></td>
+            <td><a href="./prueba4_4.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Teórico: diferencias técnicas entre Java y JavaScript</td>
+            <td><code>js/ej5_teoria.js</code></td>
+            <td><a href="./prueba4_5.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Teórico: ventajas de JavaScript en el desarrollo web</td>
+            <td><code>js/ej6_ventajas.js</code></td>
+            <td><a href="./prueba4_6.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>Laboratorio: <code>calculo.js</code> con variable no declarada</td>
+            <td><code>js/calculo.js</code></td>
+            <td><a href="./prueba4_7.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td>Extra</td>
+            <td>Complemento: métodos de conversión y getters/setters de <code>Date</code></td>
+            <td><code>js/metodos_date.js</code></td>
+            <td><a href="./prueba4_metodos.html">Abrir</a></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Notas importantes</h2>
+      <ul>
+        <li>
+          Todos los scripts se cargan con <code>&lt;script defer src="./js/... "&gt;</code>
+          desde el <code>&lt;head&gt;</code>, salvo <code>js/calculo.js</code>, que se carga
+          <strong>sin <code>defer</code> a propósito</strong> para poder observar cómo un error
+          en tiempo de ejecución no impide que el navegador pinte el resto de la página.
+        </li>
+        <li>
+          Para comprobar que los ficheros <code>.js</code> se sirven correctamente, abre las
+          herramientas de desarrollo con <code>F12</code>, ve a la pestaña <strong>Network
+          (Red)</strong> y comprueba que cada fichero devuelve <strong>200 OK</strong>.
+        </li>
+        <li>
+          Los resultados de todas las funciones se volcan también a la <strong>consola</strong>
+          del navegador con <code>console.log()</code>.
+        </li>
+      </ul>
+    </main>
+  </body>
+</html>

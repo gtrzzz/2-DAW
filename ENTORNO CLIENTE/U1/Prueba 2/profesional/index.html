@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prueba 2 reorganizada - Apartado 1.2 con ficheros externos</title>
+    <link rel="stylesheet" href="./css/estilos.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Apartado 1.2 con estructura profesional de carpetas</h1>
+
+      <p class="criterio">
+        <strong>RA1</strong> – CE 1.a · Capacidades y mecanismos de ejecución de código de los
+        navegadores Web. Esta carpeta es la <strong>versión reorganizada</strong> de los
+        ejercicios de <code>Prueba 2/</code>: en lugar de escribir el JavaScript dentro de los
+        atributos <code>onclick</code> y de bloques <code>&lt;script&gt;</code> del propio
+        HTML, toda la lógica se ha trasladado a ficheros <code>.js</code> externos.
+      </p>
+
+      <h2>Por qué se ha hecho esta copia</h2>
+      <p>
+        El apartado 1.5 pide rehacer los ejercicios de 1.2 y 1.4 con la estructura profesional
+        de carpetas. Los ficheros originales de <code>Prueba 2/</code> se conservan intactos
+        porque son la versión con el enfoque <strong>embebido</strong>, que es exactamente el
+        que el apartado 1.5 critica y sirve de referencia para comparar. Esta carpeta
+        <code>profesional/</code> es la versión equivalente con ficheros externos, y permite
+        comprobar en la pestaña <strong>Network</strong> que cada <code>.js</code> se sirve con
+        estado <strong>200 OK</strong>.
+      </p>
+
+      <h2>Estructura del proyecto</h2>
+      <pre><code>profesional/
+├── css/
+│   └── estilos.css                 <- hoja de estilos compartida
+├── js/
+│   ├── ej1_modificar_html.js
+│   ├── ej2_3_eventos.js
+│   ├── ej4_5_6_idiomas.js
+│   ├── ej7_interfaz.js
+│   ├── ej8_test_interactivo.js
+│   └── ej9_secuencia.js
+├── img/
+│   ├── frame1.jpg
+│   ├── frame2.jpg
+│   ├── frame3.jpg
+│   └── frame4.jpg
+├── index.html                      <- esta pagina
+├── ejercicio1_modificar_html.html
+├── ejercicio2_3_eventos.html
+├── ejercicio4_5_6_idiomas.html
+├── ejercicio7_interfaz.html
+├── ejercicio8_test_interactivo.html
+└── ejercicio9_secuencia.html</code></pre>
+
+      <h2>Ejercicios</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Ejercicio</th>
+            <th>Contenido</th>
+            <th>Mecanismo del navegador que practican</th>
+            <th>Ir</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Modificar el contenido de un párrafo y de un encabezado</td>
+            <td><code>getElementById()</code>, <code>innerHTML</code>, <code>textContent</code></td>
+            <td><a href="./ejercicio1_modificar_html.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td>2 y 3</td>
+            <td>Capturar el evento clic de un botón: traza y aviso modal</td>
+            <td><code>addEventListener()</code>, <code>console.log()</code>, <code>alert()</code></td>
+            <td><a href="./ejercicio2_3_eventos.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td>4, 5 y 6</td>
+            <td>Saludo en tres idiomas con color, por consola y en el flujo</td>
+            <td><code>.style.color</code>, <code>console.log()</code>, <code>document.write()</code></td>
+            <td><a href="./ejercicio4_5_6_idiomas.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>Interfaz con estado del sistema y tres botones</td>
+            <td><code>toLocaleTimeString()</code>, <code>.style.backgroundColor</code>, <code>alert()</code></td>
+            <td><a href="./ejercicio7_interfaz.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>Test interactivo de siete preguntas de verdadero o falso</td>
+            <td>Evaluación de la respuesta y <code>.style.color</code> por acierto o error</td>
+            <td><a href="./ejercicio8_test_interactivo.html">Abrir</a></td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>Secuencia cíclica de imágenes fotograma a fotograma</td>
+            <td>Reasignación del atributo <code>src</code> y estado con <code>let</code></td>
+            <td><a href="./ejercicio9_secuencia.html">Abrir</a></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Comparación de enfoques: embebido frente a externo</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Aspecto</th>
+            <th>Original (<code>Prueba 2/</code>)</th>
+            <th>Reorganizado (<code>profesional/</code>)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Ubicación del JavaScript</td>
+            <td>Atributos <code>onclick</code> y bloques <code>&lt;script&gt;</code> del HTML</td>
+            <td class="ok">Ficheros <code>.js</code> en la carpeta <code>js/</code></td>
+          </tr>
+          <tr>
+            <td>Registro de eventos</td>
+            <td>Atributo <code>onclick</code> en línea</td>
+            <td class="ok"><code>addEventListener()</code> desde el <code>.js</code></td>
+          </tr>
+          <tr>
+            <td>Estilos</td>
+            <td>En línea o sin estilar</td>
+            <td class="ok">Hoja compartida <code>css/estilos.css</code></td>
+          </tr>
+          <tr>
+            <td>Variables</td>
+            <td><code>var</code> dentro de los atributos</td>
+            <td class="ok"><code>const</code> y <code>let</code> en el <code>.js</code></td>
+          </tr>
+          <tr>
+            <td>Comparaciones</td>
+            <td><code>==</code> (no estricta)</td>
+            <td class="ok"><code>===</code> (estricta)</td>
+          </tr>
+          <tr>
+            <td>Memoria caché</td>
+            <td class="error">No aplicable: el código va dentro del HTML</td>
+            <td class="ok">Los <code>.js</code> y el <code>.css</code> se cachean</td>
+          </tr>
+          <tr>
+            <td>Reutilización</td>
+            <td class="error">Hay que copiar el código en cada página</td>
+            <td class="ok">Un <code>.js</code> enlazado desde todas las páginas</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Comprobación en la pestaña Network (Red)</h2>
+      <p>
+        Con <code>F12</code> abierto en <strong>Network</strong>, cada página de esta carpeta
+        debe solicitar <code>css/estilos.css</code> y su fichero <code>.js</code> con estado
+        <strong class="ok">200 OK</strong>. Al navegar de una página a otra se observará que el
+        <code>.css</code> y los <code>.js</code> ya <strong>no se vuelven a descargar</strong>
+        (aparecen como <em>from disk cache</em> o <em>from memory cache</em>), lo que demuestra
+        la primera ventaja de los ficheros externos.
+      </p>
+      <p class="aviso">
+        Si abres los archivos con doble clic (<code>file://</code>), la pestaña Network puede no
+        mostrar el código de estado. Para comprobar el <code>200 OK</code> real hay que servir la
+        carpeta con un servidor local, por ejemplo con la extensión <em>Live Server</em> de
+        Visual Studio Code.
+      </p>
+    </main>
+  </body>
+</html>

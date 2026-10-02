@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Práctica guiada - Estructura profesional de proyecto</title>
+
+    <!--
+      MECANISMO DE INTEGRACION: FICHERO EXTERNO SEPARADO
+      Ruta relativa correcta: ./css/estilos.css y ./js/logica.js
+      El atributo defer evita bloquear el analisis del HTML y garantiza
+      que el script se ejecuta con el DOM ya construido.
+    -->
+    <link rel="stylesheet" href="./css/estilos.css" />
+    <script defer src="./js/logica.js"></script>
+  </head>
+  <body>
+    <div class="contenedor">
+      <h1>Práctica de laboratorio guiada</h1>
+
+      <p>
+        Esta es la reorganización de un proyecto con la estructura profesional de carpetas.
+        El bloque de código que cambiaba el color del botón estaba
+        <strong>embebido dentro de este mismo archivo HTML</strong> y se ha
+        <strong>trasladado a <code>./js/logica.js</code></strong>, enlazado desde el
+        <code>&lt;head&gt;</code> con la ruta relativa <code>./js/logica.js</code>.
+      </p>
+
+      <h2>Estructura resultante</h2>
+      <pre><code>mi_proyecto/
+├── css/
+│   └── estilos.css
+├── js/
+│   └── logica.js
+└── index.html          &lt;-- esta pagina</code></pre>
+
+      <h2>Demostración: el botón cambia de color</h2>
+      <p>Pulsa el botón y observa cómo <code>js/logica.js</code> cambia su color:</p>
+      <p>
+        <button type="button" id="btnColor">Cambia mi color</button>
+      </p>
+      <p id="mensaje">(la traza de JavaScript aparecerá aquí y en la consola)</p>
+
+      <h2>Código del <code>index.html</code> completo</h2>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Mi proyecto&lt;/title&gt;
+    &lt;link rel="stylesheet" href="./css/estilos.css"&gt;
+    &lt;script defer src="./js/logica.js"&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Práctica de laboratorio guiada&lt;/h1&gt;
+    &lt;button type="button" id="btnColor"&gt;Cambia mi color&lt;/button&gt;
+    &lt;p id="mensaje"&gt;&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h2>Cómo se ha trasladado el bloque de script</h2>
+      <p>El código embebido original era:</p>
+      <pre><code>&lt;script&gt;
+  function cambiarColor() {
+    document.getElementById("btnColor").style.backgroundColor = "green";
+  }
+  document.getElementById("btnColor").addEventListener("click", cambiarColor);
+&lt;/script&gt;</code></pre>
+      <p>Ahora esa misma lógica vive en <code>./js/logica.js</code> y el HTML solo la enlaza:</p>
+      <pre><code>&lt;script defer src="./js/logica.js"&gt;&lt;/script&gt;</code></pre>
+
+      <h2>Comprobación en la pestaña Network (Red)</h2>
+      <ol>
+        <li>Abre las herramientas de desarrollador con <code>F12</code>.</li>
+        <li>Sitúate en la pestaña <strong>Network (Red)</strong>.</li>
+        <li>Recarga la página con <code>F5</code>.</li>
+        <li>
+          Comprueba que aparecen estas dos peticiones con estado
+          <strong class="ok">200 OK</strong>:
+        </li>
+      </ol>
+      <table>
+        <thead>
+          <tr><th>Recurso solicitado</th><th>Tipo</th><th>Estado esperado</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>./css/estilos.css</code></td><td>stylesheet</td><td class="ok">200 OK</td></tr>
+          <tr><td><code>./js/logica.js</code></td><td>script</td><td class="ok">200 OK</td></tr>
+          <tr><td><code>./index.html</code></td><td>document</td><td class="ok">200 OK</td></tr>
+        </tbody>
+      </table>
+      <p class="error">
+        Si alguno devolviera <strong>404 Not Found</strong>, la ruta relativa del atributo
+        <code>src</code> o del <code>href</code> estaría mal escrita: hay que comprobar que
+        desde <code>index.html</code> el camino <code>./js/logica.js</code> existe realmente.
+      </p>
+      <p class="aviso">
+        <strong>Nota:</strong> si abres el archivo con doble clic (<code>file://</code>), la
+        pestaña Network puede mostrar los recursos con estado <code>(from disk cache)</code> o
+        sin código de estado. Para ver el <code>200 OK</code> real hay que servir la carpeta
+        con un servidor local, por ejemplo con la extensión <em>Live Server</em> de Visual Studio
+        Code.
+      </p>
+
+      <nav>
+        <a href="../index.html">Índice del apartado 1.5</a>
+        <a href="../prueba5_1.html">Actividad 1: ficheros externos</a>
+        <a href="../prueba5_2.html">Actividad 2: código embebido</a>
+        <a href="../prueba5_3.html">Ubicación, defer y async</a>
+      </nav>
+    </div>
+  </body>
+</html>

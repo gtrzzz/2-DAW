@@ -1,0 +1,207 @@
+/* ============================================================
+   Hoja de estilos compartida - Prueba 5 (Apartado 1.5)
+   El CSS tambien se separa en su propio fichero, igual que el JS.
+   Ventaja extra: al estar en un .css, el navegador lo cachea
+   y no lo vuelve a descargar en cada pagina del sitio.
+   ============================================================ */
+
+:root {
+  --color-fondo: #f4f6f8;
+  --color-tarjeta: #ffffff;
+  --color-borde: #d3d9e0;
+  --color-texto: #1f2933;
+  --color-primario: #1d4ed8;
+  --color-ok: #15803d;
+  --color-error: #b91c1c;
+  --color-aviso: #b45309;
+  --color-boton: #1d4ed8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 2rem 1rem 4rem;
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
+  line-height: 1.6;
+}
+
+main {
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+h1 {
+  color: var(--color-primario);
+  border-bottom: 3px solid var(--color-primario);
+  padding-bottom: 0.4rem;
+}
+
+h2 {
+  margin-top: 2rem;
+  color: var(--color-primario);
+  font-size: 1.3rem;
+}
+
+h3 {
+  font-size: 1.05rem;
+}
+
+.criterio {
+  background-color: var(--color-aviso);
+  color: #fff;
+  padding: 0.6rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.tarjeta {
+  background-color: var(--color-tarjeta);
+  border: 1px solid var(--color-borde);
+  border-radius: 8px;
+  padding: 1.2rem 1.4rem;
+  margin: 1.2rem 0;
+}
+
+pre,
+code {
+  font-family: Consolas, "Courier New", monospace;
+}
+
+code {
+  background-color: #eef1f5;
+  border-radius: 4px;
+  padding: 0.1rem 0.3rem;
+  font-size: 0.92em;
+}
+
+pre {
+  background-color: #1f2933;
+  color: #e5e7eb;
+  padding: 0.9rem 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 0.9rem;
+}
+
+pre code {
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  background-color: var(--color-tarjeta);
+  font-size: 0.94rem;
+}
+
+th,
+td {
+  border: 1px solid var(--color-borde);
+  padding: 0.55rem 0.7rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background-color: #e8edf3;
+}
+
+button {
+  background-color: var(--color-primario);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.55rem 1.1rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  margin-right: 0.4rem;
+  margin-top: 0.4rem;
+}
+
+button:hover {
+  filter: brightness(1.15);
+}
+
+/* Boton del laboratorio: su color lo cambia js/logica.js */
+#btnColor {
+  background-color: var(--color-boton);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.7rem 1.4rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+#btnColor:hover {
+  filter: brightness(1.2);
+}
+
+.campo {
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
+.campo label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+input,
+select {
+  padding: 0.45rem 0.5rem;
+  border: 1px solid var(--color-borde);
+  border-radius: 5px;
+  font-size: 0.95rem;
+  margin: 0.2rem 0;
+}
+
+.salida {
+  background-color: #eef1f5;
+  border-left: 4px solid var(--color-primario);
+  padding: 0.7rem 0.9rem;
+  border-radius: 4px;
+  font-family: Consolas, "Courier New", monospace;
+  white-space: pre-wrap;
+  min-height: 1.2rem;
+}
+
+.ok {
+  color: var(--color-ok);
+  font-weight: 600;
+}
+
+.error {
+  color: var(--color-error);
+  font-weight: 600;
+}
+
+.aviso {
+  color: var(--color-aviso);
+  font-weight: 600;
+}
+
+nav a {
+  display: inline-block;
+  margin-right: 0.8rem;
+  color: var(--color-primario);
+}
+
+/* Zona usada por las demos de ubicacion de <script> */
+#puntoDeControl {
+  padding: 0.7rem 1rem;
+  border: 2px dashed var(--color-primario);
+  border-radius: 6px;
+  margin: 1rem 0;
+  font-weight: 600;
+}
