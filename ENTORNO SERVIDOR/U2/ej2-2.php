@@ -1,4 +1,4 @@
-```php
+
 <?php
 
 // Obtenemos la pestaña seleccionada mediante el parámetro "tab" de la URL.
@@ -511,34 +511,3 @@ $tab = $_GET['tab'] ?? '1';
 </body>
 
 </html>
-```
-
-### Importante para el ejercicio 5
-
-Hay una pequeña cuestión del enunciado que conviene tener clara. **Tal como está escrito, el apartado 3 debe cambiar únicamente los valores de las variables**, manteniendo el código de comprobación.
-
-Por eso en el código tienes primero:
-
-```php
-$numFloat = 5.7;
-$variableSinValor = null;
-```
-
-y después:
-
-```php
-$numFloat = 10;
-$variableSinValor = "Hola";
-```
-
-Así puedes demostrar las dos situaciones en la misma página.
-
-**Resultado esperado:**
-
-* Ejercicio 1 → fecha y hora actual.
-* Ejercicio 2 → `3`, `1.6` y `13`.
-* Ejercicio 3 → frase original, frase sin espacios y sus longitudes.
-* Ejercicio 4 → constante `IVA`, operación con ella y `PHP_INT_MAX`.
-* Ejercicio 5 → primero `float` y `null`; después entero y `string`.
-
-Además, las pestañas funcionan **sin JavaScript**: PHP recibe `?tab=1`, `?tab=2`, etc., y decide qué ejercicio mostrar. Esto encaja bastante bien con que la actividad sea de **Entorno Servidor**.
