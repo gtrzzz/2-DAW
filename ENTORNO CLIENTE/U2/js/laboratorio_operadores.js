@@ -3,12 +3,11 @@ function procesarEvaluacion() {
   const txtB = document.getElementById("campoValor2").value.trim();
   const visor = document.getElementById("pantallaSalida");
 
-  // Conversión segura de cadenas literales a primitivos reales usando JSON.parse
   let valA, valB;
   try {
     valA = JSON.parse(txtA);
   } catch (e) {
-    valA = txtA; // Si no es JSON válido, lo trata como string puro
+    valA = txtA;
   }
 
   try {
@@ -17,7 +16,6 @@ function procesarEvaluacion() {
     valB = txtB;
   }
 
-  // Evaluaciones de tipos y operaciones
   const tipoA = typeof valA;
   const tipoB = typeof valB;
   const igualdadAbstracta = valA == valB;
@@ -25,9 +23,15 @@ function procesarEvaluacion() {
   const operacionOr = valA || valB;
   const operacionNullish = valA ?? valB;
 
-  //Modificaciones
+  // Modificación 1
   const operacionAnd = valA && valB;
   const dobleNegacionA = !!valA;
+
+  // Modificación 2
+  let aviso = "";
+  if (tipoA === "number" && Math.abs(valA) > Number.MAX_SAFE_INTEGER) {
+    aviso = `<br><span class="resaltado">Aviso: Precisión comprometida. Utiliza BigInt (sufijo n) para operar en este rango</span>`;
+  }
 
   visor.innerHTML = `
     <strong>Operando A:</strong> <span class="resaltado">${String(valA)}</span> (typeof: ${tipoA})<br>
@@ -36,7 +40,10 @@ function procesarEvaluacion() {
     <strong>Igualdad abstracta (A == B):</strong> ${igualdadAbstracta}<br>
     <strong>Igualdad estricta   (A === B):</strong> ${igualdadEstricta}<br>
     <strong>Cortocircuito OR    (A || B):</strong> ${String(operacionOr)}<br>
-    <strong>Coalescencia nula   (A ?? B):</strong> ${String(operacionNullish)}
+    <strong>Coalescencia nula   (A ?? B):</strong> ${String(operacionNullish)}<br>
+    <strong>Cortocircuito AND   (A && B):</strong> ${String(operacionAnd)}<br>
+    <strong>Doble negación       (!!A):</strong> ${dobleNegacionA}
+    ${aviso}
   `;
 }
 
