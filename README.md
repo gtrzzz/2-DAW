@@ -1,0 +1,1 @@
+Este repositorio tiene ejercicios y proyectos personales que he ido haciendo a lo largo del curso de 2º Desarrollo de Aplicaciones Web. Incluye tareas de clase, ejercicios hechos por mi cuenta y proyectos que he ido desarrollando en cursos. 
