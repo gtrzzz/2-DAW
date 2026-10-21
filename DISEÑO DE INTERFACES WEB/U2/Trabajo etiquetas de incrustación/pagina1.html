@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web del Puerto de Algeciras por Iván Gutiérrez Mateos</title>
+    <style>
+      /* 1. Estilo general */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f6fa;
+        color: #1b2a3a;
+        margin: 0 auto;
+        max-width: 900px;
+        line-height: 1.6; /* controla el espacio vertical entre líneas de texto (interlineado) */
+      }
+      /* 2. Cabecera y navegación */
+      header {
+        background-color: #0b3d66;
+        color: white;
+        text-align: center;
+        padding: 20px; /* separa el contenido del propio borde del elemento (espacio interior) */
+      }
+      nav a {
+        color: #ffd166;
+        margin: 0 10px;
+      }
+      /* 3. Secciones de contenido */
+      section,
+      article,
+      aside {
+        background-color: white;
+        border-left: 5px solid #0b3d66;
+        padding: 10px 20px;
+        margin: 20px 0;
+      }
+      /* 4. Tabla */
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th,
+      td {
+        border: 1px solid #0b3d66;
+        padding: 8px;
+        text-align: left;
+      }
+      /* 5. Pie de página */
+      footer {
+        background-color: #0b3d66;
+        color: white;
+        text-align: center;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Puerto de Algeciras</h1>
+      <nav>
+        <a href="#info">Información</a>
+        <a href="#operaciones">Operaciones</a>
+        <a href="#mapa">Cómo llegar</a>
+        <a href="paginaenlazada.html">Más información</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="info">
+        <h2>Información del Puerto</h2>
+        <p>Bienvenido al <strong>puerto de Algeciras</strong>.</p>
+        <p>
+          El puerto de Algeciras es uno de los más importantes de
+          <em>España</em> y de <em>Europa</em>.
+        </p>
+        <hr />
+      </section>
+
+      <article id="operaciones">
+        <h2>Operaciones</h2>
+        <p>
+          En este puerto se realizan operaciones de carga y descarga de
+          mercancías.
+        </p>
+        <h3>Tipos de actividad</h3>
+        <ul>
+          <li>Tráfico de contenedores</li>
+          <li>Mercancía a granel</li>
+          <li>Transporte de pasajeros</li>
+        </ul>
+        <h3>Pasos de una operación de carga</h3>
+        <ol>
+          <li>Llegada del buque</li>
+          <li>Atraque</li>
+          <li>Carga y descarga</li>
+          <li>Salida del buque</li>
+        </ol>
+        <table>
+          <caption>
+            Resumen de tráficos
+          </caption>
+          <thead>
+            <tr>
+              <th>Tráfico</th>
+              <th>Descripción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Contenedores</td>
+              <td>Mercancía en cajas estándar</td>
+            </tr>
+            <tr>
+              <td>Granel</td>
+              <td>Mercancía sin envasar</td>
+            </tr>
+            <tr>
+              <td>Pasajeros</td>
+              <td>Líneas con el norte de África</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <aside>
+        <h2>Dato destacado</h2>
+        <p>
+          Su situación en el Estrecho lo convierte en un punto clave del
+          Mediterráneo.
+        </p>
+      </aside>
+
+      <section id="mapa">
+        <h2>¿Cómo llegar?</h2>
+        <figure>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13388.622832054953!2d-5.4589651313104435!3d36.139993156645716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0c94dead7415f5%3A0xa7eeb4d71a35c01f!2sPuerto%20Algeciras!5e0!3m2!1ses!2ses!4v1792004226119!5m2!1ses!2ses"
+            width="600"
+            height="450"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+          ></iframe>
+          <figcaption>Ubicación del Puerto de Algeciras</figcaption>
+        </figure>
+        <p><a href="paginaenlazada.html">Más información</a></p>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 Puerto de Algeciras. Todos los derechos reservados.</p>
+    </footer>
+  </body>
+</html>
