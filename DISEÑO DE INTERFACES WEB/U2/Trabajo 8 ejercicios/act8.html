@@ -2,7 +2,7 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Próximamente</title>
+    <title>Próximamente – Porsche</title>
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
@@ -11,19 +11,23 @@
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-      integrity="sha512-...."
+      integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
     <style>
+      /* 1. Variables */
       :root {
-        --prim: #2b5bff;
+        --prim: #d5001c;
       }
       * {
         box-sizing: border-box;
       }
+      /* 2. Estilo general */
       body {
         font-family: "Inter", sans-serif;
+        background-color: #000;
+        color: white;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -39,9 +43,10 @@
       }
       p {
         font-size: 1.25rem;
-        color: #555;
+        color: #bbb;
         margin: 0 0 1.5rem;
       }
+      /* 3. Botón */
       button {
         display: flex;
         align-items: center;
@@ -49,7 +54,6 @@
         padding: 0.8rem 1.6rem;
         font-size: 1rem;
         border: none;
-        border-radius: 8px;
         background: var(--prim);
         color: #fff;
         cursor: pointer;
@@ -67,8 +71,8 @@
     </style>
   </head>
   <body>
-    <h1>Nuestra web está en construcción</h1>
-    <p>Déjanos avisarte cuando lancemos&nbsp;🚀</p>
+    <h1>El nuevo configurador Porsche está en construcción</h1>
+    <p>Déjanos avisarte cuando lancemos&nbsp;🏁</p>
     <button>
       <i class="fa-regular fa-bell"></i>
       Avísame

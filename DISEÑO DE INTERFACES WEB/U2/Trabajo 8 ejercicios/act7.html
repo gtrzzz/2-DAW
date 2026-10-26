@@ -2,29 +2,33 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Tarjetas de producto</title>
+    <title>Modelos Porsche</title>
     <style>
+      /* 1. Estilo general */
       body {
-        font-family: system-ui;
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
         margin: 1rem;
         display: grid;
         gap: 1rem;
         grid-template-columns: repeat(3, 1fr);
       }
+      /* 2. Tarjetas */
       .card {
+        background-color: white;
         border: 2px solid;
+        border-top-width: 6px;
         padding: 1rem;
-        border-radius: 6px;
       }
-      [data-category="tecnología"] {
-        border-color: #4078f2;
+      /* 3. Color según categoría */
+      [data-category="deportivo"] {
+        border-color: #d5001c;
       }
-      [data-category="hogar"] {
-        border-color: #d97706;
-        padding: 2rem;
+      [data-category="eléctrico"] {
+        border-color: #0061a8;
       }
-      [data-category="deporte"] {
-        border-color: #059669;
+      [data-category="suv"] {
+        border-color: #000;
       }
       .precio {
         font-weight: 700;
@@ -32,22 +36,22 @@
     </style>
   </head>
   <body>
-    <article class="card" data-category="tecnología">
-      <h2>Auriculares Bluetooth</h2>
-      <p class="precio">39 €</p>
-      <p>Sonido Hi‑Fi y cancelación de ruido.</p>
+    <article class="card" data-category="deportivo">
+      <h2>Porsche 911 Carrera</h2>
+      <p class="precio">Desde 140.000 €</p>
+      <p>El deportivo clásico con motor bóxer trasero.</p>
     </article>
 
-    <article class="card" data-category="hogar">
-      <h2>Aspiradora Robot</h2>
-      <p class="precio">189 €</p>
-      <p>Limpieza inteligente con app móvil.</p>
+    <article class="card" data-category="eléctrico">
+      <h2>Porsche Taycan</h2>
+      <p class="precio">Desde 100.000 €</p>
+      <p>Berlina 100 % eléctrica con carga rápida.</p>
     </article>
 
-    <article class="card" data-category="deporte">
-      <h2>Esterilla Yoga Pro</h2>
-      <p class="precio">25 €</p>
-      <p>Antideslizante, 6 mm grosor.</p>
+    <article class="card" data-category="suv">
+      <h2>Porsche Cayenne</h2>
+      <p class="precio">Desde 95.000 €</p>
+      <p>SUV de cinco plazas con alma deportiva.</p>
     </article>
   </body>
 </html>

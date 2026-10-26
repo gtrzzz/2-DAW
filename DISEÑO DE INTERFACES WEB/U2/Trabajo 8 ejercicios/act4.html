@@ -2,22 +2,31 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Galería de fotos</title>
+    <title>Galería Porsche</title>
     <style>
+      /* 1. Estilo general */
       body {
-        font-family: system-ui;
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
         margin: 1rem;
       }
+      h1 {
+        border-bottom: 4px solid #d5001c;
+      }
+      /* 2. Rejilla de fotos */
       .grid {
         display: grid;
-        gap: 10rem;
+        gap: 1rem;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       }
       figure {
         margin: 0;
-        border: 1px solid #ddd;
+        background-color: white;
+        border: 1px solid #000;
         padding: 0.5rem;
-        border-radius: 4px;
+      }
+      img {
+        width: 100%;
       }
       figcaption {
         text-align: center;
@@ -28,36 +37,36 @@
     </style>
   </head>
   <body>
-    <h1>Galería de primavera</h1>
+    <h1>Galería de modelos Porsche</h1>
     <section class="grid">
-      <!-- Reemplaza las URLs si quieres imágenes propias -->
+      <!-- Imágenes de Wikimedia Commons -->
       <figure>
         <img
-          src="https://picsum.photos/seed/1/600/400"
-          alt="Paisaje 1"
+          src="https://commons.wikimedia.org/wiki/Special:FilePath/Porsche_992_Turbo_S_1X7A0413.jpg?width=600"
+          alt="Porsche 911 Turbo S"
           width="100%"
         />
-        <figcaption>Río al atardecer</figcaption>
+        <figcaption>Porsche 911 Turbo S</figcaption>
       </figure>
       <figure>
-        <img src="https://picsum.photos/seed/2/600/400" alt="Paisaje 2" />
-        <figcaption>Campo en flor</figcaption>
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Porsche_Taycan_Sport_Turismo_GTS_1X7A0416.jpg?width=600" alt="Porsche Taycan" />
+        <figcaption>Porsche Taycan</figcaption>
       </figure>
       <figure>
-        <img src="https://picsum.photos/seed/3/600/400" alt="Paisaje 3" />
-        <figcaption>Nubes primaverales</figcaption>
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/2023_Porsche_Cayenne_S_IMG_0521.jpg?width=600" alt="Porsche Cayenne" />
+        <figcaption>Porsche Cayenne</figcaption>
       </figure>
       <figure>
-        <img src="https://picsum.photos/seed/4/600/400" alt="Paisaje 4" />
-        <figcaption>Lago cristalino</figcaption>
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Porsche_Macan_4_IMG_2153.jpg?width=600" alt="Porsche Macan" />
+        <figcaption>Porsche Macan</figcaption>
       </figure>
       <figure>
-        <img src="https://picsum.photos/seed/5/600/400" alt="Paisaje 5" />
-        <figcaption>Sendero verde</figcaption>
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Porsche_718_Boxster_GTS_4.0_1X7A0320.jpg?width=600" alt="Porsche 718 Boxster" />
+        <figcaption>Porsche 718 Boxster</figcaption>
       </figure>
       <figure>
-        <img src="https://picsum.photos/seed/6/600/400" alt="Paisaje 6" />
-        <figcaption>Flores silvestres</figcaption>
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Porsche_Panamera_(21717).jpg?width=600" alt="Porsche Panamera" />
+        <figcaption>Porsche Panamera</figcaption>
       </figure>
     </section>
   </body>

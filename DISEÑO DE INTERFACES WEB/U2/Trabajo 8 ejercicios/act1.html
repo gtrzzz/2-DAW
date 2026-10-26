@@ -2,10 +2,13 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Gran inauguración del Parque Tecnológico</title>
+    <title>Porsche presenta el nuevo 911</title>
     <style>
+      /* 1. Estilo general */
       body {
-        font-family: system-ui;
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        color: #1a1a1a;
         margin: 0 1rem;
       }
       header,
@@ -14,42 +17,63 @@
         max-width: 800px;
         margin: auto;
       }
-      nav a {
-        margin-right: auto;
+      /* 2. Cabecera y navegación */
+      header {
+        background-color: #000;
+        color: white;
+        padding: 20px;
+        border-bottom: 4px solid #d5001c;
       }
+      nav a {
+        color: white;
+        margin-right: 15px;
+      }
+      /* 3. Noticia */
+      article {
+        background-color: white;
+        padding: 10px 20px;
+      }
+      /* 4. Dato curioso */
       aside {
-        background: #f5f5f5;
-        padding: 8rem;
-        border-left: 4px solid #999;
+        background: #e6e6e6;
+        padding: 1rem;
+        border-left: 4px solid #d5001c;
+      }
+      /* 5. Pie de página */
+      footer {
+        background-color: #000;
+        color: white;
+        text-align: center;
+        padding: 10px;
       }
     </style>
   </head>
   <body>
     <header>
-      <h1>Gran inauguración del Parque Tecnológico</h1>
-      <time datetime="2025-05-02">2 de mayo de 2025</time>
+      <h1>Porsche presenta el nuevo 911</h1>
+      <time datetime="2025-05-02">2 de mayo de 2025</time>
       <nav>
         <a href="#">Inicio</a>
-        <a href="#">Tecnología</a>
+        <a href="#">Modelos</a>
       </nav>
     </header>
 
     <main>
       <article>
         <p>
-          El nuevo Parque Tecnológico abrió sus puertas con más de 30 start‑ups
-          locales…
+          Porsche ha presentado la nueva generación del 911, su modelo más
+          icónico, en un evento celebrado en Stuttgart…
         </p>
-        <p>La ceremonia contó con la presencia de la alcaldesa…</p>
-        <p>Se espera que genere 800 puestos de trabajo directos…</p>
+        <p>La presentación contó con la presencia de pilotos de la marca…</p>
+        <p>Las primeras unidades llegarán a los concesionarios este año…</p>
       </article>
 
       <aside>
         <h2>Dato curioso</h2>
-        <p>El terreno era antes una estación de tren abandonada de 1920.</p>
+        <p>El primer coche con el nombre Porsche, el 356, se fabricó en 1948.</p>
       </aside>
     </main>
 
-    <footer>&copy; 2025 TechNews</footer>
+    <footer>&copy; 2025 Porsche News</footer>
   </body>
 </html>
