@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="UTF-8">
+	<title>Demo</title>
+</head>
+<body>
+	<h1 th:text="${mensaje}">Mensaje</h1>
+	<p sec:authorize="isAuthenticated()">Usuario: <span sec:authentication="name"></span></p>
+	<ul>
+		<li><a th:href="@{/privado}">Zona privada (requiere login)</a></li>
+		<li><a th:href="@{/h2-console}">Consola H2</a></li>
+	</ul>
+</body>
+</html>

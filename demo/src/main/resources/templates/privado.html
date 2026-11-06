@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="UTF-8">
+	<title>Zona privada</title>
+</head>
+<body>
+	<h1>Zona privada</h1>
+	<p>Hola, <span sec:authentication="name">usuario</span>.</p>
+	<form th:action="@{/logout}" method="post"><button type="submit">Cerrar sesión</button></form>
+	<p><a th:href="@{/}">Volver</a></p>
+</body>
+</html>
