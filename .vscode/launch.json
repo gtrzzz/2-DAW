@@ -3,6 +3,14 @@
   "configurations": [
     {
       "type": "java",
+      "name": "DemoApplication",
+      "request": "launch",
+      "mainClass": "com.example.demo.DemoApplication",
+      "projectName": "demo",
+      "cwd": "${workspaceFolder}/demo"
+    },
+    {
+      "type": "java",
       "name": "holamundo",
       "request": "launch",
       "mainClass": "holamundo",
