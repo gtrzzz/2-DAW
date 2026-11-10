@@ -1,0 +1,143 @@
+<!doctype html>
+<!--
+  Trabajo de Bootstrap - Diseño de Interfaces Web (2º DAW)
+  Proyecto: Web de compras de artículos
+  Página: carrito.html -> artículos añadidos y resumen del pedido
+  Autor/es: (poner nombre/s)
+-->
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TiendaSur | Carrito</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <link href="css/estilos.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- ===== Barra de navegación (igual en todas las páginas) ===== -->
+    <nav id="barra-principal" class="navbar navbar-expand-lg navbar-dark">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html"><i class="bi bi-bag-heart-fill"></i> TiendaSur</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
+          aria-controls="menu" aria-expanded="false" aria-label="Abrir menú">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="index.html">Catálogo</a></li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="carrito.html">
+                <i class="bi bi-cart3"></i> Carrito
+                <span class="badge rounded-pill text-bg-warning">3</span>
+              </a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="envio.html">Envío</a></li>
+            <li class="nav-item"><a class="nav-link" href="factura.html">Factura</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container py-5">
+      <!-- Migas de pan (breadcrumb de Bootstrap) -->
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Catálogo</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Carrito</li>
+        </ol>
+      </nav>
+
+      <h1 class="titulo-seccion h2 mb-4">Tu carrito</h1>
+
+      <!-- Barra de progreso: indica el paso de la compra (1 de 3) -->
+      <div class="progress mb-4" role="progressbar" aria-label="Paso 1 de 3" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar bg-warning text-dark" style="width: 33%">Paso 1 de 3: Carrito</div>
+      </div>
+
+      <!-- Alerta informativa -->
+      <div class="alert alert-info d-flex align-items-center gap-2" role="alert">
+        <i class="bi bi-truck"></i>
+        <span>Tu pedido supera los <strong>50 €</strong>: ¡el envío es gratis!</span>
+      </div>
+
+      <div class="row g-4">
+        <!-- Columna izquierda: tabla con los artículos -->
+        <div class="col-lg-8">
+          <div class="table-responsive bg-white rounded-3 shadow-sm">
+            <table class="table tabla-tienda align-middle mb-0">
+              <caption class="px-3">3 artículos en el carrito</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Artículo</th>
+                  <th scope="col" class="numero">Precio</th>
+                  <th scope="col">Cantidad</th>
+                  <th scope="col" class="numero">Subtotal</th>
+                  <th scope="col" class="position-relative"><span class="visually-hidden">Quitar</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><i class="bi bi-headphones me-2"></i>Auriculares inalámbricos</td>
+                  <td class="numero">39,99 €</td>
+                  <td><input type="number" class="form-control form-control-sm cantidad" value="1" min="1" aria-label="Cantidad de auriculares" /></td>
+                  <td class="numero">39,99 €</td>
+                  <td><button class="btn btn-sm btn-outline-danger" aria-label="Quitar auriculares"><i class="bi bi-trash"></i></button></td>
+                </tr>
+                <tr>
+                  <td><i class="bi bi-lamp me-2"></i>Lámpara de escritorio LED</td>
+                  <td class="numero">24,50 €</td>
+                  <td><input type="number" class="form-control form-control-sm cantidad" value="2" min="1" aria-label="Cantidad de lámparas" /></td>
+                  <td class="numero">49,00 €</td>
+                  <td><button class="btn btn-sm btn-outline-danger" aria-label="Quitar lámpara"><i class="bi bi-trash"></i></button></td>
+                </tr>
+                <tr>
+                  <td><i class="bi bi-backpack me-2"></i>Mochila para portátil</td>
+                  <td class="numero">32,90 €</td>
+                  <td><input type="number" class="form-control form-control-sm cantidad" value="1" min="1" aria-label="Cantidad de mochilas" /></td>
+                  <td class="numero">32,90 €</td>
+                  <td><button class="btn btn-sm btn-outline-danger" aria-label="Quitar mochila"><i class="bi bi-trash"></i></button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <a href="index.html" class="btn btn-outline-secondary mt-3"><i class="bi bi-arrow-left"></i> Seguir comprando</a>
+        </div>
+
+        <!-- Columna derecha: resumen del pedido -->
+        <aside class="col-lg-4">
+          <div class="card resumen">
+            <div class="card-body">
+              <h2 class="h5 card-title">Resumen del pedido</h2>
+              <!-- list-group de Bootstrap para las líneas del resumen -->
+              <ul class="list-group list-group-flush my-3">
+                <li class="list-group-item d-flex justify-content-between px-0">Subtotal <span>121,89 €</span></li>
+                <li class="list-group-item d-flex justify-content-between px-0">Envío <span class="text-success">Gratis</span></li>
+                <li class="list-group-item d-flex justify-content-between px-0">IVA incluido (21 %) <span>21,15 €</span></li>
+                <li class="list-group-item d-flex justify-content-between px-0 fw-bold fs-5">Total <span>121,89 €</span></li>
+              </ul>
+
+              <!-- Código de descuento: input-group de Bootstrap -->
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Código de descuento" aria-label="Código de descuento" />
+                <button class="btn btn-outline-secondary" type="button">Aplicar</button>
+              </div>
+
+              <a href="envio.html" class="btn btn-tienda w-100 btn-lg">Tramitar pedido <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <!-- ===== Pie de página ===== -->
+    <footer class="py-4 mt-auto">
+      <div class="container d-flex flex-column flex-md-row justify-content-between gap-2">
+        <span>&copy; 2026 TiendaSur · Proyecto de clase (2º DAW)</span>
+        <span><a href="#">Aviso legal</a> · <a href="#">Privacidad</a> · <a href="#">Contacto</a></span>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

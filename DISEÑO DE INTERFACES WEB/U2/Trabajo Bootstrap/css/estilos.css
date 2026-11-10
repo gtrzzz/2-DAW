@@ -1,0 +1,284 @@
+/* =========================================================
+   Trabajo de Bootstrap - Web de compras de artículos
+   Hoja de estilos propia (se carga DESPUÉS de Bootstrap
+   para poder sobrescribir o completar sus estilos).
+
+   Índice:
+     1. Variables (colores y medidas comunes)
+     2. Estilos generales (body, tipografía)
+     3. Barra de navegación
+     4. Cabecera / hero
+     5. Tarjetas de producto
+     6. Tablas (carrito y factura)
+     7. Formulario de envío
+     8. Listas
+     9. Pie de página
+    10. Diseño adaptable (media queries) e impresión
+   ========================================================= */
+
+/* ---------- 1. Variables ----------
+   Uso de propiedades personalizadas de CSS para no repetir
+   colores. Se mezclan formatos de color: hex, rgb() y hsl(). */
+:root {
+  --color-principal: #1f6f78;            /* hexadecimal */
+  --color-secundario: rgb(255, 159, 67); /* rgb */
+  --color-fondo: hsl(200, 25%, 97%);     /* hsl */
+  --color-texto: #2d3436;
+  --radio: 0.75rem;                      /* rem: relativo a la fuente raíz */
+  --sombra: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* ---------- 2. Estilos generales ---------- */
+/* Selector de etiqueta */
+body {
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  line-height: 1.6;
+  /* min-height en vh: el body ocupa al menos toda la altura de la pantalla */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* El main crece para que el footer quede siempre abajo */
+main {
+  flex: 1;
+}
+
+/* Selector de varias etiquetas a la vez (agrupado) */
+h1,
+h2,
+h3 {
+  font-weight: 700;
+  letter-spacing: 0.02em; /* em: relativo a la fuente del propio elemento */
+}
+
+/* Pseudo-elemento ::after para subrayar los títulos de sección */
+.titulo-seccion::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  margin-top: 0.4rem;
+  background-color: var(--color-secundario);
+  border-radius: 2px;
+}
+
+/* ---------- 3. Barra de navegación ---------- */
+/* Selector de id */
+#barra-principal {
+  background-color: var(--color-principal);
+}
+
+/* Selector descendiente + pseudo-clase :hover */
+#barra-principal .nav-link:hover {
+  color: var(--color-secundario) !important;
+}
+
+/* Selector de clase combinado: enlace activo del menú */
+#barra-principal .nav-link.active {
+  font-weight: 600;
+  border-bottom: 2px solid var(--color-secundario);
+}
+
+/* ---------- 4. Cabecera / hero ---------- */
+.hero {
+  /* Degradado lineal de fondo */
+  background: linear-gradient(135deg, var(--color-principal), #134e54);
+  color: #fff;
+  /* Altura en unidades de viewport */
+  min-height: 40vh;
+  display: flex;
+  align-items: center;
+}
+
+.hero p {
+  font-size: 1.15rem;
+  max-width: 40ch; /* ch: ancho de un carácter "0" */
+}
+
+/* ---------- 5. Tarjetas de producto ---------- */
+.tarjeta-producto {
+  border: none;
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  overflow: hidden;
+  /* Transición suave al pasar el ratón */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tarjeta-producto:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Zona superior con el icono del producto (en lugar de imagen) */
+.imagen-producto {
+  height: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4rem;
+  color: var(--color-principal);
+  background-color: hsl(186, 40%, 90%);
+}
+
+.precio {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-principal);
+}
+
+/* Precio antiguo tachado */
+.precio-antiguo {
+  text-decoration: line-through;
+  color: #999;
+  font-size: 0.9rem;
+}
+
+/* Botón propio con el color secundario */
+.btn-tienda {
+  background-color: var(--color-secundario);
+  color: #fff;
+  font-weight: 600;
+  border: none;
+}
+
+.btn-tienda:hover,
+.btn-tienda:focus {
+  background-color: rgb(235, 135, 40);
+  color: #fff;
+}
+
+/* ---------- 6. Tablas (carrito y factura) ---------- */
+.tabla-tienda {
+  border-collapse: collapse;
+  caption-side: top;
+}
+
+.tabla-tienda caption {
+  font-weight: 600;
+  color: var(--color-texto);
+}
+
+/* Selector de hijo directo (>) para la cabecera */
+.tabla-tienda > thead th {
+  background-color: var(--color-principal);
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+/* Pseudo-clase :nth-child para alternar el color de las filas */
+.tabla-tienda tbody tr:nth-child(even) {
+  background-color: hsl(186, 30%, 96%);
+}
+
+/* Celdas numéricas alineadas a la derecha */
+.tabla-tienda .numero {
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* Campo de cantidad estrecho */
+.cantidad {
+  width: 4.5rem;
+}
+
+/* Caja del resumen del pedido */
+.resumen {
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  border-top: 5px solid var(--color-secundario);
+}
+
+/* ---------- 7. Formulario de envío ---------- */
+/* Selector de atributo: campos obligatorios */
+input[required],
+select[required] {
+  border-left: 4px solid var(--color-principal);
+}
+
+/* Pseudo-clase :focus para resaltar el campo activo */
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--color-secundario);
+  box-shadow: 0 0 0 0.2rem rgba(255, 159, 67, 0.25);
+}
+
+/* Opción de envío: tarjeta seleccionable */
+.opcion-envio {
+  border: 2px solid #dee2e6;
+  border-radius: var(--radio);
+  padding: 1rem;
+  cursor: pointer;
+}
+
+/* Pseudo-clase :has() para marcar la opción elegida */
+.opcion-envio:has(input:checked) {
+  border-color: var(--color-principal);
+  background-color: hsl(186, 40%, 95%);
+}
+
+/* ---------- 8. Listas ---------- */
+/* Lista de ventajas con viñeta personalizada */
+.lista-ventajas {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.lista-ventajas li::before {
+  content: "✔ ";
+  color: var(--color-secundario);
+  font-weight: 700;
+}
+
+/* Lista numerada con números romanos (pasos de compra) */
+.lista-pasos {
+  list-style-type: upper-roman;
+  list-style-position: inside;
+}
+
+/* ---------- 9. Pie de página ---------- */
+footer {
+  background-color: #1b2a2f;
+  color: #cfd8dc;
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: #cfd8dc;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: var(--color-secundario);
+  text-decoration: underline;
+}
+
+/* ---------- 10. Diseño adaptable e impresión ---------- */
+/* En pantallas pequeñas se reduce el título del hero */
+@media (max-width: 576px) {
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .imagen-producto {
+    height: 120px;
+    font-size: 3rem;
+  }
+}
+
+/* Al imprimir la factura se ocultan menú, pie y botones */
+@media print {
+  #barra-principal,
+  footer,
+  .no-imprimir {
+    display: none !important;
+  }
+
+  body {
+    background-color: #fff;
+  }
+}

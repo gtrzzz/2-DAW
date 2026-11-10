@@ -1,0 +1,173 @@
+<!doctype html>
+<!--
+  Trabajo de Bootstrap - Diseño de Interfaces Web (2º DAW)
+  Proyecto: Web de compras de artículos
+  Página: factura.html -> confirmación del pedido y factura
+  Autor/es: (poner nombre/s)
+-->
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TiendaSur | Factura</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <link href="css/estilos.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- ===== Barra de navegación (igual en todas las páginas) ===== -->
+    <nav id="barra-principal" class="navbar navbar-expand-lg navbar-dark">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html"><i class="bi bi-bag-heart-fill"></i> TiendaSur</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
+          aria-controls="menu" aria-expanded="false" aria-label="Abrir menú">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="index.html">Catálogo</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="carrito.html">
+                <i class="bi bi-cart3"></i> Carrito
+                <span class="badge rounded-pill text-bg-warning">3</span>
+              </a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="envio.html">Envío</a></li>
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="factura.html">Factura</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container py-5">
+      <!-- Barra de progreso: paso 3 de 3 (completado) -->
+      <div class="progress mb-4 no-imprimir" role="progressbar" aria-label="Paso 3 de 3" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar bg-success" style="width: 100%">Paso 3 de 3: Pedido confirmado</div>
+      </div>
+
+      <!-- Alerta de éxito -->
+      <div class="alert alert-success d-flex align-items-center gap-2 no-imprimir" role="alert">
+        <i class="bi bi-check-circle-fill fs-4"></i>
+        <div><strong>¡Gracias por tu compra!</strong> Hemos enviado una copia de la factura a tu correo.</div>
+      </div>
+
+      <!-- ===== Factura ===== -->
+      <article class="card resumen">
+        <div class="card-body p-4 p-md-5">
+          <!-- Cabecera de la factura: empresa y datos de la factura -->
+          <div class="row g-4 mb-4">
+            <div class="col-sm-6">
+              <h1 class="h3 mb-1"><i class="bi bi-bag-heart-fill text-warning"></i> TiendaSur S.L.</h1>
+              <address class="small text-muted mb-0">
+                CIF B11223344<br />
+                Av. de la Constitución, 5<br />
+                11001 Cádiz
+              </address>
+            </div>
+            <div class="col-sm-6 text-sm-end">
+              <h2 class="h4">FACTURA</h2>
+              <p class="mb-0 small">
+                <strong>N.º:</strong> F-2026-000123<br />
+                <strong>Fecha:</strong> 10/11/2026<br />
+                <strong>Pedido:</strong> #45871
+              </p>
+            </div>
+          </div>
+
+          <!-- Datos del cliente y del envío (vienen del formulario de envio.html) -->
+          <div class="row g-4 mb-4">
+            <div class="col-md-6">
+              <h3 class="h6 text-uppercase text-muted">Facturar a</h3>
+              <p class="mb-0">
+                Nombre Apellido Apellido<br />
+                nombre@ejemplo.com · 600123456
+              </p>
+            </div>
+            <div class="col-md-6">
+              <h3 class="h6 text-uppercase text-muted">Detalles de envío</h3>
+              <p class="mb-0">
+                C/ Ancha, 12, 2º B<br />
+                11001 Cádiz (Cádiz)<br />
+                <span class="badge text-bg-secondary">Envío estándar · 48-72 h</span>
+              </p>
+            </div>
+          </div>
+
+          <!-- Tabla de líneas de la factura -->
+          <div class="table-responsive">
+            <table class="table tabla-tienda">
+              <thead>
+                <tr>
+                  <th scope="col">Concepto</th>
+                  <th scope="col" class="numero">Cant.</th>
+                  <th scope="col" class="numero">Precio (sin IVA)</th>
+                  <th scope="col" class="numero">Importe</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Auriculares inalámbricos</td>
+                  <td class="numero">1</td>
+                  <td class="numero">33,05 €</td>
+                  <td class="numero">33,05 €</td>
+                </tr>
+                <tr>
+                  <td>Lámpara de escritorio LED</td>
+                  <td class="numero">2</td>
+                  <td class="numero">20,25 €</td>
+                  <td class="numero">40,50 €</td>
+                </tr>
+                <tr>
+                  <td>Mochila para portátil</td>
+                  <td class="numero">1</td>
+                  <td class="numero">27,19 €</td>
+                  <td class="numero">27,19 €</td>
+                </tr>
+                <tr>
+                  <td>Gastos de envío (estándar)</td>
+                  <td class="numero">1</td>
+                  <td class="numero">0,00 €</td>
+                  <td class="numero">0,00 €</td>
+                </tr>
+              </tbody>
+              <!-- tfoot: totales de la factura -->
+              <tfoot>
+                <tr>
+                  <th scope="row" colspan="3" class="numero">Base imponible</th>
+                  <td class="numero">100,74 €</td>
+                </tr>
+                <tr>
+                  <th scope="row" colspan="3" class="numero">IVA (21 %)</th>
+                  <td class="numero">21,15 €</td>
+                </tr>
+                <tr class="fs-5">
+                  <th scope="row" colspan="3" class="numero">TOTAL</th>
+                  <td class="numero fw-bold">121,89 €</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+
+          <p class="small text-muted mb-0">
+            Forma de pago: tarjeta bancaria. Dispones de 30 días para devoluciones.
+          </p>
+        </div>
+      </article>
+
+      <!-- Botones (no salen al imprimir gracias a .no-imprimir) -->
+      <div class="d-flex flex-wrap gap-2 mt-4 no-imprimir">
+        <button type="button" class="btn btn-tienda" onclick="window.print()"><i class="bi bi-printer"></i> Imprimir factura</button>
+        <a href="index.html" class="btn btn-outline-secondary">Volver al catálogo</a>
+      </div>
+    </main>
+
+    <footer class="py-4 mt-auto">
+      <div class="container d-flex flex-column flex-md-row justify-content-between gap-2">
+        <span>&copy; 2026 TiendaSur · Proyecto de clase (2º DAW)</span>
+        <span><a href="#">Aviso legal</a> · <a href="#">Privacidad</a> · <a href="#">Contacto</a></span>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
