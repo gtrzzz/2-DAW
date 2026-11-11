@@ -1,0 +1,174 @@
+<!doctype html>
+<!--
+  Informe de la Práctica UD2 - Gestores de contenido (2º DAW)
+  Se convierte a PDF con: msedge --headless --print-to-pdf (ver README.md)
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>UD2 Práctica - Gutiérrez Mateos, Iván</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm; }
+  body { font-family: "Segoe UI", Arial, sans-serif; font-size: 10.5pt; color: #222; line-height: 1.45; }
+  h1 { font-size: 20pt; margin: 0 0 4mm; }
+  h2 { font-size: 14pt; color: #1f3b57; border-bottom: 2px solid #1f3b57; padding-bottom: 1mm; margin-top: 0; }
+  h3 { font-size: 11.5pt; margin: 5mm 0 2mm; color: #1f3b57; }
+  p { margin: 0 0 2.5mm; }
+  .portada { height: 250mm; display: flex; flex-direction: column; justify-content: center; text-align: center; page-break-after: always; }
+  .portada .modulo { font-size: 12pt; color: #555; letter-spacing: .05em; text-transform: uppercase; }
+  .portada h1 { font-size: 26pt; margin: 6mm 0; }
+  .portada .tema { font-size: 14pt; margin: 4mm 0 16mm; }
+  .portada table { margin: 0 auto; font-size: 11.5pt; border-collapse: collapse; }
+  .portada td { padding: 1.5mm 4mm; text-align: left; }
+  .portada td:first-child { font-weight: 600; text-align: right; color: #555; }
+  section { page-break-before: always; }
+  section.seguido { page-break-before: auto; }
+  figure { margin: 3mm 0 4mm; page-break-inside: avoid; }
+  figure img { max-width: 100%; max-height: 100mm; border: 1px solid #ccc; display: block; margin: 0 auto; }
+  figcaption { font-size: 8.5pt; color: #666; text-align: center; margin-top: 1mm; }
+  table.datos { width: 100%; border-collapse: collapse; font-size: 9.5pt; margin: 2mm 0 4mm; page-break-inside: avoid; }
+  table.datos th, table.datos td { border: 1px solid #bbb; padding: 1.2mm 2mm; text-align: left; vertical-align: top; }
+  table.datos th { background: #1f3b57; color: #fff; }
+  table.datos td.c { text-align: center; }
+  .nota { font-size: 9pt; color: #555; }
+  ul { margin: 0 0 2.5mm; padding-left: 6mm; }
+</style>
+</head>
+<body>
+
+<!-- ===================== PORTADA ===================== -->
+<div class="portada">
+  <div class="modulo">Optativa · Gestores de contenido · 2º DAW</div>
+  <h1>Práctica UD2<br>Configuración del panel de administración y gestión de usuarios en WordPress</h1>
+  <div class="tema">Temática elegida: <strong>Aeviternus Automation</strong><br>(sitio corporativo con blog: webs, digitalización y automatización para empresas)</div>
+  <table>
+    <tr><td>Alumno</td><td>Iván Gutiérrez Mateos</td></tr>
+    <tr><td>Curso</td><td>2º Desarrollo de Aplicaciones Web</td></tr>
+    <tr><td>Centro</td><td>IES Kursaal (Cádiz)</td></tr>
+    <tr><td>Fecha</td><td>11 de noviembre de 2026</td></tr>
+    <tr><td>Sitio</td><td>http://www.wordpresspruebas.com.mialias.net (CDMON)</td></tr>
+  </table>
+</div>
+
+<!-- ===================== TAREA 1 ===================== -->
+<section class="seguido">
+<h2>Tarea 1. Configuración general del sitio</h2>
+<p>He puesto como título <strong>Aeviternus Automation</strong> y como descripción corta (104 caracteres, hace de meta description): <em>"Webs potentes, digitalización y automatización para empresas. Tu departamento tecnológico externalizado."</em> El idioma es Español, la zona horaria Madrid, la fecha en formato largo español (<code>j \d\e F \d\e Y</code> → 11 de noviembre de 2026), la hora en 24 h (<code>H:i</code>) y la semana empieza el lunes.</p>
+<p><strong>Registro libre deshabilitado:</strong> he dejado desmarcado "Cualquiera puede registrarse". Es un sitio corporativo donde solo trabaja el equipo; con el registro abierto cualquiera (o un bot) podría crearse una cuenta, lo que genera spam y amplía la superficie de ataque. Los usuarios los crea el administrador.</p>
+<p><strong>Dirección de WordPress (URL) vs. Dirección del sitio (URL):</strong> la primera es donde están instalados los archivos de WordPress (wp-admin, wp-includes...); la segunda es la que escriben los visitantes para ver la web. Normalmente coinciden, pero pueden ser distintas si WordPress se instala en una subcarpeta (por ejemplo <code>/wp</code>) y queremos que la web se vea en la raíz del dominio.</p>
+<figure><img src="capturas/t1_01_ajustes_generales.png"><figcaption>Ajustes → Generales: título, descripción, URLs, registro deshabilitado, idioma y zona horaria</figcaption></figure>
+<figure><img src="capturas/t1_03_formatos_fecha_hora.png"><figcaption>Formatos de fecha y hora habituales en España</figcaption></figure>
+</section>
+
+<!-- ===================== TAREA 2 ===================== -->
+<section>
+<h2>Tarea 2. Configuración de escritura y lectura</h2>
+<h3>Ajustes → Escritura</h3>
+<p>He creado las categorías <strong>Artículos</strong>, <strong>Auditorías</strong> y <strong>Automatización</strong>, y he puesto <strong>Artículos</strong> como categoría predeterminada (más genérica que "Sin categoría"). El resto queda por defecto.</p>
+<p><strong>rpc.pingomatic.com</strong> es un servicio de actualización (ping): cada vez que se publica una entrada, WordPress le avisa y Ping-O-Matic reenvía el aviso a buscadores y directorios de blogs para que sepan que hay contenido nuevo y lo indexen antes.</p>
+<figure><img src="capturas/t2_01_escritura.png"><figcaption>Categoría por defecto "Artículos" y servicio de actualización rpc.pingomatic.com</figcaption></figure>
+
+<h3>Ajustes → Lectura</h3>
+<p>He creado las páginas <strong>Inicio</strong> (con un texto breve de bienvenida), <strong>Blog</strong> (vacía), <strong>Quiénes somos</strong> y <strong>Contacto</strong>, con contenido genérico provisional. La portada es la página estática "Inicio" y las entradas se muestran en "Blog": 5 por página y 10 en el feed RSS, solo con el extracto.</p>
+<p>"Pedir a los motores de búsqueda que no indexen este sitio" está <strong>desmarcado</strong>. En un sitio en producción es importante: si se queda marcado, WordPress añade <code>noindex</code> y Google no muestra la web, así que nadie la encontraría buscando.</p>
+<figure><img src="capturas/t2_02_paginas.png"><figcaption>Páginas creadas: Inicio, Blog, Quiénes somos y Contacto</figcaption></figure>
+<figure><img src="capturas/t2_03_lectura.png"><figcaption>Portada estática (Inicio), página de entradas (Blog), 5 entradas, 10 en el feed, extracto e indexación permitida</figcaption></figure>
+</section>
+
+<!-- ===================== TAREA 3 ===================== -->
+<section>
+<h2>Tarea 3. Personalización del escritorio</h2>
+<p>Desde <strong>Opciones de pantalla</strong> he ocultado los widgets "Eventos y noticias de WordPress" y "Borrador rápido", que no aportan al trabajo diario. Los widgets restantes los he organizado en <strong>2 columnas</strong> arrastrándolos (WPForms y Elementor a la izquierda; De un vistazo, Actividad y Estado de salud a la derecha). En Usuarios → Perfil he cambiado el esquema de color a <strong>Medianoche</strong>.</p>
+<figure><img src="capturas/t3_01_opciones_pantalla_2columnas.png"><figcaption>Opciones de pantalla con los dos widgets ocultos y el escritorio en 2 columnas</figcaption></figure>
+<figure><img src="capturas/t3_02_esquema_color.png"><figcaption>Esquema de color "Medianoche" aplicado al administrador</figcaption></figure>
+<div style="page-break-inside: avoid">
+<h3>Atajos de teclado del escritorio (vistos en clase)</h3>
+<table class="datos">
+  <tr><th>Atajo</th><th>Qué hace</th></tr>
+  <tr><td>Shift + Alt + C</td><td>Añadir un nuevo comentario</td></tr>
+  <tr><td>Shift + Alt + M</td><td>Añadir un nuevo medio (subir un archivo a la biblioteca)</td></tr>
+  <tr><td>Shift + Alt + P</td><td>Añadir una nueva página</td></tr>
+</table>
+</div>
+</section>
+
+<!-- ===================== TAREA 4 ===================== -->
+<section>
+<h2>Tarea 4. Gestión de usuarios y roles</h2>
+<p>He creado 5 usuarios con el patrón <strong>rol.nombre</strong> y correos ficticios <code>@aeviternus.local</code>. Las contraseñas son las que genera WordPress (24 caracteres con mayúsculas, minúsculas, números y símbolos, calificadas como "Fuerte"). El nombre público de cada uno es su nombre y apellido, no el login, y el Editor y el Autor tienen biografía. No he enviado el aviso por correo porque las direcciones son ficticias.</p>
+<table class="datos">
+  <tr><th>Rol</th><th>Nombre de usuario</th><th>Nombre a mostrar</th><th>Justificación del rol</th></tr>
+  <tr><td>Administrador</td><td>admin.ivan</td><td>Iván Gutiérrez</td><td>Responsable técnico y dirección del proyecto</td></tr>
+  <tr><td>Editor</td><td>editor.lucia</td><td>Lucía Romero</td><td>Responsable de contenidos: revisa, publica y modera</td></tr>
+  <tr><td>Autor</td><td>autor.daniel</td><td>Daniel Ortega</td><td>Redactor de la sección de auditorías web</td></tr>
+  <tr><td>Colaborador</td><td>colaborador.marta</td><td>Marta Vidal</td><td>Colaboradora esporádica (artículos invitados)</td></tr>
+  <tr><td>Suscriptor</td><td>suscriptor.pablo</td><td>Pablo Serrano</td><td>Lector registrado para comentar</td></tr>
+</table>
+<p class="nota">El usuario administrador que creó CDMON en la instalación (010bcedd8ad1) no se puede renombrar desde WordPress; por eso el administrador que sigue la política de nombres es <code>admin.ivan</code>.</p>
+<figure><img src="capturas/t4_01_nuevo_usuario_editor.png"><figcaption>Alta del Editor con contraseña generada "Fuerte" (oculta en la captura)</figcaption></figure>
+<figure><img src="capturas/t4_02_lista_usuarios.png"><figcaption>Lista de usuarios: un rol de cada tipo y nombre público configurado</figcaption></figure>
+<figure><img src="capturas/t4_03_perfil_editor_biografia.png"><figcaption>Perfil del Editor: nombre público y biografía</figcaption></figure>
+</section>
+
+<!-- ===================== TAREA 5 ===================== -->
+<section>
+<h2>Tarea 5. Verificación de permisos</h2>
+<p>Para iniciar sesión con cada rol sin escribir contraseñas he usado el plugin <strong>User Switching</strong>, que permite al administrador cambiar a otro usuario y volver con un clic.</p>
+<h3>5.1 Colaborador (Marta Vidal)</h3>
+<p>Puede crear y guardar entradas, pero en lugar de "Publicar" solo aparece <strong>"Enviar para revisión"</strong>. Su menú solo tiene Escritorio, Entradas, Comentarios, Perfil y Herramientas (más Elementor): no ve Páginas, Medios, Ajustes ni Usuarios, y el editor le avisa de que no tiene permiso para subir medios.</p>
+<figure><img src="capturas/t5_01_colaborador_solo_revision.png"><figcaption>Editor de la Colaboradora: solo "Enviar para revisión", no puede publicar</figcaption></figure>
+<figure><img src="capturas/t5_02_colaborador_pendiente_menu.png"><figcaption>Entradas de la Colaboradora (borrador y pendiente) y su menú reducido</figcaption></figure>
+<h3>5.2 Autor (Daniel Ortega)</h3>
+<p>Aparece el botón <strong>"Publicar"</strong> y su entrada "Qué revisamos en una auditoría web" queda publicada directamente, sin revisión.</p>
+<figure><img src="capturas/t5_03_autor_publica.png"><figcaption>El Autor publica su propia entrada</figcaption></figure>
+<h3>5.3 Editor (Lucía Romero)</h3>
+<p>Puede editar y publicar entradas de otros usuarios y moderar comentarios (ver Tarea 6), pero en su menú no existen <strong>Ajustes</strong> ni <strong>Usuarios</strong>, y si entra por URL en Ajustes WordPress responde "no tienes permisos para acceder a esta página".</p>
+<figure><img src="capturas/t5_04_editor_menu_sin_ajustes_usuarios.png"><figcaption>Menú del Editor: ve las entradas de todos, pero no tiene Ajustes ni Usuarios</figcaption></figure>
+<figure><img src="capturas/t5_05_editor_sin_permiso_ajustes.png"><figcaption>El Editor no puede acceder a Ajustes (options-general.php)</figcaption></figure>
+
+<h3>Tabla resumen de roles y permisos observada</h3>
+<table class="datos">
+  <tr><th>Capacidad comprobada</th><th>Suscriptor</th><th>Colaborador</th><th>Autor</th><th>Editor</th><th>Admin.</th></tr>
+  <tr><td>Leer entradas y páginas publicadas / comentar</td><td class="c">Sí</td><td class="c">Sí</td><td class="c">Sí</td><td class="c">Sí</td><td class="c">Sí</td></tr>
+  <tr><td>Crear y editar sus propias entradas</td><td class="c">-</td><td class="c">Sí</td><td class="c">Sí</td><td class="c">Sí</td><td class="c">Sí</td></tr>
+  <tr><td>Publicar sus propias entradas</td><td class="c">-</td><td class="c">- (solo enviar a revisión)</td><td class="c">Sí</td><td class="c">Sí</td><td class="c">Sí</td></tr>
+  <tr><td>Subir archivos (menú Medios)</td><td class="c">-</td><td class="c">-</td><td class="c">Sí</td><td class="c">Sí</td><td class="c">Sí</td></tr>
+  <tr><td>Editar y publicar entradas de otros</td><td class="c">-</td><td class="c">-</td><td class="c">-</td><td class="c">Sí</td><td class="c">Sí</td></tr>
+  <tr><td>Administrar categorías y etiquetas</td><td class="c">-</td><td class="c">-</td><td class="c">-</td><td class="c">Sí</td><td class="c">Sí</td></tr>
+  <tr><td>Moderar comentarios</td><td class="c">-</td><td class="c">-</td><td class="c">-</td><td class="c">Sí</td><td class="c">Sí</td></tr>
+  <tr><td>Acceder a Ajustes y Usuarios</td><td class="c">-</td><td class="c">-</td><td class="c">-</td><td class="c">-</td><td class="c">Sí</td></tr>
+</table>
+<p><strong>Comparación con la matriz de la página 12 del PDF (2.10 Permisos detallados por rol):</strong> lo observado coincide con la matriz. El Colaborador solo puede editar sus entradas (no publicarlas ni subir archivos), el Autor ya publica y sube archivos, el Editor añade moderar comentarios, gestionar categorías/etiquetas y editar contenido ajeno, y solo el Administrador puede gestionar usuarios, temas, plugins y ajustes. La columna de Super Administrador no aplica porque el sitio no es una red multisitio.</p>
+</section>
+
+<!-- ===================== TAREA 6 ===================== -->
+<section>
+<h2>Tarea 6. Simulación de flujo de trabajo editorial</h2>
+<p><strong>1. Colaborador:</strong> Marta crea la entrada "5 errores que frenan la web de tu empresa" y la envía a revisión; queda en estado Pendiente.</p>
+<figure><img src="capturas/t6_01_colaborador_envia_revision.png"><figcaption>La Colaboradora envía la entrada a revisión</figcaption></figure>
+<p><strong>2. Editor:</strong> Lucía revisa la entrada, le asigna la categoría <strong>Auditorías</strong> y la etiqueta <strong>errores web</strong>, y la publica (la autora sigue siendo Marta).</p>
+<figure><img src="capturas/t6_02_editor_categoria_etiqueta.png"><figcaption>El Editor añade categoría y etiqueta antes de publicar</figcaption></figure>
+<figure><img src="capturas/t6_03_editor_publica.png"><figcaption>Entrada publicada por el Editor con categoría y etiqueta</figcaption></figure>
+<p><strong>3. Suscriptor:</strong> los comentarios ya estaban abiertos. Pablo entra en la web y comenta la entrada; como es su primer comentario, queda pendiente de moderación.</p>
+<figure><img src="capturas/t6_04_suscriptor_comenta.png"><figcaption>El Suscriptor escribe su comentario</figcaption></figure>
+<figure><img src="capturas/t6_05_comentario_pendiente.png"><figcaption>Comentario enviado, pendiente de moderación</figcaption></figure>
+<p><strong>4. Editor:</strong> Lucía ve el comentario pendiente en Comentarios y lo aprueba.</p>
+<figure><img src="capturas/t6_06_editor_comentario_pendiente.png"><figcaption>Comentario pendiente en el panel del Editor</figcaption></figure>
+<figure><img src="capturas/t6_07_editor_comentario_aprobado.png"><figcaption>Comentario aprobado por el Editor</figcaption></figure>
+</section>
+
+<!-- ===================== CONCLUSIONES ===================== -->
+<section>
+<h2>Conclusiones personales</h2>
+<p><strong>Qué he aprendido:</strong> que buena parte de la seguridad y del orden de un sitio WordPress se decide en los ajustes iniciales y en los roles. Con el principio de menor privilegio cada persona tiene solo lo que necesita: el colaborador no puede publicar sin revisión, el autor no toca el trabajo de otros y solo el administrador cambia la configuración. También he visto cómo un flujo editorial real (redactar, revisar, publicar y moderar) encaja con esos roles.</p>
+<p><strong>Dificultades y cómo las he resuelto:</strong></p>
+<ul>
+  <li>La Plataforma de Pruebas de CDMON está protegida con usuario y contraseña. Entrando desde el navegador con la ventana de autenticación el servidor daba error 500 (el registro de errores mostraba <code>AuthType Basic configured without corresponding module</code>); lo resolví entrando desde el enlace "Acceder a la página" del panel de CDMON.</li>
+  <li>Para probar los permisos había que iniciar sesión con cada rol. Para no tener que cerrar sesión y escribir contraseñas cada vez, usé el plugin User Switching.</li>
+  <li>Al revisar la entrada con el Editor, WordPress la mostraba bloqueada porque la Colaboradora la había tenido abierta hacía poco. Esperé a que caducara el bloqueo de edición (unos 2 minutos) y pude editarla.</li>
+  <li>En las versiones actuales de WordPress ya no hay una opción de "número de columnas" en Opciones de pantalla; las 2 columnas se consiguen arrastrando los widgets a las dos primeras columnas.</li>
+</ul>
+</section>
+
+</body>
+</html>
