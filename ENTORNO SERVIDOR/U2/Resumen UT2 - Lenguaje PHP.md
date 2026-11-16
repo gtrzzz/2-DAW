@@ -1,6 +1,6 @@
 # Resumen UT2: Lenguaje PHP. Inserción de código en páginas web
 
-Desarrollo web en entorno servidor · 2º DAW · Autor: (poner nombre/s)
+Desarrollo web en entorno servidor · 2º DAW · Autor: Iván Gutiérrez Mateos
 
 Resumen para el **examen teórico** (test con penalización: cada fallo resta 0,5). Va al grano: cada concepto lleva un ejemplo de código con su salida, y cada bloque acaba con preguntas de repaso.
 
