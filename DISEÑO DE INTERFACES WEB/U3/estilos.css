@@ -1,0 +1,100 @@
+aside {
+  width: 30%;
+  padding-left: 15px;
+  margin-left: 15px;
+  float: right;
+  font-style: italic;
+  background-color: lightgray;
+  display: inline-block;
+  vertical-align: top;
+  border: 1px dotted blue;
+  word-wrap: break-word;
+  position: sticky;
+  top: 0;
+}
+footer {
+  text-align: center;
+  padding: 3px;
+  background-color: DarkSalmon;
+  color: white;
+}
+nav {
+  padding: 1rem;
+  background-color: grey;
+  border: 3px solid red;
+  position: sticky;
+}
+
+.clase1 {
+  color: pink;
+}
+
+header + p {
+  color: blue;
+}
+* {
+  font-style: italic;
+}
+
+aside > p {
+  color: green;
+}
+
+header > h3 {
+  color: purple;
+}
+
+header + p {
+  color: yellow;
+}
+.par {
+  color: orange;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+section > article > p {
+  color: yellowgreen;
+}
+
+article h3 {
+  color: brown;
+}
+
+* {
+  color: cadetblue;
+}
+
+p {
+  color: darkblue;
+}
+
+#prueba {
+  color: darkgreen;
+  text-align: center;
+}
+
+div p {
+  color: darkred;
+  border: 1px solid black;
+}
+
+div,
+p {
+  color: darkorange;
+  border: 1px solid orange;
+}
+
+article > h4 {
+  color: darkorchid;
+}
+
+h1 + h4 {
+  color: red;
+}
+article > p {
+  color: red;
+}
+
+body {
+  font-size: clamp(15px, 3vw, 20px);
+}
